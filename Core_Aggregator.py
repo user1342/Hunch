@@ -96,6 +96,19 @@ class WebsiteToCrawl:
             elif website == "reddit":
                 pass
 
+            elif "http" in website:
+                from Data_Source_Aggregators import Generic_Aggrigator as ga
+                aggrigator = ga.Generic_Aggrigator()
+
+                # Loops through each of the handles for each of the websites
+                for user in self.handles:
+                    response = aggrigator.scrape_website(website,user)
+
+                    try:
+                        self.list_of_text.extend(response)
+                    except:
+                        self.list_of_text.append(response)
+
             else:
                 raise Exception("Unknown Website " + website)
 
