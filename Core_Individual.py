@@ -16,6 +16,10 @@ class Individual:
 
         self.add_text_to_be_profiled(text)
 
+        self.impact = None
+
+
+
     def get_liklihood(self):
         assert self._liklihood is not None, " Liklihood has not been set."
         return self._liklihood
@@ -64,6 +68,9 @@ class Individual:
         total = 0
         # Loops through all of the detectors
         for detector in list_of_detectors:
+
+            #Removes null items in list
+            self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
             #Loops through the list of text to be profiled, profiling each, and then calculating an average
             for text in self._text_to_be_profiled:
