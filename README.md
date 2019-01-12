@@ -12,6 +12,11 @@ pip install awscli --upgrade --user
 ```bash
 aws configure
 ```
+The Reddit aggregation requires the Reddit [PRAW](https://praw.readthedocs.io/en/latest/getting_started/installation.html) api to be installed.
+
+```bash
+pip install praw
+```
 
 ## Usage
 There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile an individual. A sample of this is below:
