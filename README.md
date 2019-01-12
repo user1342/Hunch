@@ -22,12 +22,13 @@ import Core_Individual
 
 my_aggrigator = Core_Aggregator.WebsiteToCrawl()
 my_aggrigator.add_to_handles_list("realdonaldtrump")
-my_aggrigator.add_to_website_list("twitter")
+my_aggrigator.add_to_website_list(["twitter","reddit"])
 
 text_to_be_profiled = my_aggrigator.aggregate_data()
 
+
 my_individual = Core_Individual.Individual()
-for text in data_from_individual:
+for text in text_to_be_profiled :
         my_individual.add_text_to_be_profiled(text)
 
 individual_liklihood = my_individual.profile()
