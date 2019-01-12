@@ -15,11 +15,13 @@ for filename in os.listdir(json_file_directory):
     full_path = os.path.join(json_file_directory,filename)
     my_aggrigator.read_from_json_file(full_path)
 
+    individual_impact = my_aggrigator.impact
+
     print("Created aggrigator for: " + str(my_aggrigator.handles) + " and " + str(my_aggrigator.website_names))
     #my_aggrigator.add_to_handles_list("_JamesStevenson")
     #my_aggrigator.add_to_website_list("twitter")
     data_from_individual = my_aggrigator.aggregate_data()
-    print("Completed aggrigating data sources for individual " + my_aggrigator.name)
+    print("Completed aggrigating data sources for individual " + my_aggrigator.name +", "+str(my_aggrigator.impact))
 
     ######################
     ## Build Individual ##
@@ -32,6 +34,9 @@ for filename in os.listdir(json_file_directory):
     for text in data_from_individual:
         my_individual.add_text_to_be_profiled(text)
     print("Starting profiling ", len(my_individual._text_to_be_profiled), "samples.")
-    score = my_individual.profile()
+    individual_liklihood = my_individual.profile()
 
-    print("The individual " + my_individual.name + " has the liklihood of " + str(score))
+    print("The individual " + my_individual.name + " has the liklihood of " + str(individual_liklihood))
+
+    individual_risk = float(individual_liklihood)*float(individual_impact)
+    print("Risk = "+ str(individual_risk))

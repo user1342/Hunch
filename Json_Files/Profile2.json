@@ -1,6 +1,7 @@
 {
     "individual":{
       "name": "10 Downing Street",
+      "impact":2,
       "websites": [
         "twitter"
       ],

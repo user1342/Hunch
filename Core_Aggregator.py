@@ -16,6 +16,8 @@ class WebsiteToCrawl:
 
         self.name = ""
 
+        self.impact = 0
+
     #This is used to add items to the website list and make sure that there are no duplicates
     def add_to_website_list(self, website):
         try:
@@ -50,6 +52,8 @@ class WebsiteToCrawl:
                         self.add_to_handles_list(nested_value)
                     elif attribute == "name":
                         self.name = nested_value
+                    elif attribute == "impact":
+                        self.impact = nested_value
                     else:
                         raise Exception("Json in incorrect form for profiling.")
 
