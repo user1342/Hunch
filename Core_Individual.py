@@ -6,7 +6,7 @@ A class that is used to build a knowledge base on a likelihood.
 class Individual:
 
     #The constructor, setting class variables for each individual
-    def __init__(self):
+    def __init__(self, text = []):
         # A score of this individuals liklihood
         self._liklihood = None
         # Name of the individual
@@ -14,13 +14,19 @@ class Individual:
         # A list used to hold the text that will be profiled
         self._text_to_be_profiled = []
 
+        self.add_text_to_be_profiled(text)
+
     def get_liklihood(self):
         assert self._liklihood is not None, " Liklihood has not been set."
         return self._liklihood
 
     #A method used to add text to the aformentioned list
     def add_text_to_be_profiled(self,text):
-        self._text_to_be_profiled.append(text)
+
+        if type(text) is list:
+            self._text_to_be_profiled.extend(text)
+        else:
+            self._text_to_be_profiled.append(text)
 
     #A method used to remove text from the aformentioned list
     def remove_from__text_to_be_profiled(self,text):

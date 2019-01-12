@@ -7,16 +7,17 @@ as well as what handles / account names will be gathered.
 class WebsiteToCrawl:
 
     # The default constructor
-    def __init__(self):
+    def __init__(self, websites_to_add = [], handles_to_add = [],new_name="", new_impact =0):
         self.website_names = []
-
         self.handles = []
-
         self.list_of_text = []
-
         self.name = ""
-
         self.impact = 0
+
+        self.add_to_website_list(websites_to_add)
+        self.add_to_handles_list(handles_to_add)
+        self.name = new_name
+        self.impact = new_impact
 
     #This is used to add items to the website list and make sure that there are no duplicates
     def add_to_website_list(self, website):
