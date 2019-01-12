@@ -40,7 +40,6 @@ class Individual:
 
     #Uses the detectors to calculate a risk score for the individual
     def profile(self):
-        assert self.name is not "", "Individual has no name"
         assert self._text_to_be_profiled, "List of text to be profiled is empty"
 
         list_of_detectors = []
