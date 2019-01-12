@@ -94,10 +94,21 @@ class WebsiteToCrawl:
                         self.list_of_text.append(response)
 
             elif website == "reddit":
-                pass
+                from Data_Source_Aggregators import Reddit_Aggrigator as ra
+
+                aggrigator = ra.Reddit_Aggrigator()
+
+                for user in self.handles:
+                    response = aggrigator.pull_from_reddit(user)
+
+                    try:
+                        self.list_of_text.extend(response)
+                    except:
+                        self.list_of_text.append(response)
 
             elif "http" in website:
                 from Data_Source_Aggregators import Generic_Aggrigator as ga
+
                 aggrigator = ga.Generic_Aggrigator()
 
                 # Loops through each of the handles for each of the websites

@@ -27,7 +27,10 @@ class AWSComprehend:
 
     #A function used to construct a list for a command out of the type of command, the text and the language.
     def construct_detect_command(self, task, text, language = "en"):
+
+        text = text.replace(",","\,")
         #Check if used task is in list of known aws comprehend detect commands
         assert task in self.list_of_detect_commands, task + " not in list of known detect commands: " + str(self.list_of_detect_commands)
-        command_list = ['aws', 'comprehend', task, '--text', text, "--language-code", language]
+        command_list = ['aws', 'comprehend',task, '--language-code', language, '--text', text]
+
         return self._run_aws_comprehend(command_list)

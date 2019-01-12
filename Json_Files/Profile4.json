@@ -1,12 +1,12 @@
 {
     "individual":{
-      "name": "James",
-      "impact":2,
+      "name": "Reddit User",
+      "impact":1,
       "websites": [
-        "http://www.hackinginsider.com"
+        "reddit"
       ],
       "handles": [
-        "James Stevenson"
+        "user_simulator"
       ]
     }
 }
