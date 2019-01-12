@@ -33,6 +33,8 @@ for text in text_to_be_profiled :
 
 individual_liklihood = my_individual.profile()
 
+print(individual_liklihood)
+
 ```
 
 ## Contributing
