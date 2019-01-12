@@ -1,0 +1,12 @@
+{
+    "individual":{
+      "name": "Trump",
+      "impact":5,
+      "websites": [
+        "twitter"
+      ],
+      "handles": [
+        "realdonaldtrump"
+      ]
+    }
+}
