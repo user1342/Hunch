@@ -1,2 +1,2 @@
 # Hunch
-A simple file explorer Android application that allows for viewing and sharing of files in the Android external storage. 
+A predictive policing framework that uses natural language processing (NLP) at it's core.

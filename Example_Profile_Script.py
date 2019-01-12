@@ -4,7 +4,7 @@ import Core_Aggregator
 import Core_Individual
 
 #Loops through the json folder and creates an individual to profile based off each file.
-json_file_directory =r"C:\Users\User\Desktop\Hunch\Json_Files"
+json_file_directory =r"Json_Files"
 for filename in os.listdir(json_file_directory):
 
     ######################
