@@ -1,0 +1,12 @@
+{
+    "individual":{
+      "name": "Website User",
+      "impact":1,
+      "websites": [
+        "https://www.cnet.com/forums/windows-10/"
+      ],
+      "handles": [
+        "Lee Koo"
+      ]
+    }
+}
