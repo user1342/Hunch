@@ -20,6 +20,11 @@ class WebsiteToCrawl:
 
     #This is used to add items to the website list and make sure that there are no duplicates
     def add_to_website_list(self, website):
+
+        #Checks if its not a list and if so makes it a list of 1
+        if type(website) is not list:
+            website = [website]
+
         try:
             self.website_names.extend(website)
         except:
@@ -28,6 +33,11 @@ class WebsiteToCrawl:
 
     #This is used to add items to the handles list and make sure that there are no duplicates
     def add_to_handles_list(self, handles):
+
+        #Checks if its not a list and if so makes it a list of 1
+        if type(handles) is not list:
+            handles = [handles]
+
         try:
             self.handles.extend(handles)
         except:
