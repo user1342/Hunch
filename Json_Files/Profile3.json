@@ -1,0 +1,12 @@
+{
+    "individual":{
+      "name": "James",
+      "impact":2,
+      "websites": [
+        "http://www.hackinginsider.com"
+      ],
+      "handles": [
+        "James Stevenson"
+      ]
+    }
+}
