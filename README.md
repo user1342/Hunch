@@ -35,9 +35,9 @@ my_aggrigator = Core_Aggregator.WebsiteToCrawl(["twitter","reddit"],"realdonaldt
 
 my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
 
-individual_likelihood = my_individual.profile()
+results = my_individual.profile()
 
-print(individual_likelihood)
+print(results["likelihood"])
 
 ```
 
