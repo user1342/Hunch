@@ -41,6 +41,7 @@ There is an example Python script called [Example_Profile_Script.py](https://git
 ```python
 
 import Core_Aggregator
+import Core_Display
 import Core_Individual
 
 my_aggrigator = Core_Aggregator.WebsiteToCrawl(["twitter","reddit"],"realdonaldtrump")
@@ -48,8 +49,13 @@ my_aggrigator = Core_Aggregator.WebsiteToCrawl(["twitter","reddit"],"realdonaldt
 my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
 
 results = my_individual.profile()
+impact = 1
+list_of_profiled_individuals = [{"name":"test_profile",
+                                     "risk": results["likelihood"] * impact,
+                                     "likelihood":results["likelihood"],
+                                     "impact":impact}]
 
-print(results["likelihood"])
+Core_Display.create_website(list_of_profiled_individuals).generate_page()
 
 ```
 
