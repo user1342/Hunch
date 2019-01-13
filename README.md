@@ -12,10 +12,15 @@ pip install awscli --upgrade --user
 ```bash
 aws configure
 ```
-The Reddit aggregation requires the Reddit [PRAW](https://praw.readthedocs.io/en/latest/getting_started/installation.html) api to be installed.
+The Reddit aggregation requires the Reddit [PRAW](https://praw.readthedocs.io/en/latest/getting_started/installation.html) api to be installed. You will also need a [Reddit developed application](https://www.reddit.com/prefs/apps/) and use the keys created as part of that process.
 
 ```bash
 pip install praw
+```
+The Twitter aggrigator requires the [Tweepy](http://www.tweepy.org/) module and requires [Twitter App API keys](https://developer.twitter.com/en/apps).
+
+```bash
+pip install tweepy
 ```
 
 ## Usage
