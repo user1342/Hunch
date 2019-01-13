@@ -50,12 +50,11 @@ my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
 
 results = my_individual.profile()
 impact = 1
-list_of_profiled_individuals = [{"name":"test_profile",
+
+Core_Display.create_website([{"name":"test_profile",
                                      "risk": results["likelihood"] * impact,
                                      "likelihood":results["likelihood"],
-                                     "impact":impact}]
-
-Core_Display.create_website(list_of_profiled_individuals).generate_page()
+                                     "impact":impact}]).generate_page()
 
 ```
 
