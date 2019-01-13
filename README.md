@@ -27,6 +27,13 @@ The Twitter aggrigator requires the [Tweepy](http://www.tweepy.org/) module and 
 ```bash
 pip install tweepy
 ```
+The core display requires the [Dash](https://dash.plot.ly/) python plugin to be installed.
+```bash
+pip install dash==0.35.1
+pip install dash-html-components==0.13.4
+pip install dash-core-components==0.42.1
+pip install dash-table==3.1.11
+```
 
 ## Usage
 There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile an individual. A sample of this is below:
