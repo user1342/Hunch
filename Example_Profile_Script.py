@@ -1,4 +1,6 @@
 import os
+from pprint import pprint
+
 import Core_Aggregator
 import Core_Individual
 
@@ -16,7 +18,11 @@ for filename in os.listdir(json_file_directory):
     my_individual.name = my_aggrigator.name
     print("\nBeginning profiling " + my_individual.name+"'s "+ str(len(my_individual._text_to_be_profiled)) + " samples.")
 
-    likelihood = my_individual.profile()
+    results = my_individual.profile()
+    likelihood = results["likelihood"]
     impact = my_individual.impact
     risk = likelihood * impact
-    print("Risk "+str(risk)+"| Impack "+str(impact)+"| Likelihood "+str(likelihood))
+    print("Risk "+str(risk)+"| Impact "+str(impact)+"| Likelihood "+str(likelihood))
+    print("\n\n")
+    pprint(results)
+    print("\n\n")

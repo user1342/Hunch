@@ -69,4 +69,11 @@ class Relationship_Detection:
                     ret_val = self._get_sentiment()
                     break
 
-        return ret_val
+
+        return_dictionary = {}
+        return_dictionary["likelihood"] = ret_val
+        return_dictionary["text"] =[]
+        return_dictionary["text"].append(self.text_to_profile)
+        return_dictionary["highlights"] = dictionary_of_items
+
+        return return_dictionary

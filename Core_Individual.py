@@ -66,6 +66,8 @@ class Individual:
 
         total_scores = []
         total = 0
+
+        list_of_extra_info = []
         # Loops through all of the detectors
         for detector in list_of_detectors:
 
@@ -75,12 +77,19 @@ class Individual:
             #Loops through the list of text to be profiled, profiling each, and then calculating an average
             for text in self._text_to_be_profiled:
 
-                total_scores.append(detector.get_score(text))
+                dictionary_of_scan_results = detector.get_score(text)
+                list_of_extra_info.append(dictionary_of_scan_results)
+                total_scores.append(dictionary_of_scan_results["likelihood"])
+
 
         for number in total_scores:
             total = total + number
         average = total / len(total_scores)
         self._liklihood = average
 
-        return self._liklihood
+
+        dictionary_for_individual = {}
+        dictionary_for_individual["likelihood"] = self._liklihood
+        dictionary_for_individual["extra"]=list_of_extra_info
+        return dictionary_for_individual
 
