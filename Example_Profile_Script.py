@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
         my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
         my_individual.impact = my_aggrigator.impact
-        my_individual.generate_name()
+        my_individual.name = my_aggrigator.name #my_individual.generate_name()
         print("\nBeginning profiling " + my_individual.name+"'s "+ str(len(my_individual._text_to_be_profiled)) + " samples.")
 
         name = my_individual.name
@@ -32,10 +32,4 @@ if __name__ == '__main__':
 
         list_of_profiled_individuals.append({"name":name,"risk":risk,"likelihood":likelihood,"impact":impact})
 
-    #ToDo There is a bug where the scrpt will run twice when before the website is displayed.
-    my_website = Core_Display.create_website(list_of_profiled_individuals)
-    my_website.generate_page()
-
-    while True:
-        while True:
-            pass
+    Core_Display.create_website(list_of_profiled_individuals).generate_page()

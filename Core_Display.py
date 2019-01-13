@@ -4,6 +4,7 @@ import dash_html_components as html
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.title='Hunch'
 
 '''
 A Class used to create a web front end for viewing Hunch results. 
@@ -15,6 +16,34 @@ class create_website:
     def __init__(self, list_of_individuals_to_display = []):
         self.list_of_individuals = []
         self.list_of_individuals.extend(list_of_individuals_to_display)
+
+    def return_graph (self, value):
+        if value:
+            if type(value) is not list:
+                value = [value]
+            # This checks if the indivudals that have been selected in the dropdown are in the list of individuals
+            # and if so adds their data to the graph.
+            list_for_graph = []
+            for user in value:
+                for people in self.list_of_individuals:
+                    if people["name"] == user:
+                        list_for_graph.append({'x': ["Likelihood", "Impact", "Risk"],
+                                               'y': [people["likelihood"], people["impact"], people["risk"]],
+                                               'type': 'bar', 'name': people["name"]})
+
+            # Returns the new graph object
+            return dcc.Graph(
+                id='graph-1-tabs',
+                figure={
+                    'data': list_for_graph,
+                    'layout': {
+                        'title': 'Profiled Individuals'
+                    }
+                }
+            )
+        else:
+            return None
+
 
     # This is the main bulk of the class. Defining the necessary setting to load the page.
     # This function loads the titles, dropdown and graph.
@@ -50,6 +79,7 @@ class create_website:
             ),
 
         html.Div(id='output-container')
+
         ])
 
         #A callback for when a user selects on item in the drop down
@@ -57,29 +87,7 @@ class create_website:
             dash.dependencies.Output('output-container', 'children'),
             [dash.dependencies.Input('my-dropdown', 'value')])
         def update_output(value):
-            if value:
-                if type(value) is not list:
-                    value = [value]
-                #This checks if the indivudals that have been selected in the dropdown are in the list of individuals
-                # and if so adds their data to the graph.
-                list_for_graph = []
-                for user in value:
-                    for people in self.list_of_individuals:
-                        if  people["name"] == user:
-                                list_for_graph.append({'x': ["Likelihood", "Impact", "Risk"], 'y': [people["likelihood"], people["impact"], people["risk"]], 'type': 'bar', 'name': people["name"]})
+            return self.return_graph(value)
 
-                # Returns the new graph object
-                return dcc.Graph(
-                    id='graph-1-tabs',
-                    figure={
-                        'data': list_for_graph,
-                        'layout': {
-                            'title': 'Profiled Individuals'
-                        }
-                    }
-                )
-            else:
-                return None
-
-        #Renders the website
-        app.run_server(debug=True)
+        #Displays the website
+        app.run_server()
