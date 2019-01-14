@@ -2,8 +2,7 @@
 A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing. 
 
 
-<img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png" width="400">
-<img src="https://github.com/user1342/Hunch/blob/master/Display.gif" width="400">
+<img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png" width="400"> <img src="https://github.com/user1342/Hunch/blob/master/Display.gif" width="400">
 
 ## Installation
 
