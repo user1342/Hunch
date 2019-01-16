@@ -91,9 +91,16 @@ class Individual:
         average = total / len(total_scores)
         self._liklihood = average
 
+        assert self.impact, "No impact set to the individual."
+        assert self._liklihood,"No likelihood set for the individual."
+        assert self.name, "No name set for the individual."
 
+        #Adds items to a dictionary so that they can be returned to the main script
         dictionary_for_individual = {}
         dictionary_for_individual["likelihood"] = self._liklihood
-        dictionary_for_individual["extra"]=list_of_extra_info
-        return dictionary_for_individual
+        dictionary_for_individual["impact"] = self.impact
+        dictionary_for_individual["extra"]= list_of_extra_info
+        dictionary_for_individual["name"] = self.name
+        dictionary_for_individual["risk"] = self.impact * self._liklihood
 
+        return dictionary_for_individual

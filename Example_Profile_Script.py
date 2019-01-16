@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 
 import Core_Aggregator
 import Core_Individual
@@ -23,13 +24,9 @@ if __name__ == '__main__':
         my_individual.name = my_aggrigator.name #my_individual.generate_name()
         print("\nBeginning profiling " + my_individual.name+"'s "+ str(len(my_individual._text_to_be_profiled)) + " samples.")
 
-        name = my_individual.name
         results = my_individual.profile()
-        likelihood = results["likelihood"]
-        impact = my_individual.impact
-        risk = likelihood * impact
-        print("Risk "+str(risk)+"| Impact "+str(impact)+"| Likelihood "+str(likelihood))
+        print("Risk "+str(results["risk"])+"| Impact "+str(results["impact"])+"| Likelihood "+str(results["likelihood"]))
 
-        list_of_profiled_individuals.append({"name":name,"risk":risk,"likelihood":likelihood,"impact":impact})
+        list_of_profiled_individuals.append(results)
 
     Core_Display.create_website(list_of_profiled_individuals).generate_page()

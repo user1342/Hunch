@@ -56,25 +56,29 @@ class Goal_Detection:
         list_of_entities = ["COMMERCIAL_ITEM","QUANTITY","EVENT","TITLE"]
 
         dictionary_of_items = {}
+        items_to_return = {}
+        list_of_keywords = []
+
         for key in json_response:
             value = json_response[key]
-
 
             for attribute in value:
                 Text = attribute['Text']
                 Type = attribute['Type']
+                items_to_return["Type"] = Type
+                items_to_return["Text"] = Text
+                list_of_keywords.append(items_to_return)
+
                 dictionary_of_items[Type] = Text
-            #Checks if the text has a tag for Person or Organisation if not returns as none
+            # Checks if the text has a tag for Person or Organisation if not returns as none
             for item in dictionary_of_items:
                 if item in list_of_entities:
                     ret_val = self._get_sentiment()
                     break
 
-
+        #Creates a dictionary of the likelihood and the additional information
         return_dictionary = {}
         return_dictionary["likelihood"] = ret_val
-        return_dictionary["text"] =[]
-        return_dictionary["text"].append(self.text_to_profile)
-        return_dictionary["highlights"] = dictionary_of_items
+        return_dictionary["extra"] = list_of_keywords
 
         return return_dictionary
