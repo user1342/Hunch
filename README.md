@@ -27,12 +27,15 @@ The Twitter aggrigator requires the [Tweepy](http://www.tweepy.org/) module and 
 ```bash
 pip install tweepy
 ```
-The core display requires the [Dash](https://dash.plot.ly/) python plugin to be installed.
+The core display requires the [Dash](https://dash.plot.ly/) python plugin to be installed. The display also uses [Pandas](https://pandas.pydata.org/pandas-docs/stable/install.html) to display tables. 
 ```bash
 pip install dash==0.35.1
 pip install dash-html-components==0.13.4
 pip install dash-core-components==0.42.1
 pip install dash-table==3.1.11
+```
+```bash
+pip install pandas
 ```
 
 ## Usage
@@ -46,15 +49,9 @@ import Core_Individual
 
 my_aggrigator = Core_Aggregator.WebsiteToCrawl(["twitter","reddit"],"realdonaldtrump")
 
-my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
+my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), "Trump")
 
-results = my_individual.profile()
-impact = 1
-
-Core_Display.create_website([{"name":"test_profile",
-                                     "risk": results["likelihood"] * impact,
-                                     "likelihood":results["likelihood"],
-                                     "impact":impact}]).generate_page()
+Core_Display.create_website([my_individual.profile()]).generate_page()
 
 ```
 
