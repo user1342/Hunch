@@ -23,7 +23,7 @@ class Goal_Detection:
     profiler = core_nlp.create_analyser()
 
     #A dictionary that is used for the level of liklihood
-    scores = {"HIGH" : 2, "MEDIUM" : 1, "LOW" : 0, "NONE" : 0}
+    scores = {"HIGH" : 10, "MEDIUM" : 5, "LOW" : 0, "NONE" : 0}
 
     # The constructor, setting class variables
     def __init__(self):

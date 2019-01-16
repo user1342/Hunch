@@ -69,11 +69,15 @@ class Individual:
 
         list_of_extra_info = []
         # Loops through all of the detectors
+
+        #I have no idea why this tmp is needed (maybe a pointer problem) but everything breaks without it.
+        tmp_text = self._text_to_be_profiled
         for detector in list_of_detectors:
 
             #Removes null items in list
             self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
+            self._text_to_be_profiled = tmp_text
             #Loops through the list of text to be profiled, profiling each, and then calculating an average
             for text in self._text_to_be_profiled:
 
