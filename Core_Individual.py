@@ -6,17 +6,18 @@ A class that is used to build a knowledge base on a likelihood.
 class Individual:
 
     #The constructor, setting class variables for each individual
-    def __init__(self, text = []):
+    def __init__(self, text = [], name = None, impact = 1):
         # A score of this individuals liklihood
         self._liklihood = None
         # Name of the individual
-        self.name = ""
+        self.name = name
         # A list used to hold the text that will be profiled
         self._text_to_be_profiled = []
 
         self.add_text_to_be_profiled(text)
 
-        self.impact = None
+        #Sets the impact of the individual, default is 1
+        self.impact = impact
 
 
 

@@ -1,6 +1,4 @@
 import os
-from pprint import pprint
-
 import Core_Aggregator
 import Core_Individual
 import Core_Display
@@ -17,12 +15,12 @@ if __name__ == '__main__':
         my_aggrigator = Core_Aggregator.WebsiteToCrawl()
         full_path = os.path.join(json_file_directory, filename)
         my_aggrigator.read_from_json_file(full_path)
-        print("Created Aggrigator for  "+my_aggrigator.name + ": " + str(my_aggrigator.website_names) + " and " + str(my_aggrigator.handles))
+        print("\n\nCreated Aggrigator for  "+my_aggrigator.name + ": " + str(my_aggrigator.website_names) + " and " + str(my_aggrigator.handles))
 
         my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
         my_individual.impact = my_aggrigator.impact
         my_individual.name = my_aggrigator.name #my_individual.generate_name()
-        print("\nBeginning profiling " + my_individual.name+"'s "+ str(len(my_individual._text_to_be_profiled)) + " samples.")
+        print("Beginning profiling " + my_individual.name+"'s "+ str(len(my_individual._text_to_be_profiled)) + " samples.")
 
         results = my_individual.profile()
         print("Risk "+str(results["risk"])+"| Impact "+str(results["impact"])+"| Likelihood "+str(results["likelihood"]))

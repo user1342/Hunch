@@ -1,4 +1,5 @@
 #A detector class must have a 'get_score' function that returns a number..
+import datetime
 
 import Core_NLPAnalyser as ca
 
@@ -66,7 +67,9 @@ class Goal_Detection:
                 Text = attribute['Text']
                 Type = attribute['Type']
                 items_to_return["Type"] = Type
-                items_to_return["Text"] = Text
+                items_to_return["Keyword"] = Text
+                items_to_return["Time"] = datetime.datetime.now()
+                items_to_return["Text"] = self.text_to_profile
                 list_of_keywords.append(items_to_return)
 
                 dictionary_of_items[Type] = Text
