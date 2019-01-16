@@ -46,15 +46,9 @@ import Core_Individual
 
 my_aggrigator = Core_Aggregator.WebsiteToCrawl(["twitter","reddit"],"realdonaldtrump")
 
-my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
+my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), "Trump")
 
-results = my_individual.profile()
-impact = 1
-
-Core_Display.create_website([{"name":"test_profile",
-                                     "risk": results["likelihood"] * impact,
-                                     "likelihood":results["likelihood"],
-                                     "impact":impact}]).generate_page()
+Core_Display.create_website([my_individual.profile()]).generate_page()
 
 ```
 
