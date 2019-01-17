@@ -71,6 +71,7 @@ class create_website:
             texts = []
             keywords = []
             times = []
+            sentiments = []
             # The below adds the aformentioned list to individual colums for a data frame structure
             for item in list_of_extras:
                 if item["Text"] not in texts:
@@ -79,10 +80,11 @@ class create_website:
                     keywords.append(item["Keyword"])
                     times.append(item["Time"])
                     texts.append(item["Text"])
+                    sentiments.append(item["sentiment"])
 
 
             # This is used to create the table.
-            d = {'Name': names, 'Type': types,'Keyword':keywords,'Time':times, 'Text': texts}
+            d = {'Name': names, 'Type': types,'Keyword':keywords,'Gathered At':times, 'Text': texts, 'Sentiment':sentiments}
             dataframe = pd.DataFrame(data=d)
 
             # Returns and generates a html data frame object with the above attributes

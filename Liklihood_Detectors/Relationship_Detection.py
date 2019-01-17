@@ -43,7 +43,7 @@ class Relationship_Detection:
         else:
             retval = self.scores["LOW"]
 
-        return retval
+        return retval, sentiment
 
     # A method used to find if any individuals or organisations have been mentioned in the sample text.
     def get_score(self, text):
@@ -66,17 +66,20 @@ class Relationship_Detection:
             for attribute in value:
                 Text = attribute['Text']
                 Type = attribute['Type']
-                items_to_return["Type"] = Type
-                items_to_return["Keyword"] = Text
-                items_to_return["Time"] = datetime.datetime.now()
-                items_to_return["Text"] = self.text_to_profile
-                list_of_keywords.append(items_to_return)
 
                 dictionary_of_items[Type] = Text
             #Checks if the text has a tag for Person or Organisation if not returns as none
             for item in dictionary_of_items:
                 if item in list_of_entities:
-                    ret_val = self._get_sentiment()
+                    ret_val, sentiment = self._get_sentiment()
+
+                    items_to_return["Type"] = item
+                    items_to_return["Keyword"] = dictionary_of_items[item]
+                    items_to_return["Time"] = datetime.datetime.now()
+                    items_to_return["Text"] = self.text_to_profile
+                    items_to_return["sentiment"] = sentiment
+                    list_of_keywords.append(items_to_return)
+
                     break
 
         #Creates a dictionary to return containing the likelihood and additional ifnormation like tags
