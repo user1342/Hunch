@@ -43,7 +43,7 @@ class Twitter_Aggrigator:
 
             self.list_of_tweets.append(tweet)
 
-            if tweet_count > number_of_tweets_timeout:
+            if tweet_count >= number_of_tweets_timeout:
                 break
 
         return self.list_of_tweets
