@@ -37,6 +37,10 @@ pip install dash-table==3.1.11
 ```bash
 pip install pandas
 ```
+Location detection requires the [GeoPy](https://pypi.org/project/geopy/) plugin that can be installed with the command below. The Location Detection also uses the [UK Police Crime API](https://data.police.uk/docs/). This API does not currently require an API key. 
+```bash
+pip install geopy
+```
 
 ## Usage
 There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile an individual. A sample of this is below:
