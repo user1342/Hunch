@@ -1,4 +1,4 @@
-#A detector class must have a 'get_score' function that returns a number..
+# A detector class must have a 'get_score' function that returns a number..
 import datetime
 
 import Core_NLPAnalyser as ca
@@ -18,13 +18,15 @@ A Class used to calculate a liklihood based off known goals and aspirations .
                                             0           2
 
 '''
+
+
 class Goal_Detection:
-    #sets the profiler object to be the default analyser set in the Core_NLPAnalyser file
+    # sets the profiler object to be the default analyser set in the Core_NLPAnalyser file
     core_nlp = ca.Core_NLPAnalyser()
     profiler = core_nlp.create_analyser()
 
-    #A dictionary that is used for the level of liklihood
-    scores = {"HIGH" : 10, "MEDIUM" : 5, "LOW" : 0, "NONE" : 0}
+    # A dictionary that is used for the level of liklihood
+    scores = {"HIGH": 10, "MEDIUM": 5, "LOW": 0, "NONE": 0}
 
     # The constructor, setting class variables
     def __init__(self):
@@ -50,12 +52,12 @@ class Goal_Detection:
 
         self.text_to_profile = text
 
-        ret_val = self.scores["MEDIUM"] #This is set to medium as the individual has no reference to Goals (in the text).
-
+        ret_val = self.scores[
+            "MEDIUM"]  # This is set to medium as the individual has no reference to Goals (in the text).
 
         json_response = self.profiler.construct_detect_command("detect-entities", self.text_to_profile)
 
-        list_of_entities = ["COMMERCIAL_ITEM","EVENT","TITLE"]
+        list_of_entities = ["COMMERCIAL_ITEM", "EVENT", "TITLE"]
 
         dictionary_of_items = {}
         items_to_return = {}
@@ -67,7 +69,6 @@ class Goal_Detection:
             for attribute in value:
                 Text = attribute['Text']
                 Type = attribute['Type']
-
 
                 dictionary_of_items[Type] = Text
             # Checks if the text has a tag for Person or Organisation if not returns as none
@@ -85,7 +86,7 @@ class Goal_Detection:
 
                     break
 
-        #Creates a dictionary of the likelihood and the additional information
+        # Creates a dictionary of the likelihood and the additional information
         return_dictionary = {}
         return_dictionary["likelihood"] = ret_val
         return_dictionary["extra"] = list_of_keywords
