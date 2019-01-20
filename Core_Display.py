@@ -1,3 +1,5 @@
+import operator
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -10,6 +12,8 @@ app.title = 'Hunch'
 '''
 A Class used to create a web front end for viewing Hunch results. 
 '''
+
+
 class create_website:
 
     # The constructor, setting class variables
@@ -18,6 +22,70 @@ class create_website:
         self.list_of_individuals = []
         self.list_of_individuals.extend(list_of_individuals_to_display)
 
+    # A function used to return a table of all of the profiled individuals prioritised on the highest risk
+    def return_prioritised_table(self):
+
+        # Sorts the list of individuals in order of lower risk first then flips it.
+        self.list_of_individuals.sort(key=operator.itemgetter('risk'))
+        self.list_of_individuals.reverse()
+
+        # Creates a series of lists that will later be used as colums for the table.
+        names = []
+        risks = []
+        likelihoods = []
+        impacts = []
+
+        # The below loops through the individuals and assigns their values to each colum
+        for individual in self.list_of_individuals:
+            names.append(individual["name"])
+            risks.append(individual["risk"])
+            likelihoods.append(individual["likelihood"])
+            impacts.append(individual["impact"])
+
+        # This is used to create the table.
+        d = {'Name': names, 'Risk': risks, 'Likelihood': likelihoods, 'Impact': impacts}
+        dataframe = pd.DataFrame(data=d)
+
+        # Returns and generates a html data frame object with the above attributes
+        return html.Table(
+            # Header
+            [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+            # Body
+            [html.Tr([
+                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+            ]) for i in range(min(len(dataframe), len(dataframe)))]
+        )
+
+    # A function that returns a graph of risk and likelihood for every profiled individual
+    def return_prioritised_risk_graph(self):
+
+        # Loops through all profiled individuals and adds their likelihood and risk to a list
+        list_for_graph = []
+        for individual in self.list_of_individuals:
+            list_for_graph.append({'x': [individual["likelihood"]],
+                                   'y': [individual["risk"], ],
+                                   'type': 'log', 'name': individual["name"],
+                                   'mode': 'markers',
+                                   'opacity': 0.7,
+                                   'marker': {
+                                       'size': 15,
+                                       'line': {'width': 0.5, 'color': 'white'}
+                                   }
+                                   })
+
+        # Returns the new graph object, using the aformentioned list
+        return dcc.Graph(
+            id='graph-1-tabs',
+            figure={
+                'data': list_for_graph,
+                'layout': {
+                    'title': "Individuals' Risk Scores"
+                }
+            }
+        )
+
+    # This function returns the analysis graph
     def return_graph(self, value):
         if value:
             if type(value) is not list:
@@ -64,8 +132,8 @@ class create_website:
                         for extra in item["extra"]:
                             if people["name"] == user:
                                 extra["name"] = people["name"]
-
-                                list_of_extras.append(extra)
+                                if extra not in list_of_extras:
+                                    list_of_extras.append(extra)
             names = []
             types = []
             texts = []
@@ -74,17 +142,16 @@ class create_website:
             sentiments = []
             # The below adds the aformentioned list to individual colums for a data frame structure
             for item in list_of_extras:
-                if item["Text"] not in texts:
-                    names.append(item["name"])
-                    types.append(item["Type"])
-                    keywords.append(item["Keyword"])
-                    times.append(item["Time"])
-                    texts.append(item["Text"])
-                    sentiments.append(item["sentiment"])
-
+                names.append(item["name"])
+                types.append(item["Type"])
+                keywords.append(item["Keyword"])
+                times.append(item["Time"])
+                texts.append(item["Text"])
+                sentiments.append(item["sentiment"])
 
             # This is used to create the table.
-            d = {'Name': names, 'Type': types,'Keyword':keywords,'Gathered At':times, 'Text': texts, 'Sentiment':sentiments}
+            d = {'Name': names, 'Type': types, 'Keyword': keywords, 'Gathered At': times, 'Text': texts,
+                 'Sentiment': sentiments}
             dataframe = pd.DataFrame(data=d)
 
             # Returns and generates a html data frame object with the above attributes
@@ -112,28 +179,40 @@ class create_website:
             list_for_dropdown.append({'label': individual["name"], 'value': individual["name"]})
 
         # Sets what the HTML page will look like.
-
-        df = pd.read_csv(
-            'https://gist.githubusercontent.com/chriddyp/'
-            'c78bf172206ce24f77d6363a2d754b59/raw/'
-            'c353e8ef842413cae56ae3920b8fd78468aa4cb2/'
-            'usa-agricultural-exports-2011.csv')
-
-        app.layout = html.Div(children=[
+        app.layout = app.layout = html.Div([
             html.H1(children='Hunch!'),
+            html.Div(children='''A NLP powered predictive policing framework.'''),
+            dcc.Tabs(id="tabs", children=[
+                dcc.Tab(label='Prioritization', children=[
+                    html.H2(children='Individual Risk Profiles'),
+                    html.Div([
+                        html.Div([
+                            html.Div([dcc.Markdown(
+                                "\nA section to view all profiled individuals, sorted and prioritised on their risk.\n"),
+                                self.return_prioritised_table()], className="six columns"),
 
-            html.Div(children='''
-                A NLP powered predictive policing framework.
-            '''),
+                            html.Div([self.return_prioritised_risk_graph()], className="six columns"),
+                        ], className="row")
+                    ])
+                ]),
 
-            dcc.Dropdown(
-                id='my-dropdown',
-                options=list_for_dropdown,
-                multi=True
-            ),
+                # Generates the Third tab, used to compare individuals
+                dcc.Tab(label='Analysis', children=[
+                    html.Div([
+                        html.H2(children="Individuals' Data Comparison"),
+                        html.Div(
+                            children='''Select an assortment of individuals from the dropdown to dive deeper into their profiles.\n'''),
+                        dcc.Dropdown(
+                            id='my-dropdown',
+                            options=list_for_dropdown,
+                            multi=True
+                        ),
 
-            html.Div(id='output-container')
-
+                        html.Div(id='output-container')]),
+                ])
+            ], colors={
+                "primary": "gold"}
+                     )
         ])
 
         # A callback for when a user selects on item in the drop down
@@ -142,6 +221,7 @@ class create_website:
             [dash.dependencies.Input('my-dropdown', 'value')])
         def update_output(value):
             return [self.return_graph(value), self.return_table(value)]
+
 
         # Displays the website
         app.run_server()
