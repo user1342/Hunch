@@ -15,7 +15,7 @@ if __name__ == '__main__':
         my_aggrigator = Core_Aggregator.WebsiteToCrawl()
         full_path = os.path.join(json_file_directory, filename)
         my_aggrigator.read_from_json_file(full_path)
-        print("\n\nCreated Aggrigator for  "+my_aggrigator.name + ": " + str(my_aggrigator.website_names) + " and " + str(my_aggrigator.handles))
+        print("\n\nCreated Aggrigator for  "+my_aggrigator.name + ": " + str(my_aggrigator.list_of_dictionary_sources))
 
         my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data())
         my_individual.impact = my_aggrigator.impact

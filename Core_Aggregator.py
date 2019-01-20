@@ -7,30 +7,15 @@ as well as what handles / account names will be gathered.
 class WebsiteToCrawl:
 
     # The default constructor
-    def __init__(self, websites_to_add = [], handles_to_add = [],new_name="", new_impact =0):
-        self.website_names = []
-        self.handles = []
+    def __init__(self, list_of_dict_sources = [],new_name="", new_impact =0):
         self.list_of_text = []
         self.name = ""
         self.impact = 0
+        self.list_of_dictionary_sources = []
 
-        self.add_to_website_list(websites_to_add)
-        self.add_to_handles_list(handles_to_add)
+        self.list_of_dictionary_sources = list_of_dict_sources
         self.name = new_name
         self.impact = new_impact
-
-    #This is used to add items to the website list and make sure that there are no duplicates
-    def add_to_website_list(self, website):
-
-        #Checks if its not a list and if so makes it a list of 1
-        if type(website) is not list:
-            website = [website]
-
-        try:
-            self.website_names.extend(website)
-        except:
-            self.website_names.append(website)
-        self.website_names = list(set(self.website_names))
 
     #This is used to add items to the handles list and make sure that there are no duplicates
     def add_to_handles_list(self, handles):
@@ -57,8 +42,9 @@ class WebsiteToCrawl:
                 for attribute in value:
                     nested_value = value[attribute]
 
-                    if attribute == "websites":
-                        self.add_to_website_list(nested_value)
+                    if attribute == "sources":
+                        for source in nested_value:
+                            self.list_of_dictionary_sources.append({source:nested_value[source]})
                     elif attribute == "handles":
                         self.add_to_handles_list(nested_value)
                     elif attribute == "name":
@@ -72,33 +58,32 @@ class WebsiteToCrawl:
     # This function checks what websites have been requested to profile users and what
     # user accounts are to be profiled on the websites.
     def aggregate_data(self):
-        assert self.website_names is not None, " No websites listed"
-        assert self.list_of_text is not None, "No hndles listed"
+        assert self.list_of_dictionary_sources is not None, " No sources listed"
 
-        #Loops through the requested websites
-        for website in self.website_names:
-            website = website.lower()
+        #Loops through the sources using the defined handle for each defined website
+        for source_dictionary in self.list_of_dictionary_sources:
+            for key in source_dictionary:
 
-            #Checks what aggrigator to use based on the website chosen
-            if website == "twitter":
-                from Data_Source_Aggregators import Twitter_Aggrigator as tw
+                #Sets a user variable to be equal to the entry for the key, of which will be the source website.
+                user = source_dictionary[key]
 
-                aggrigator = tw.Twitter_Aggrigator()
+                #Checks what website the key is specifiying to use and then profiled that website using the individual user requested.
+                if key == "twitter":
+                    from Data_Source_Aggregators import Twitter_Aggrigator as tw
 
-                #Loops through each of the handles for each of the websites
-                for user in self.handles:
+                    aggrigator = tw.Twitter_Aggrigator()
+
                     response = aggrigator.pull_from_twitter(user)
                     try:
                         self.list_of_text.extend(response)
                     except:
                         self.list_of_text.append(response)
 
-            elif website == "reddit":
-                from Data_Source_Aggregators import Reddit_Aggrigator as ra
+                elif key == "reddit":
+                    from Data_Source_Aggregators import Reddit_Aggrigator as ra
 
-                aggrigator = ra.Reddit_Aggrigator()
+                    aggrigator = ra.Reddit_Aggrigator()
 
-                for user in self.handles:
                     response = aggrigator.pull_from_reddit(user)
 
                     try:
@@ -106,21 +91,19 @@ class WebsiteToCrawl:
                     except:
                         self.list_of_text.append(response)
 
-            elif "http" in website:
-                from Data_Source_Aggregators import Generic_Aggrigator as ga
+                elif "http" in key:
+                    from Data_Source_Aggregators import Generic_Aggrigator as ga
 
-                aggrigator = ga.Generic_Aggrigator()
+                    aggrigator = ga.Generic_Aggrigator()
 
-                # Loops through each of the handles for each of the websites
-                for user in self.handles:
-                    response = aggrigator.scrape_website(website,user)
+                    response = aggrigator.scrape_website(key,user)
 
                     try:
                         self.list_of_text.extend(response)
                     except:
                         self.list_of_text.append(response)
 
-            else:
-                raise Exception("Unknown Website " + website)
+                else:
+                    raise Exception("Unknown Website " + key)
 
         return self.list_of_text

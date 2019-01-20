@@ -1,0 +1,10 @@
+{
+    "individual":{
+      "name": "Barack Obama",
+      "impact":1,
+      "sources": {
+        "twitter": "BarackObama",
+        "reddit": "Obama"
+      }
+    }
+}
