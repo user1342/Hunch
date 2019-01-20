@@ -38,7 +38,8 @@ class WebsiteToCrawl:
 
                     if attribute == "sources":
                         for source in nested_value:
-                            self.list_of_dictionary_sources.append({source:nested_value[source]})
+
+                            self.list_of_dictionary_sources.append(source)
                     elif attribute == "name":
                         self.name = nested_value
                     elif attribute == "impact":
