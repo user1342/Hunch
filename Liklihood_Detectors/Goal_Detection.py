@@ -55,7 +55,7 @@ class Goal_Detection:
 
         json_response = self.profiler.construct_detect_command("detect-entities", self.text_to_profile)
 
-        list_of_entities = ["COMMERCIAL_ITEM","QUANTITY","EVENT","TITLE"]
+        list_of_entities = ["COMMERCIAL_ITEM","EVENT","TITLE"]
 
         dictionary_of_items = {}
         items_to_return = {}

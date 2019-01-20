@@ -65,6 +65,11 @@ class Individual:
         goal_profile = gd.Goal_Detection()
         list_of_detectors.append(goal_profile)
 
+        # Adds the goal detector to be used when profiling
+        from Liklihood_Detectors import Location_Detection as ld
+        location_profile = ld.Location_Detection()
+        list_of_detectors.append(location_profile)
+
         total_scores = []
         total = 0
 
