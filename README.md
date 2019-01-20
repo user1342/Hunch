@@ -47,7 +47,7 @@ import Core_Aggregator
 import Core_Display
 import Core_Individual
 
-my_aggrigator = Core_Aggregator.WebsiteToCrawl(["twitter","reddit"],"realdonaldtrump")
+my_aggrigator = Core_Aggregator.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"realdonaldtrump")
 
 my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), "Trump")
 
