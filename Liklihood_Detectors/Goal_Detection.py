@@ -52,6 +52,7 @@ class Goal_Detection:
 
         ret_val = self.scores["MEDIUM"] #This is set to medium as the individual has no reference to Goals (in the text).
 
+
         json_response = self.profiler.construct_detect_command("detect-entities", self.text_to_profile)
 
         list_of_entities = ["COMMERCIAL_ITEM","QUANTITY","EVENT","TITLE"]

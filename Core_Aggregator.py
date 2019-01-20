@@ -17,21 +17,15 @@ class WebsiteToCrawl:
         self.name = new_name
         self.impact = new_impact
 
-    #This is used to add items to the handles list and make sure that there are no duplicates
-    def add_to_handles_list(self, handles):
-
-        #Checks if its not a list and if so makes it a list of 1
-        if type(handles) is not list:
-            handles = [handles]
-
-        try:
-            self.handles.extend(handles)
-        except:
-            self.handles.append(handles)
-        self.handles = list(set(self.handles))
-
     #This file takes a file location as an input and reads that file as json and adds the contents to the necessary fields.
     def read_from_json_file(self, file_path):
+
+        #This resets the variable for every time a json file is read.
+        # This shouldn't be necessary, i'm sure there is something i'm missing.
+        self.list_of_dictionary_sources = []
+        self.name = []
+        self.impact = []
+
 
         with open(file_path) as json_file:
             json_input = json.load(json_file)
@@ -45,8 +39,6 @@ class WebsiteToCrawl:
                     if attribute == "sources":
                         for source in nested_value:
                             self.list_of_dictionary_sources.append({source:nested_value[source]})
-                    elif attribute == "handles":
-                        self.add_to_handles_list(nested_value)
                     elif attribute == "name":
                         self.name = nested_value
                     elif attribute == "impact":

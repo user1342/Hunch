@@ -81,10 +81,11 @@ class Individual:
             self._text_to_be_profiled = tmp_text
             #Loops through the list of text to be profiled, profiling each, and then calculating an average
             for text in self._text_to_be_profiled:
+                if text:
 
-                dictionary_of_scan_results = detector.get_score(text)
-                list_of_extra_info.append(dictionary_of_scan_results)
-                total_scores.append(dictionary_of_scan_results["likelihood"])
+                    dictionary_of_scan_results = detector.get_score(text)
+                    list_of_extra_info.append(dictionary_of_scan_results)
+                    total_scores.append(dictionary_of_scan_results["likelihood"])
 
 
         for number in total_scores:
