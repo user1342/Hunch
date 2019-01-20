@@ -1,5 +1,8 @@
 # How Data Source Aggregation Works
 
+<img src="https://github.com/user1342/Hunch/blob/master/Data_Source_Aggregators/Data%20Source%20Aggregation.png?raw=true">
+
+## Creating The Core Aggregator
 Data source aggregators are used to gather information from a specific website on a specific individual. For example all of the information from the user 'Jane Doe' on Reddit.
 
 The Hunch Core Aggregator class manages what aggregators are used depending on it's input. For example the below aggregator will profile the 'realdonaldtrump' account on Twitter. 
@@ -11,6 +14,7 @@ my_aggrigator = Core_Aggregator.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"
 
 ```
 
+## Adding a new aggregator
 When the [Core Aggregation class](https://github.com/user1342/Hunch/blob/master/Core_Aggregator.py) is run it compares the specified website against a series of known aggregators, these being listed below. When a new aggregator is created it needs to be added to this series of IF statments.
 
 ```python
