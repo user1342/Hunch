@@ -51,9 +51,9 @@ import Core_Aggregator
 import Core_Display
 import Core_Individual
 
-my_aggrigator = Core_Aggregator.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"realdonaldtrump")
+my_aggrigator = Core_Aggregator.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"Donald J. Trump")
 
-my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), "Trump")
+my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name)
 
 Core_Display.create_website([my_individual.profile()]).generate_page()
 
