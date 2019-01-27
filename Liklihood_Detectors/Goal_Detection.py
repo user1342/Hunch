@@ -2,6 +2,7 @@
 import datetime
 
 import Core_NLPAnalyser as ca
+import Core_ConfigInterpreter as cc
 
 '''
 A Class used to calculate a liklihood based off known goals and aspirations . 
@@ -26,7 +27,10 @@ class Goal_Detection:
     profiler = core_nlp.create_analyser()
 
     # A dictionary that is used for the level of liklihood
-    scores = {"HIGH": 10, "MEDIUM": 5, "LOW": 0, "NONE": 0}
+    scores = {"HIGH": cc.Config().get_score_high("core_config.json"),
+              "MEDIUM": cc.Config().get_score_medium("core_config.json"),
+              "LOW": cc.Config().get_score_low("core_config.json")
+              }
 
     # The constructor, setting class variables
     def __init__(self):

@@ -1,4 +1,5 @@
 import json
+import Core_ConfigInterpreter as cc
 
 '''
 A class used to define which aggregation sources will be used to gather text from individuals
@@ -9,7 +10,7 @@ as well as what handles / account names will be gathered.
 class WebsiteToCrawl:
 
     # The default constructor
-    def __init__(self, list_of_dict_sources=[], new_name="", new_impact=0):
+    def __init__(self, list_of_dict_sources=[], new_name="", new_impact= cc.Config().get_default_impact("core_config.json")):
         self.list_of_text = []
         self.name = ""
         self.impact = 0

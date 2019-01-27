@@ -1,0 +1,21 @@
+{
+  "config": {
+    "default_analyser": "comprehend",
+    "score_high": 10,
+    "score_medium": 5,
+    "score_low": 0,
+    "default_impact": 1,
+    "default_aggregations": 10,
+
+    "reddit_client_id": "Add API Key Here",
+    "reddit_client_secret" : "Add API Key Here",
+    "reddit_username" : "Add API Key Here",
+    "reddit_password" : "Add API Key Here",
+    "reddit_user_agent" : "Add API Key Here",
+
+    "twitter_consumer_key" : "Add API Key Here",
+    "twitter_consumer_secret" : "Add API Key Here",
+    "twitter_access_token" : "Add API Key Here",
+    "twitter_access_token_secret" : "Add API Key Here"
+  }
+}

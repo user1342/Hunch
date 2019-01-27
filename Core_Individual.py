@@ -1,4 +1,5 @@
 import random
+import Core_ConfigInterpreter as cc
 
 '''
 A class that is used to build a knowledge base on a likelihood.
@@ -8,7 +9,7 @@ A class that is used to build a knowledge base on a likelihood.
 class Individual:
 
     # The constructor, setting class variables for each individual
-    def __init__(self, text=[], name=None, impact=1):
+    def __init__(self, text=[], name=None, impact= cc.Config().get_default_impact("core_config.json")):
         # A score of this individuals liklihood
         self._liklihood = None
         # Name of the individual

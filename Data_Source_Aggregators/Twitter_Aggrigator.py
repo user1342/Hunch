@@ -1,14 +1,19 @@
 import re
 import tweepy
 
+import Core_ConfigInterpreter as cc
+
 '''
 A class used to gather tweets from a specified user
 '''
+
+
 class Twitter_Aggrigator:
-    consumer_key = #Add this field
-    consumer_secret = #Add this field
-    access_token = #Add this field
-    access_token_secret = #Add this field
+    consumer_key = cc.Config().get_twitter_consumer_key("core_config.json")
+    consumer_secret = cc.Config().get_twitter_consumer_secret("core_config.json")
+    access_token = cc.Config().get_twitter_access_token("core_config.json")
+    access_token_secret = cc.Config().get_twitter_access_token_secret("core_config.json")
+
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
@@ -17,8 +22,8 @@ class Twitter_Aggrigator:
     def __init__(self):
         self.list_of_tweets = []
 
-    #Takes the last amount of tweets from a users twitter account
-    def pull_from_twitter(self, username, number_of_tweets_timeout = 10):
+    # Takes the last amount of tweets from a users twitter account
+    def pull_from_twitter(self, username, number_of_tweets_timeout= cc.Config().get_default_aggregations("core_config.json")):
 
         item = self.api.get_user(username)
 

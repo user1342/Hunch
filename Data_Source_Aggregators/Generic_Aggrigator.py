@@ -1,6 +1,6 @@
 import re
 import subprocess as sp
-import time
+import Core_ConfigInterpreter as cc
 
 '''
 A class used to gather information from generic websites
@@ -12,7 +12,7 @@ class Generic_Aggrigator:
         self.list_of_occurances = []
 
     #method used to gather information from a defined website
-    def scrape_website(self,website, username, nested_pages_timeout = 10):
+    def scrape_website(self,website, username, nested_pages_timeout = cc.Config().ger_default_aggregations("core_config.json")):
 
         list_of_urls = []
         list_of_urls.append(website)

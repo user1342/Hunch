@@ -2,6 +2,8 @@
 import datetime
 import time
 
+import Core_ConfigInterpreter as cc
+
 from geopy.geocoders import Nominatim
 import urllib.request, json
 
@@ -33,7 +35,10 @@ class Location_Detection:
     profiler = core_nlp.create_analyser()
 
     # A dictionary that is used for the level of liklihood
-    scores = {"HIGH": 10, "MEDIUM": 5, "LOW": 0, "NONE": 0}
+    scores = {"HIGH": cc.Config().get_score_high("core_config.json"),
+              "MEDIUM": cc.Config().get_score_medium("core_config.json"),
+              "LOW": cc.Config().get_score_low("core_config.json")
+              }
 
     # The constructor, setting class variables
     def __init__(self):
@@ -114,11 +119,11 @@ class Location_Detection:
                                         items_to_return["sentiment"] = sentiment
                                         list_of_keywords.append(items_to_return)
                             else:
-                                # No crimes picked up
+                                # No crimes picked up for the specified location
                                 ret_val = self.scores["LOW"]
 
                     except:
-                        # A location that we cant check
+                        # A location that we cant check (e.g. not in the UK)
                         ret_val, sentiment = self._get_sentiment()
 
                         items_to_return["Type"] = item
