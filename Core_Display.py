@@ -1,4 +1,5 @@
 import operator
+from datetime import datetime
 
 import dash
 import dash_core_components as dcc
@@ -20,7 +21,129 @@ class create_website:
     # This takes in a list of dictionaries for the individuals to be profiled.
     def __init__(self, list_of_individuals_to_display=[]):
         self.list_of_individuals = []
+        self.list_of_individuals_being_scanned = []
         self.list_of_individuals.extend(list_of_individuals_to_display)
+
+    def generate_layout(self):
+
+        # This is used to loop through the individuals and create a list for them
+        list_for_dropdown = []
+        for individual in self.list_of_individuals:
+            list_for_dropdown.append({'label': individual["name"], 'value': individual["name"]})
+
+        # Sets what the HTML page will look like.
+        app.layout = app.layout = html.Div([
+            html.H1(children='Hunch!'),
+            html.Div(
+                children='''A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing and Open Source Intelligence.'''),
+            dcc.Tabs(id="tabs", children=[
+                dcc.Tab(label='Prioritization', children=[
+                    html.H2(children='Individual Risk Profiles'),
+                    html.Div([
+                        html.Div([
+                            html.Div([dcc.Markdown(
+                                "\nA section to view all profiled individuals, sorted and prioritised on their risk.\n"),
+                                self.return_prioritised_table()], className="six columns"),
+
+                            html.Div([self.return_prioritised_risk_graph()], className="six columns"),
+                        ], className="row")
+                    ])
+                ]),
+
+                dcc.Tab(label='Profile', children=[
+                    html.H2(children='Profile An Individual'),
+                    html.Div([
+                        html.Div([
+                            html.Div([
+                                dcc.Markdown("\nAdd the specifications for an individual to be profiled.\n"),
+                                dcc.Input(id='name_input-box', type='text', placeholder='Name...'),
+                                dcc.Input(id='handle_and_source_input_box', type='text', placeholder='Handle and Source...'),
+                                dcc.Input(id='impact_input_box', type='text',placeholder='Impact...'),
+                                html.Button('Submit', id='button'),
+                                html.Div(id='output-container-button',
+                                         children='Enter a value and press submit')
+                            ])
+                        ]),
+                        html.Div([self.return_inprogress_individuals_table()])
+                    ])
+                ]),
+
+                # Generates the Third tab, used to compare individuals
+                dcc.Tab(label='Analysis', children=[
+                    html.Div([
+                        html.H2(children="Individuals' Data Comparison"),
+                        html.Div(
+                            children='''Select an assortment of individuals from the dropdown to dive deeper into their profiles.\n'''),
+                        dcc.Dropdown(
+                            id='my-dropdown',
+                            options=list_for_dropdown,
+                            multi=True
+                        ),
+
+                        html.Div(id='output-container')]),
+                ])
+            ], colors={
+                "primary": "gold"}
+                     )
+        ])
+
+
+    # This function should be moved to a core function. e.g. core profile. Lazy Profile
+    def profile_individual(self, list_of_dictionary_individuals, individual_name, impact):
+
+        import Core_Aggregator
+        import Core_Individual
+
+        my_aggrigator = Core_Aggregator.WebsiteToCrawl(list_of_dictionary_individuals, individual_name, impact)
+        print(
+            "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(my_aggrigator.list_of_dictionary_sources))
+
+        my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name)
+        print("Beginning profiling " + my_individual.name + "'s " + str(
+            len(my_individual._text_to_be_profiled)) + " samples.")
+
+        # Adds individuals name to the list that is used to show the current scans in progress, then re draws the layout
+        self.list_of_individuals_being_scanned.append([my_individual.name, datetime.now()])
+        self.generate_layout()
+
+        self.list_of_individuals.append(my_individual.profile())
+
+
+        for item in self.list_of_individuals_being_scanned:
+            if item[0] == my_individual.name:
+                self.list_of_individuals_being_scanned.remove(item)
+                break
+
+        print("Finished adding to list : " + str(self.list_of_individuals))
+
+        #When the profile/ scan is finished the layout is re drawn with the new data
+        self.generate_layout()
+
+    # A function used to return a table of all of the profiled individuals prioritised on the highest risk
+    def return_inprogress_individuals_table(self):
+
+        # Creates a series of lists that will later be used as colums for the table.
+        names = []
+        dates = []
+        # The below loops through the individuals and assigns their values to each colum
+        for individual in self.list_of_individuals_being_scanned:
+            names.append(individual[0])
+            dates.append(individual[1])
+
+        # This is used to create the table.
+        d = {"Profile's In Progress": names, "Date started": dates}
+        dataframe = pd.DataFrame(data=d)
+
+        # Returns and generates a html data frame object with the above attributes
+        return html.Table(
+            # Header
+            [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+            # Body
+            [html.Tr([
+                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+            ]) for i in range(min(len(dataframe), len(dataframe)))]
+        )
 
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
     def return_prioritised_table(self):
@@ -173,48 +296,7 @@ class create_website:
     # This function loads the titles, dropdown and graph.
     def generate_page(self):
 
-        # This is used to loop through the individuals and create a list for them
-        list_for_dropdown = []
-        for individual in self.list_of_individuals:
-            list_for_dropdown.append({'label': individual["name"], 'value': individual["name"]})
-
-        # Sets what the HTML page will look like.
-        app.layout = app.layout = html.Div([
-            html.H1(children='Hunch!'),
-            html.Div(
-                children='''A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing and Open Source Intelligence.'''),
-            dcc.Tabs(id="tabs", children=[
-                dcc.Tab(label='Prioritization', children=[
-                    html.H2(children='Individual Risk Profiles'),
-                    html.Div([
-                        html.Div([
-                            html.Div([dcc.Markdown(
-                                "\nA section to view all profiled individuals, sorted and prioritised on their risk.\n"),
-                                self.return_prioritised_table()], className="six columns"),
-
-                            html.Div([self.return_prioritised_risk_graph()], className="six columns"),
-                        ], className="row")
-                    ])
-                ]),
-
-                # Generates the Third tab, used to compare individuals
-                dcc.Tab(label='Analysis', children=[
-                    html.Div([
-                        html.H2(children="Individuals' Data Comparison"),
-                        html.Div(
-                            children='''Select an assortment of individuals from the dropdown to dive deeper into their profiles.\n'''),
-                        dcc.Dropdown(
-                            id='my-dropdown',
-                            options=list_for_dropdown,
-                            multi=True
-                        ),
-
-                        html.Div(id='output-container')]),
-                ])
-            ], colors={
-                "primary": "gold"}
-                     )
-        ])
+        self.generate_layout()
 
         # A callback for when a user selects on item in the drop down
         @app.callback(
@@ -222,6 +304,34 @@ class create_website:
             [dash.dependencies.Input('my-dropdown', 'value')])
         def update_output(value):
             return [self.return_graph(value), self.return_table(value)]
+
+        @app.callback(
+            dash.dependencies.Output('output-container-button', 'children'),
+            [dash.dependencies.Input('button', 'n_clicks')],
+            [dash.dependencies.State('name_input-box', 'value'),
+             dash.dependencies.State('impact_input_box', 'value'),
+            dash.dependencies.State('handle_and_source_input_box', 'value')])
+        def update_output(n_clicks, name, impact, handles_and_sources):
+            try:
+                if name and impact and handles_and_sources:
+
+                        if "," in handles_and_sources:
+                            handles_and_sources = handles_and_sources.split(",")
+                        else:
+                            handles_and_sources = [handles_and_sources]
+
+                        list_of_dictionaries = []
+
+                        for handle_and_source in handles_and_sources:
+                            handle, source = handle_and_source.split(":")
+                            list_of_dictionaries.append({source:handle})
+
+                        self.profile_individual(list_of_dictionaries,name, impact)
+                else:
+                    return "Please fill all boxes..."
+
+            except:
+                return "Sorry, something went wrong with that profile..."
 
         # Displays the website
         app.run_server()
