@@ -27,7 +27,7 @@ class lazy_profile:
         self.list_of_profiled_individuals.append(results)
 
     def display_webpage(self):
-        assert self.list_of_profiled_individuals > 0, "List of indivduals empty"
+        assert len(self.list_of_profiled_individuals) > 0, "List of indivduals empty"
 
         Core_Display.create_website(self.list_of_profiled_individuals).generate_page()
 

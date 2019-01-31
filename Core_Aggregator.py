@@ -46,7 +46,7 @@ class WebsiteToCrawl:
                     elif attribute == "impact":
                         self.impact = nested_value
                     else:
-                        raise Exception("Json in incorrect form for profiling.")
+                        raise Exception("Json in incorrect form for profiling. " + json_file.name)
 
     # This function checks what websites have been requested to profile users and what
     # user accounts are to be profiled on the websites.
