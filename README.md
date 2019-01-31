@@ -58,6 +58,26 @@ my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_ag
 Core_Display.create_website([my_individual.profile()]).generate_page()
 
 ```
+or you can use the [Lazy](https://github.com/user1342/Hunch/blob/master/Lazy.py) tool which cleans up the code needed to profile an individual.
+```python
+
+import Lazy
+
+list_to_profile = [
+    [[{"twitter":"realdonaldtrump"}],"Donald J. Trump", 1],
+    [[{"twitter":"AOC"}],"Alexandria Ocasio-Cortez", 1],
+    [[{"reddit":"user_simulator"}],"user_simulator", 1]
+]
+
+lazy_profle = Lazy.lazy_profile()
+
+for individual in list_to_profile:
+    lazy_profle.profile(individual[0],individual[1], individual[2])
+
+lazy_profle.display_webpage()
+
+```
+
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
