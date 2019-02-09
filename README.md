@@ -41,6 +41,10 @@ Location detection requires the [GeoPy](https://pypi.org/project/geopy/) plugin 
 ```bash
 pip install geopy
 ```
+The URL Recognition script requires the [Requests](https://pypi.org/project/requests/2.7.0/) plugin to un shorten url shortlinks. 
+```bash
+pip install requests
+```
 
 ## Usage
 There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile an individual. A sample of this is below:
