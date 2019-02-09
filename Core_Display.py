@@ -1,4 +1,5 @@
 import operator
+import re
 from datetime import datetime
 
 import dash
@@ -13,8 +14,6 @@ app.title = 'Hunch'
 '''
 A Class used to create a web front end for viewing Hunch results. 
 '''
-
-
 class create_website:
 
     # The constructor, setting class variables
@@ -24,6 +23,7 @@ class create_website:
         self.list_of_individuals_being_scanned = []
         self.list_of_individuals.extend(list_of_individuals_to_display)
 
+    # The function generates the undelaying layout for the whole front end.
     def generate_layout(self):
 
         # This is used to loop through the individuals and create a list for them
@@ -269,7 +269,8 @@ class create_website:
                 types.append(item["Type"])
                 keywords.append(item["Keyword"])
                 times.append(item["Time"])
-                texts.append(item["Text"])
+                texts.append(re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '',
+                       item["Text"]))
                 sentiments.append(item["sentiment"])
 
             # This is used to create the table.

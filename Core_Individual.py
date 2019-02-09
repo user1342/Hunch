@@ -1,4 +1,6 @@
 import random
+import re
+
 import Core_ConfigInterpreter as cc
 
 '''
@@ -71,6 +73,10 @@ class Individual:
         location_profile = ld.Location_Detection()
         list_of_detectors.append(location_profile)
 
+        from Liklihood_Detectors import url_recognition as ur
+        url_recognition = ur.Url_Recognition()
+        list_of_detectors.append(url_recognition)
+
         total_scores = []
         total = 0
 
@@ -90,7 +96,10 @@ class Individual:
                 if text:
                     dictionary_of_scan_results = detector.get_score(text)
                     list_of_extra_info.append(dictionary_of_scan_results)
-                    total_scores.append(dictionary_of_scan_results["likelihood"])
+
+                    #Checks if the likelihood field exists and if so uses it towards the total.
+                    if "likelihood" in dictionary_of_scan_results.keys():
+                        total_scores.append(dictionary_of_scan_results["likelihood"])
 
         for number in total_scores:
             total = total + number
@@ -100,6 +109,8 @@ class Individual:
         assert self.impact, "No impact set to the individual."
         assert self._liklihood, "No likelihood set for the individual."
         assert self.name, "No name set for the individual."
+
+
 
         # Adds items to a dictionary so that they can be returned to the main script
         dictionary_for_individual = {}

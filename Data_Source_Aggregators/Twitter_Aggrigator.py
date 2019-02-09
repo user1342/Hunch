@@ -1,4 +1,3 @@
-import re
 import tweepy
 
 import Core_ConfigInterpreter as cc
@@ -44,7 +43,7 @@ class Twitter_Aggrigator:
         for status in tweepy.Cursor(self.api.user_timeline, id=username).items():
             tweet_count += 1
             tweet = status.text
-            tweet = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', tweet)
+            #tweet = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', tweet)
 
             self.list_of_tweets.append(tweet)
 

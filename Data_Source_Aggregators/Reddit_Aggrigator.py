@@ -22,8 +22,8 @@ class Reddit_Aggrigator:
         user = self.reddit_api.redditor(username)
 
         for comment in user.comments.new():
-            comment = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', comment.body)
-            comment = re.sub('\\n\\n.+', '',comment)
+            #comment = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', comment.body)
+            comment = re.sub('\\n\\n.+', '',comment.body)
 
             self.list_of_comments.append(comment)
 

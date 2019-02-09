@@ -92,7 +92,7 @@ class Config:
         assert paramiter, "No paramiter given to Config Interpreter"
 
         if config_file_location is None or os.path.isfile(config_file_location) is False:
-            print("No file given or file given incorrect, defaulting to default config.")
+            #print("No file given or file given incorrect, defaulting to default config.")
             ret_val = self._read_default_paramiter(paramiter)
         else:
             ret_val = self._read_from_file(paramiter,config_file_location)
