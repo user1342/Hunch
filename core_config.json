@@ -17,5 +17,7 @@
     "twitter_consumer_secret" : "Add API Key Here",
     "twitter_access_token" : "Add API Key Here",
     "twitter_access_token_secret" : "Add API Key Here"
+
+    "blacklisted_strings" : ["war", "North Korea", "North"]
   }
 }

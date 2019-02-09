@@ -87,6 +87,9 @@ class Config:
     def get_default_impact(self, config = None):
         return self._read_paramiter("default_impact", config)
 
+    def get_blacklisted_strings(self, config = None):
+        return self._read_paramiter("blacklisted_strings", config)
+
     #Takes a paramiter that should be in the config dictionary
     def _read_paramiter (self, paramiter = None, config_file_location = None):
         assert paramiter, "No paramiter given to Config Interpreter"

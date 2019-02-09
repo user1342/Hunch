@@ -5,6 +5,7 @@ import requests
 import Core_ConfigInterpreter as cc
 import Core_NLPAnalyser as ca
 
+
 # This class is uses entity recognition to detect when a blacklisted word is used in a given piece of text.
 # This class does not return a likelihood and instead returns an extra of when blacklisted words are used.
 class Blacklist_Recognition:
@@ -44,21 +45,20 @@ class Blacklist_Recognition:
         items_to_return = {}
         list_of_keywords = []
 
-        # Loops through the blacklist file appending its values to a list
-        blacklist_file = open(r"C:\Users\User\Desktop\Hunch\Liklihood_Detectors\blacklist_recognition_file.txt", "r")
-        list_of_blacklist_items = []
-        for line in blacklist_file:
-            list_of_blacklist_items.append(line)
+        # Takes the blacklisted strings from the config file and adds them to a list
+        list_of_blacklist_items = cc.Config().get_blacklisted_strings(("core_config.json"))
 
+        # Loops through that list of blacklisted strings and cgecks if any are in the given text to be profied.
         for blacklisted_item in list_of_blacklist_items:
             if blacklisted_item.lower().strip() in str(self.text_to_profile).lower().strip():
                 items_to_return["Type"] = "BLACKLISTED"
                 items_to_return["Keyword"] = blacklisted_item
                 items_to_return["Time"] = datetime.datetime.now()
                 items_to_return["Text"] = self.text_to_profile
-                items_to_return["sentiment"] = self._get_sentiment()[1] #This sets the sentiment of the text (e.g. positive), even though an impact isn't created.
+                # This sets the sentiment of the text (e.g. positive), even though an impact isn't created.
+                #The [1] is because the first value [0] is retval not the sentiment
+                items_to_return["sentiment"] = self._get_sentiment()[1]
                 list_of_keywords.append(items_to_return)
-
 
         # Creates a dictionary to return containing the likelihood and additional ifnormation like tags
         return_dictionary = {}
