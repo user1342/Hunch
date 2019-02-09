@@ -6,8 +6,6 @@ import Core_ConfigInterpreter as cc
 '''
 A class that is used to build a knowledge base on a likelihood.
 '''
-
-
 class Individual:
 
     # The constructor, setting class variables for each individual
@@ -73,9 +71,15 @@ class Individual:
         location_profile = ld.Location_Detection()
         list_of_detectors.append(location_profile)
 
+        # Adds the url recognition
         from Liklihood_Detectors import url_recognition as ur
         url_recognition = ur.Url_Recognition()
         list_of_detectors.append(url_recognition)
+
+        #Adds the Blacklist recognition
+        from Liklihood_Detectors import blacklist_recognition as br
+        blacklist_recognition = br.Blacklist_Recognition()
+        list_of_detectors.append(blacklist_recognition)
 
         total_scores = []
         total = 0
