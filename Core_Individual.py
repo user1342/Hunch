@@ -11,7 +11,7 @@ A class that is used to build a knowledge base on a likelihood.
 class Individual:
 
     # The constructor, setting class variables for each individual
-    def __init__(self, text=[], name=None, impact= cc.Config().get_default_impact("core_config.json")):
+    def __init__(self, text=[], name=None, impact=cc.Config().get_default_impact("core_config.json")):
         # A score of this individuals liklihood
         self._liklihood = None
         # Name of the individual
@@ -97,7 +97,7 @@ class Individual:
                     dictionary_of_scan_results = detector.get_score(text)
                     list_of_extra_info.append(dictionary_of_scan_results)
 
-                    #Checks if the likelihood field exists and if so uses it towards the total.
+                    # Checks if the likelihood field exists and if so uses it towards the total.
                     if "likelihood" in dictionary_of_scan_results.keys():
                         total_scores.append(dictionary_of_scan_results["likelihood"])
 
@@ -110,14 +110,13 @@ class Individual:
         assert self._liklihood, "No likelihood set for the individual."
         assert self.name, "No name set for the individual."
 
-
-
         # Adds items to a dictionary so that they can be returned to the main script
+        # The round function sets the decimal place to 2.
         dictionary_for_individual = {}
-        dictionary_for_individual["likelihood"] = self._liklihood
-        dictionary_for_individual["impact"] = self.impact
+        dictionary_for_individual["likelihood"] = round(self._liklihood, 2)
+        dictionary_for_individual["impact"] = round(self.impact, 2)
         dictionary_for_individual["extra"] = list_of_extra_info
         dictionary_for_individual["name"] = self.name
-        dictionary_for_individual["risk"] = self.impact * self._liklihood
+        dictionary_for_individual["risk"] = round(self.impact * self._liklihood, 2)
 
         return dictionary_for_individual

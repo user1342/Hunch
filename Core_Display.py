@@ -33,9 +33,14 @@ class create_website:
 
         # Sets what the HTML page will look like.
         app.layout = app.layout = html.Div([
-            html.H1(children='Hunch!'),
-            html.Div(
-                children='''A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing and Open Source Intelligence.'''),
+            html.Div(style={'backgroundColor': "#ffffff", 'color':"#000000"},
+                children=html.H1(children='Hunch!'),
+            ),
+
+            html.Div(style={'backgroundColor': "#ffffff", 'color':"#000000"},
+                     children="A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing and Open Source Intelligence.",
+                     ),
+
             dcc.Tabs(id="tabs", children=[
                 dcc.Tab(label='Prioritization', children=[
                     html.H2(children='Individual Risk Profiles'),
