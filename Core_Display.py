@@ -14,6 +14,8 @@ app.title = 'Hunch'
 '''
 A Class used to create a web front end for viewing Hunch results. 
 '''
+
+
 class create_website:
 
     # The constructor, setting class variables
@@ -33,11 +35,11 @@ class create_website:
 
         # Sets what the HTML page will look like.
         app.layout = app.layout = html.Div([
-            html.Div(style={'backgroundColor': "#ffffff", 'color':"#000000"},
-                children=html.H1(children='Hunch!'),
-            ),
+            html.Div(style={'backgroundColor': "#ffffff", 'color': "#000000"},
+                     children=html.H1(children='Hunch!'),
+                     ),
 
-            html.Div(style={'backgroundColor': "#ffffff", 'color':"#000000"},
+            html.Div(style={'backgroundColor': "#ffffff", 'color': "#000000"},
                      children="A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing and Open Source Intelligence.",
                      ),
 
@@ -62,8 +64,9 @@ class create_website:
                             html.Div([
                                 dcc.Markdown("\nAdd the specifications for an individual to be profiled.\n"),
                                 dcc.Input(id='name_input-box', type='text', placeholder='Name...'),
-                                dcc.Input(id='handle_and_source_input_box', type='text', placeholder='Handle and Source...'),
-                                dcc.Input(id='impact_input_box', type='text',placeholder='Impact...'),
+                                dcc.Input(id='handle_and_source_input_box', type='text',
+                                          placeholder='Handle and Source...'),
+                                dcc.Input(id='impact_input_box', type='text', placeholder='Impact...'),
                                 html.Button('Submit', id='button'),
                                 html.Div(id='output-container-button',
                                          children='Enter a value and press submit')
@@ -92,7 +95,6 @@ class create_website:
                      )
         ])
 
-
     # This function should be moved to a core function. e.g. core profile. Lazy Profile
     def profile_individual(self, list_of_dictionary_individuals, individual_name, impact):
 
@@ -113,7 +115,6 @@ class create_website:
 
         self.list_of_individuals.append(my_individual.profile())
 
-
         for item in self.list_of_individuals_being_scanned:
             if item[0] == my_individual.name:
                 self.list_of_individuals_being_scanned.remove(item)
@@ -121,7 +122,7 @@ class create_website:
 
         print("Finished adding to list : " + str(self.list_of_individuals))
 
-        #When the profile/ scan is finished the layout is re drawn with the new data
+        # When the profile/ scan is finished the layout is re drawn with the new data
         self.generate_layout()
 
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
@@ -208,7 +209,13 @@ class create_website:
             figure={
                 'data': list_for_graph,
                 'layout': {
-                    'title': "Individuals' Risk Scores"
+                    'title': "Individuals' Risk Scores",
+                    'xaxis': {
+                        'title': 'Likelihood'
+                    },
+                    'yaxis': {
+                        'title': 'Risk'
+                    }
                 }
             }
         )
@@ -234,7 +241,13 @@ class create_website:
                 figure={
                     'data': list_for_graph,
                     'layout': {
-                        'title': 'Profiled Individuals'
+                        'title': 'Individuals Profiled',
+                        'xaxis': {
+                            'title': 'Type'
+                        },
+                        'yaxis': {
+                            'title': 'Score'
+                        }
                     }
                 }
             )
@@ -274,8 +287,9 @@ class create_website:
                 types.append(item["Type"])
                 keywords.append(item["Keyword"])
                 times.append(item["Time"])
-                texts.append(re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '',
-                       item["Text"]))
+                texts.append(
+                    re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '',
+                           item["Text"]))
                 sentiments.append(item["sentiment"])
 
             # This is used to create the table.
@@ -316,23 +330,23 @@ class create_website:
             [dash.dependencies.Input('button', 'n_clicks')],
             [dash.dependencies.State('name_input-box', 'value'),
              dash.dependencies.State('impact_input_box', 'value'),
-            dash.dependencies.State('handle_and_source_input_box', 'value')])
+             dash.dependencies.State('handle_and_source_input_box', 'value')])
         def update_output(n_clicks, name, impact, handles_and_sources):
             try:
                 if name and impact and handles_and_sources:
 
-                        if "," in handles_and_sources:
-                            handles_and_sources = handles_and_sources.split(",")
-                        else:
-                            handles_and_sources = [handles_and_sources]
+                    if "," in handles_and_sources:
+                        handles_and_sources = handles_and_sources.split(",")
+                    else:
+                        handles_and_sources = [handles_and_sources]
 
-                        list_of_dictionaries = []
+                    list_of_dictionaries = []
 
-                        for handle_and_source in handles_and_sources:
-                            handle, source = handle_and_source.split(":")
-                            list_of_dictionaries.append({source:handle})
+                    for handle_and_source in handles_and_sources:
+                        handle, source = handle_and_source.split(":")
+                        list_of_dictionaries.append({source: handle})
 
-                        self.profile_individual(list_of_dictionaries,name, impact)
+                    self.profile_individual(list_of_dictionaries, name, impact)
                 else:
                     return "Please fill all boxes..."
 

@@ -2,13 +2,18 @@ import Core_Aggregator
 import Core_Display
 import Core_Individual
 
+'''
+This class has been created as a more user friendly version of the hunch scripts. 
+This allows for the exact same functioanlity, however, is used differently. 
+'''
 class lazy_profile:
 
+    # The Constructor function
     def __init__(self):
         self.list_of_profiled_individuals = []
 
-    def profile (self, list_of_dictionarys_to_aggregate, name, impact):
-
+    # This function takes in a list of dictionaries to aggregate, a name, and an impact,
+    def profile(self, list_of_dictionarys_to_aggregate, name, impact):
         my_aggrigator = Core_Aggregator.WebsiteToCrawl(list_of_dictionarys_to_aggregate, name, impact)
 
         print(
@@ -26,8 +31,8 @@ class lazy_profile:
 
         self.list_of_profiled_individuals.append(results)
 
+    # This function takes all of the lists of individuals to profile that have been created using the profile function and displays them in the web views
     def display_webpage(self):
         assert len(self.list_of_profiled_individuals) > 0, "List of indivduals empty"
 
         Core_Display.create_website(self.list_of_profiled_individuals).generate_page()
-
