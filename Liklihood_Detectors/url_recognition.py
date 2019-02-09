@@ -48,8 +48,13 @@ class Url_Recognition:
 
             # Gets the url behind any shortlinks
             url = regex.group(0)
-            url = requests.get(url)
-            url = url.url
+
+            # This try block is here just encase a url is requested that doesn't meet the expectations of url.url
+            try:
+                url = requests.get(url)
+                url = url.url
+            except:
+                pass
 
             #Checks if the url is for twitter as these are normally links to the tweets.
             if str(url).startswith("https://twitter.com") == False:
