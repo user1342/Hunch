@@ -1,11 +1,12 @@
 {
   "config": {
     "default_analyser": "comprehend",
-    "score_high": 10,
-    "score_medium": 5,
+    "score_high": 2,
+    "score_medium": 1,
     "score_low": 0,
     "default_impact": 1,
-    "default_aggregations": 10,
+    "default_aggregations": 5,
+    "character_limit":300,
 
     "reddit_client_id": "Add API Key Here",
     "reddit_client_secret" : "Add API Key Here",
@@ -18,6 +19,6 @@
     "twitter_access_token" : "Add API Key Here",
     "twitter_access_token_secret" : "Add API Key Here",
 
-    "blacklisted_strings" : ["war", "North Korea", "North"]
+    "blacklisted_strings" : ["war", "North Korea", "brexit", "hero"]
   }
 }

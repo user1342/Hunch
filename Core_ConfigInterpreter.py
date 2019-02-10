@@ -18,6 +18,7 @@ class Config:
             "score_low": 0,
             "default_impact": 1,
             "default_aggregations": 10,
+            "character_limit":300,
 
             "reddit_client_id": None,
             "reddit_client_secret" : None,
@@ -28,7 +29,9 @@ class Config:
             "twitter_consumer_key" : None,
             "twitter_consumer_secret" : None,
             "twitter_access_token" : None,
-            "twitter_access_token_secret" : None
+            "twitter_access_token_secret" : None,
+
+            "blacklisted_strings": []
         }
 
     #The below functions are used to get api information, such as Twitter and Reddit API keys
@@ -89,6 +92,9 @@ class Config:
 
     def get_blacklisted_strings(self, config = None):
         return self._read_paramiter("blacklisted_strings", config)
+
+    def get_aggrigat_character_limit(self, config = None):
+        return self._read_paramiter("character_limit", config)
 
     #Takes a paramiter that should be in the config dictionary
     def _read_paramiter (self, paramiter = None, config_file_location = None):

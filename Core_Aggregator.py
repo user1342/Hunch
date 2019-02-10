@@ -84,6 +84,18 @@ class WebsiteToCrawl:
                     except:
                         self.list_of_text.append(response)
 
+                elif key == "instagram":
+                    from Data_Source_Aggregators import Instagram_Aggrigator as ia
+
+                    aggrigator = ia.Instagram_Aggrigator()
+
+                    response = aggrigator.pull_from_instagram(user)
+
+                    try:
+                        self.list_of_text.extend(response)
+                    except:
+                        self.list_of_text.append(response)
+
                 elif "http" in key:
                     from Data_Source_Aggregators import Generic_Aggrigator as ga
 
