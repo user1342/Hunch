@@ -1,0 +1,14 @@
+{
+  "individual": {
+    "name": "Donald J. Trump",
+    "impact": 5,
+    "sources": [
+      {
+        "twitter": "realDonaldTrump"
+      },
+      {
+        "twitter": "POTUS"
+      }
+    ]
+  }
+}

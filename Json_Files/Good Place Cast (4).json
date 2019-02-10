@@ -1,0 +1,9 @@
+{
+    "individual":{
+      "name": "Ted Danson",
+      "impact":2,
+      "sources": [{
+        "twitter": "TedDanson"
+      }]
+    }
+}

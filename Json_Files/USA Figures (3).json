@@ -1,0 +1,9 @@
+{
+    "individual":{
+      "name": "Hillary Clinton",
+      "impact":4,
+      "sources": [{
+        "twitter": "HillaryClinton"
+      }]
+    }
+}
