@@ -96,6 +96,18 @@ class WebsiteToCrawl:
                     except:
                         self.list_of_text.append(response)
 
+                elif key == "tumblr":
+                    from Data_Source_Aggregators import Tumblr_Aggrigator as ta
+
+                    aggrigator = ta.Tumblr_Aggrigator()
+
+                    response = aggrigator.pull_from_tumblr(user)
+
+                    try:
+                        self.list_of_text.extend(response)
+                    except:
+                        self.list_of_text.append(response)
+
                 elif "http" in key:
                     from Data_Source_Aggregators import Generic_Aggrigator as ga
 

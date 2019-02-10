@@ -27,8 +27,9 @@ class Instagram_Aggrigator:
         for post in post_list:
             #Removes excess characters
             post = re.sub(r"(\\\\[^ ]*)","", post)
-            post = post.strip("}}")
+            post = post.strip("}")
             post = post.strip("]")
+            post = post.strip('"')
             if character_limit > len(post):
                 pass
             else:
