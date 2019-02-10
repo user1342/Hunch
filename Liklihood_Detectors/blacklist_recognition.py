@@ -49,10 +49,11 @@ class Blacklist_Recognition:
         list_of_blacklist_items = cc.Config().get_blacklisted_strings(("core_config.json"))
 
         # Loops through that list of blacklisted strings and cgecks if any are in the given text to be profied.
+        # We add a space so that it is a fresh word
         for blacklisted_item in list_of_blacklist_items:
-            if blacklisted_item.lower().strip() in str(self.text_to_profile).lower().strip():
+            if blacklisted_item.lower().strip()+" " in str(self.text_to_profile).lower().strip():
                 items_to_return["Type"] = "BLACKLISTED"
-                items_to_return["Keyword"] = blacklisted_item
+                items_to_return["Keyword"] = str(blacklisted_item).capitalize()
                 items_to_return["Time"] = datetime.datetime.now()
                 items_to_return["Text"] = self.text_to_profile
                 # This sets the sentiment of the text (e.g. positive), even though an impact isn't created.

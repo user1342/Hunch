@@ -35,12 +35,10 @@ class create_website:
 
         # Sets what the HTML page will look like.
         app.layout = app.layout = html.Div([
+
+        # Banner display
             html.Div(style={'backgroundColor': "#ffffff", 'color': "#000000"},
                      children=html.H1(children='Hunch!'),
-                     ),
-
-            html.Div(style={'backgroundColor': "#ffffff", 'color': "#000000"},
-                     children="A Predictive Policing and Threat Aggregation toolset, powered by Natural Language Processing and Open Source Intelligence.",
                      ),
 
             dcc.Tabs(id="tabs", children=[
@@ -69,11 +67,13 @@ class create_website:
                                 dcc.Input(id='impact_input_box', type='text', placeholder='Impact...'),
                                 html.Button('Submit', id='button'),
                                 html.Div(id='output-container-button',
-                                         children='Enter a value and press submit')
+                                         children='Enter a value and press submit'),
+                                html.Div([self.return_inprogress_individuals_table()])
                             ])
                         ]),
-                        html.Div([self.return_inprogress_individuals_table()])
+
                     ])
+
                 ]),
 
                 # Generates the Third tab, used to compare individuals
@@ -90,8 +90,7 @@ class create_website:
 
                         html.Div(id='output-container')]),
                 ])
-            ], colors={
-                "primary": "gold"}
+            ]
                      )
         ])
 
