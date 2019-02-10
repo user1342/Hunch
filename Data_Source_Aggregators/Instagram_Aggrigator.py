@@ -25,6 +25,10 @@ class Instagram_Aggrigator:
         #Adds this text to the list and cuts the post length to a size set in the config.
         character_limit = cc.Config().get_aggrigat_character_limit("core_config.json")
         for post in post_list:
+            #Removes excess characters
+            post = re.sub(r"(\\\\[^ ]*)","", post)
+            post = post.strip("}}")
+            post = post.strip("]")
             if character_limit > len(post):
                 pass
             else:

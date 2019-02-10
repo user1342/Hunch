@@ -18,7 +18,7 @@ class Config:
             "score_low": 0,
             "default_impact": 1,
             "default_aggregations": 10,
-            "character_limit":300,
+            "character_limit":250,
 
             "reddit_client_id": None,
             "reddit_client_secret" : None,
