@@ -1,9 +1,0 @@
-{
-    "individual":{
-      "name": "user_simulator",
-      "impact":1,
-      "sources": [{
-        "reddit": "user_simulator"
-      }]
-    }
-}
