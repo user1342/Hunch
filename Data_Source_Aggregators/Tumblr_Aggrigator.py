@@ -14,7 +14,6 @@ class Tumblr_Aggrigator:
     #method used to gather information from tumblr
     def pull_from_tumblr(self,username):
         tumblr_base_url = ".tumblr.com"
-        username = "elven-child"
         # Gets the text for the photos on their profile.
         url = username + tumblr_base_url
         website = sp.Popen(["curl", url], stdout=sp.PIPE)
@@ -31,18 +30,17 @@ class Tumblr_Aggrigator:
             line = re.sub(r"(<.*?>)", "", line)
             #line = re.sub(r'(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', line)
             line = re.sub(r'\\.*?  ', "", line)
+            line = re.sub(r"\\.*? \w'", " ", line)
             line = line.replace("  ", "")
             line = line.replace("&rsquo;", "'")
-            line = line.replace("&ldquo;", "")
+            line = re.sub(r"&.*?;", "",line)
             if len(line) > 100:
                 if character_limit > len(line):
                     character_limit = len(line)
                 self.list_of_posts.append(line[0:character_limit]+"...")
 
-        #Checks if the amount requested to return in the config is above the amount actually returned by tumblr.
+        #Sets the amount to return as the value set in the config
         return_amount = cc.Config().get_default_aggregations("core_config.json")
-        if return_amount > 10:
-            return_amount = 10
 
-        return self.list_of_posts[1:return_amount+1]
+        return self.list_of_posts[0:return_amount]
 
