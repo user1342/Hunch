@@ -34,6 +34,8 @@ class Location_Detection:
     core_nlp = ca.Core_NLPAnalyser()
     profiler = core_nlp.create_analyser()
 
+    detector_name = "location"
+
     # A dictionary that is used for the level of liklihood
     scores = {"HIGH": cc.Config().get_score_high("core_config.json"),
               "MEDIUM": cc.Config().get_score_medium("core_config.json"),

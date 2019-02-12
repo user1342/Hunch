@@ -50,10 +50,8 @@ class Individual:
             random_number = random.randint(0, len(list_of_words))
             self.name = self.name + list_of_words[random_number - 1] + "//"
 
-    # Uses the detectors to calculate a risk score for the individual
-    def profile(self):
-        assert self._text_to_be_profiled, "List of text to be profiled is empty"
 
+    def detect (self):
         list_of_detectors = []
 
         # Adds the Relationship Detector to be used when profiling
@@ -81,6 +79,14 @@ class Individual:
         blacklist_recognition = br.Blacklist_Recognition()
         list_of_detectors.append(blacklist_recognition)
 
+        return list_of_detectors
+
+    # Uses the detectors to calculate a risk score for the individual
+    def profile(self):
+        assert self._text_to_be_profiled, "List of text to be profiled is empty"
+
+        list_of_detectors = self.detect()
+
         total_scores = []
         total = 0
 
@@ -89,21 +95,28 @@ class Individual:
 
         # I have no idea why this tmp is needed (maybe a pointer problem) but everything breaks without it.
         tmp_text = self._text_to_be_profiled
+
+        #Sets a list to be equal to the detectors set in the config.
+        list_of_detectors_in_config = cc.Config().get_list_of_in_use_detectors("core_config.json")
         for detector in list_of_detectors:
+            #Only runs the detectors that are set in the config
+            if detector.detector_name in list_of_detectors_in_config:
+                print("Detector run " + detector.detector_name)
+                # Removes null items in list
+                self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
-            # Removes null items in list
-            self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
+                self._text_to_be_profiled = tmp_text
+                # Loops through the list of text to be profiled, profiling each, and then calculating an average
+                for text in self._text_to_be_profiled:
+                    if text:
+                        dictionary_of_scan_results = detector.get_score(text)
+                        list_of_extra_info.append(dictionary_of_scan_results)
 
-            self._text_to_be_profiled = tmp_text
-            # Loops through the list of text to be profiled, profiling each, and then calculating an average
-            for text in self._text_to_be_profiled:
-                if text:
-                    dictionary_of_scan_results = detector.get_score(text)
-                    list_of_extra_info.append(dictionary_of_scan_results)
-
-                    # Checks if the likelihood field exists and if so uses it towards the total.
-                    if "likelihood" in dictionary_of_scan_results.keys():
-                        total_scores.append(dictionary_of_scan_results["likelihood"])
+                        # Checks if the likelihood field exists and if so uses it towards the total.
+                        if "likelihood" in dictionary_of_scan_results.keys():
+                            total_scores.append(dictionary_of_scan_results["likelihood"])
+            else:
+                print("Detector not run " + detector.detector_name)
 
         for number in total_scores:
             total = total + number

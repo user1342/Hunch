@@ -67,6 +67,12 @@ class Config:
     def get_default_aggregations (self, config = None):
         return self._read_paramiter("default_aggregations", config)
 
+    def get_list_of_in_use_aggregators (self, config = None):
+        return self._read_paramiter("aggregators", config)
+
+    def get_list_of_in_use_detectors (self, config = None):
+        return self._read_paramiter("detectors", config)
+
     # This function is used to retrive the default analyser
     def get_default_analyser(self, config = None):
         ret_val = self._read_paramiter("default_analyser", config)

@@ -9,6 +9,9 @@ import Core_NLPAnalyser as ca
 # This class is uses entity recognition to detect when a blacklisted word is used in a given piece of text.
 # This class does not return a likelihood and instead returns an extra of when blacklisted words are used.
 class Blacklist_Recognition:
+
+    detector_name = "blacklist"
+
     # sets the profiler object to be the default analyser set in the Core_NLPAnalyser file
     core_nlp = ca.Core_NLPAnalyser()
     profiler = core_nlp.create_analyser()

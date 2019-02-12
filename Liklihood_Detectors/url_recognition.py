@@ -12,6 +12,8 @@ class Url_Recognition:
     core_nlp = ca.Core_NLPAnalyser()
     profiler = core_nlp.create_analyser()
 
+    detector_name = "url"
+
     scores = {"HIGH": cc.Config().get_score_high("core_config.json"),
               "MEDIUM": cc.Config().get_score_medium("core_config.json"),
               "LOW": cc.Config().get_score_low("core_config.json")
@@ -43,7 +45,7 @@ class Url_Recognition:
 
         items_to_return = {}
         list_of_keywords = []
-        regex = re.search(r'(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', self.text_to_profile)
+        regex = re.search(r'((http|https)://)*([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-]){2,}', self.text_to_profile)
         if regex:
 
             # Gets the url behind any shortlinks

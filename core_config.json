@@ -1,12 +1,17 @@
 {
   "config": {
     "default_analyser": "comprehend",
+    "aggregators": ["twitter","reddit","instagram","tumblr","http"],
+    "detectors": ["blacklist","goal","location","relationship"],
+
+    "blacklisted_strings" : ["war", "North Korea", "brexit", "hero","mum","anon"],
+
     "score_high": 2,
     "score_medium": 1,
     "score_low": 0,
     "default_impact": 1,
     "default_aggregations": 5,
-    "character_limit":300,
+    "character_limit":250,
 
     "reddit_client_id": "Add API Key Here",
     "reddit_client_secret" : "Add API Key Here",
@@ -17,8 +22,6 @@
     "twitter_consumer_key" : "Add API Key Here",
     "twitter_consumer_secret" : "Add API Key Here",
     "twitter_access_token" : "Add API Key Here",
-    "twitter_access_token_secret" : "Add API Key Here",
-
-    "blacklisted_strings" : ["war", "North Korea", "brexit", "hero"]
+    "twitter_access_token_secret" : "Add API Key Here"
   }
 }
