@@ -2,7 +2,7 @@
   "config": {
     "default_analyser": "comprehend",
     "aggregators": ["twitter","reddit","instagram","tumblr","http"],
-    "detectors": ["blacklist","goal","location","relationship"],
+    "detectors": ["blacklist","goal","location","relationship", "url"],
 
     "blacklisted_strings" : ["war", "North Korea", "brexit", "hero","mum","anon"],
 
