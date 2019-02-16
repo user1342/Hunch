@@ -83,7 +83,8 @@ class Individual:
 
     # Uses the detectors to calculate a risk score for the individual
     def profile(self):
-        assert self._text_to_be_profiled, "List of text to be profiled is empty"
+        # The below was removed so that we don't crash during a run.
+        #assert self._text_to_be_profiled, "List of text to be profiled is empty"
 
         list_of_detectors = self.detect()
 
@@ -101,7 +102,7 @@ class Individual:
         for detector in list_of_detectors:
             #Only runs the detectors that are set in the config
             if detector.detector_name in list_of_detectors_in_config:
-                print("Detector run " + detector.detector_name)
+                print(detector.detector_name.capitalize() + " detector run ")
                 # Removes null items in list
                 self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
@@ -116,24 +117,37 @@ class Individual:
                         if "likelihood" in dictionary_of_scan_results.keys():
                             total_scores.append(dictionary_of_scan_results["likelihood"])
             else:
-                print("Detector not run " + detector.detector_name)
+                print(detector.detector_name.capitalize() + " detector not run ")
 
         for number in total_scores:
             total = total + number
-        average = total / len(total_scores)
-        self._liklihood = average
 
-        assert self.impact, "No impact set to the individual."
-        assert self._liklihood, "No likelihood set for the individual."
-        assert self.name, "No name set for the individual."
+        if total > 0:
+            average = total / len(total_scores)
+            self._liklihood = average
+        else:
+            self._liklihood = 0
 
-        # Adds items to a dictionary so that they can be returned to the main script
-        # The round function sets the decimal place to 2.
-        dictionary_for_individual = {}
-        dictionary_for_individual["likelihood"] = round(self._liklihood, 2)
-        dictionary_for_individual["impact"] = round(self.impact, 2)
-        dictionary_for_individual["extra"] = list_of_extra_info
-        dictionary_for_individual["name"] = self.name
-        dictionary_for_individual["risk"] = round(self.impact * self._liklihood, 2)
+        #Checks if the likelihood for an individual exists as this will define if any tweets were profiled.
+        if self._liklihood:
+            assert self.impact, "No impact set to the individual."
+            assert self._liklihood, "No likelihood set for the individual."
+            assert self.name, "No name set for the individual."
+
+            # Adds items to a dictionary so that they can be returned to the main script
+            # The round function sets the decimal place to 2.
+            dictionary_for_individual = {}
+            dictionary_for_individual["likelihood"] = round(self._liklihood, 2)
+            dictionary_for_individual["impact"] = round(self.impact, 2)
+            dictionary_for_individual["extra"] = list_of_extra_info
+            dictionary_for_individual["name"] = self.name
+            dictionary_for_individual["risk"] = round(self.impact * self._liklihood, 2)
+        else:
+            dictionary_for_individual = {}
+            dictionary_for_individual["likelihood"] = None
+            dictionary_for_individual["impact"] = None
+            dictionary_for_individual["extra"] = list_of_extra_info
+            dictionary_for_individual["name"] = self.name
+            dictionary_for_individual["risk"] = None
 
         return dictionary_for_individual

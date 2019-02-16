@@ -127,6 +127,6 @@ class WebsiteToCrawl:
                     else:
                         raise Exception("Unknown Source " + key)
                 else:
-                    raise Exception("Source not in config " + key)
+                    print(user+"'s source " + key + " not set in config")
 
         return self.list_of_text

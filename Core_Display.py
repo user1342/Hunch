@@ -79,7 +79,7 @@ class create_website:
                 # Generates the Third tab, used to compare individuals
                 dcc.Tab(label='Analysis', children=[
                     html.Div([
-                        html.H2(children="Individuals' Data Comparison"),
+                        html.H2(children="Signals and Pivots"),
                         html.Div(
                             children='''Select an assortment of individuals from the dropdown to dive deeper into their profiles.\n'''),
                         dcc.Dropdown(
@@ -153,6 +153,15 @@ class create_website:
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
     def return_prioritised_table(self):
 
+        # If an individual doesn't have a risk score then they ever have no data attached (e.g. no valid detectors were chosen) to them or they only have extra data (like a url detector).
+        # We still want them on the table, however at the end so assign them to -1.
+        iterator = 0
+        for individual in self.list_of_individuals:
+            if individual["risk"] == None:
+                self.list_of_individuals[iterator]["risk"] = -1
+            iterator = iterator + 1
+
+
         # Sorts the list of individuals in order of lower risk first then flips it.
         self.list_of_individuals.sort(key=operator.itemgetter('risk'))
         self.list_of_individuals.reverse()
@@ -164,11 +173,18 @@ class create_website:
         impacts = []
 
         # The below loops through the individuals and assigns their values to each colum
+        iterator = 0
         for individual in self.list_of_individuals:
-            names.append(individual["name"])
+            #If the risk is set to -1 then it was done so for our sort and we can change it back to None
+            if individual["risk"] == -1:
+                self.list_of_individuals[iterator]["risk"] = None
+
             risks.append(individual["risk"])
+            names.append(individual["name"])
             likelihoods.append(individual["likelihood"])
             impacts.append(individual["impact"])
+
+            iterator = iterator + 1
 
         # This is used to create the table.
         d = {'Name': names, 'Risk': risks, 'Likelihood': likelihoods, 'Impact': impacts}

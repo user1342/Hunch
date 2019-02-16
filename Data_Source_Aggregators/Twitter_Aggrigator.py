@@ -39,10 +39,12 @@ class Twitter_Aggrigator:
         '''
 
         tweet_count = 0
+        character_limit = cc.Config().get_aggrigat_character_limit("core_config.json")
 
         for status in tweepy.Cursor(self.api.user_timeline, id=username).items():
             tweet_count += 1
             tweet = status.text
+
             #tweet = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', tweet)
 
             self.list_of_tweets.append(tweet)
