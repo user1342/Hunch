@@ -1,6 +1,12 @@
+import json
 import operator
+import os
 import re
 from datetime import datetime
+
+import Core_ConfigInterpreter as cc
+import Core_Aggregator
+import Core_Individual
 
 import dash
 import dash_core_components as dcc
@@ -61,14 +67,13 @@ class create_website:
                         html.Div([
                             html.Div([
                                 dcc.Markdown("\nAdd the specifications for an individual to be profiled.\n"),
-                                dcc.Input(id='name_input-box', type='text', placeholder='Name...'),
-                                dcc.Input(id='handle_and_source_input_box', type='text',
-                                          placeholder='Handle and Source...'),
-                                dcc.Input(id='impact_input_box', type='text', placeholder='Impact...'),
+                                self.return_inprogress_individuals_table(),
+                                dcc.Textarea(id='name_input-box', placeholder= cc.Config().get_whole_config("core_config.json"), draggable = "false", readOnly = True, style={'width': '50%', 'height':"500px"}),
+                                dcc.Textarea(id='handle_and_source_input_box',
+                                          placeholder='JSON source and handle information...', draggable = "False",  style={'width': '50%', 'height':"500px"}),
                                 html.Button('Submit', id='button'),
                                 html.Div(id='output-container-button',
                                          children='Enter a value and press submit'),
-                                html.Div([self.return_inprogress_individuals_table()])
                             ])
                         ]),
 
@@ -95,14 +100,26 @@ class create_website:
         ])
 
     # This function should be moved to a core function. e.g. core profile. Lazy Profile
-    def profile_individual(self, list_of_dictionary_individuals, individual_name, impact):
+    # This function takes a string from a user input, converts it to json , daves it as a file, profiles it, then removes that file.
+    def profile_individual(self, json_to_profile):
 
-        import Core_Aggregator
-        import Core_Individual
+        json_file_folder = "Json_Files"
 
-        my_aggrigator = Core_Aggregator.WebsiteToCrawl(list_of_dictionary_individuals, individual_name, impact)
+        json_to_profile = json.loads(json_to_profile)
+        individual_name = json_to_profile["individual"]["name"]
+        full_path = os.path.join(json_file_folder, individual_name+".json")
+
+        new_json_file = open(full_path, "w")
+        json.dump(json_to_profile,new_json_file)
+        new_json_file.close()
+
+        my_aggrigator = Core_Aggregator.WebsiteToCrawl()
+
+        my_aggrigator.read_from_json_file(full_path)
+
         print(
-            "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(my_aggrigator.list_of_dictionary_sources))
+            "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(
+                my_aggrigator.list_of_dictionary_sources))
 
         my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name)
         print("Beginning profiling " + my_individual.name + "'s " + str(
@@ -123,6 +140,8 @@ class create_website:
 
         # When the profile/ scan is finished the layout is re drawn with the new data
         self.generate_layout()
+        os.remove(full_path)
+
 
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
     def return_inprogress_individuals_table(self):
@@ -135,20 +154,36 @@ class create_website:
             names.append(individual[0])
             dates.append(individual[1])
 
-        # This is used to create the table.
-        d = {"Profile's In Progress": names, "Date started": dates}
-        dataframe = pd.DataFrame(data=d)
+        if self.list_of_individuals_being_scanned:
+            # This is used to create the table.
+            d = {"Profile's In Progress": names, "Date started": dates}
+            dataframe = pd.DataFrame(data=d)
 
-        # Returns and generates a html data frame object with the above attributes
-        return html.Table(
-            # Header
-            [html.Tr([html.Th(col) for col in dataframe.columns])] +
+            # Returns and generates a html data frame object with the above attributes
+            return html.Table(
+                # Header
+                [html.Tr([html.Th(col) for col in dataframe.columns])] +
 
-            # Body
-            [html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), len(dataframe)))]
-        )
+                # Body
+                [html.Tr([
+                    html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+                ]) for i in range(min(len(dataframe), len(dataframe)))]
+            )
+        else:
+            d = {"Profile's In Progress": ["None"], "Date started": ["None"]}
+            dataframe = pd.DataFrame(data=d)
+
+            # Returns and generates a html data frame object with the above attributes
+            return html.Table(
+                # Header
+                [html.Tr([html.Th(col) for col in dataframe.columns])] +
+
+                # Body
+                [html.Tr([
+                    html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
+                ]) for i in range(min(len(dataframe), len(dataframe)))]
+            )
+
 
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
     def return_prioritised_table(self):
@@ -343,30 +378,15 @@ class create_website:
         @app.callback(
             dash.dependencies.Output('output-container-button', 'children'),
             [dash.dependencies.Input('button', 'n_clicks')],
-            [dash.dependencies.State('name_input-box', 'value'),
-             dash.dependencies.State('impact_input_box', 'value'),
-             dash.dependencies.State('handle_and_source_input_box', 'value')])
-        def update_output(n_clicks, name, impact, handles_and_sources):
-            try:
-                if name and impact and handles_and_sources:
-
-                    if "," in handles_and_sources:
-                        handles_and_sources = handles_and_sources.split(",")
-                    else:
-                        handles_and_sources = [handles_and_sources]
-
-                    list_of_dictionaries = []
-
-                    for handle_and_source in handles_and_sources:
-                        handle, source = handle_and_source.split(":")
-                        list_of_dictionaries.append({source: handle})
-
-                    self.profile_individual(list_of_dictionaries, name, impact)
-                else:
-                    return "Please fill all boxes..."
-
-            except:
-                return "Sorry, something went wrong with that profile..."
+            [dash.dependencies.State('handle_and_source_input_box', 'value')])
+        def update_output(n_clicks, json_input):
+            if json_input:
+                try:
+                    self.profile_individual(json_input)
+                except:
+                    return "It looks like something went wrong..."
+            else:
+                return "Please fill all boxes..."
 
         # Displays the website
         app.run_server()

@@ -102,6 +102,17 @@ class Config:
     def get_aggrigat_character_limit(self, config = None):
         return self._read_paramiter("character_limit", config)
 
+    def get_whole_config(self, config_file_location):
+        if config_file_location is not None and os.path.isfile(config_file_location) is True:
+            with open(config_file_location, 'r') as config_file:
+                contents = config_file.read()
+            ret_val = contents
+        else:
+            ret_val = None
+
+        return ret_val
+
+
     #Takes a paramiter that should be in the config dictionary
     def _read_paramiter (self, paramiter = None, config_file_location = None):
         assert paramiter, "No paramiter given to Config Interpreter"
