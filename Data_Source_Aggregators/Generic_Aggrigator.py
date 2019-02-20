@@ -7,13 +7,9 @@ A class used to gather information from generic websites
 '''
 class Generic_Aggrigator:
 
-    # The constructor
-    def __init__(self):
-        self.list_of_occurances = []
-
     #method used to gather information from a defined website
-    def scrape_website(self,website, username, nested_pages_timeout = cc.Config().ger_default_aggregations("core_config.json")):
-
+    def pull(self,website, username, nested_pages_timeout = cc.Config().ger_default_aggregations("core_config.json")):
+        list_of_occurances = []
         list_of_urls = []
         list_of_urls.append(website)
         base_url = re.search("^.+?[^\/:](?=[?\/]|$)", website)
@@ -52,12 +48,12 @@ class Generic_Aggrigator:
 
                 #If the username has been mentioned the line is added to the list
                 if occurances_of_user:
-                        self.list_of_occurances.append(line)
+                        list_of_occurances.append(line)
 
             #Closes the loop if it's over the set threshold
             if iterator >= nested_pages_timeout:
                 break
 
         # Chunks the responses down to 10 samples, mainly for testing purposes.
-        return self.list_of_occurances[0:10]
+        return list_of_occurances[0:10]
 

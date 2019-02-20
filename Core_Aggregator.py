@@ -1,5 +1,6 @@
 import json
 import Core_ConfigInterpreter as cc
+from Data_Source_Aggregators import Core_Aggrigator_List
 
 '''
 A class used to define which aggregation sources will be used to gather text from individuals
@@ -64,68 +65,22 @@ class WebsiteToCrawl:
                 config_set_aggrigator = cc.Config().get_list_of_in_use_aggregators("core_config.json")
                 #Checks if the key is in that list
                 if key in config_set_aggrigator:
-                    # Checks what website the key is specifiying to use and then profiled that website using the individual user requested.
-                    if key == "twitter":
-                        from Data_Source_Aggregators import Twitter_Aggrigator as tw
+                    #Checks the website key against the dictionary of aggregators
+                    ditionary_of_aggregators = Core_Aggrigator_List.dictionary_of_aggrigators
 
-                        aggrigator = tw.Twitter_Aggrigator()
-
-                        response = aggrigator.pull_from_twitter(user)
-                        try:
-                            self.list_of_text.extend(response)
-                        except:
-                            self.list_of_text.append(response)
-
-                    elif key == "reddit":
-                        from Data_Source_Aggregators import Reddit_Aggrigator as ra
-
-                        aggrigator = ra.Reddit_Aggrigator()
-
-                        response = aggrigator.pull_from_reddit(user)
+                    try:
+                        #Checks the key (e.g. instagram) is in the dictionary and if so sets the value as the aggrigator
+                        aggrigator = ditionary_of_aggregators[key]
+                        response = aggrigator.pull(user)
 
                         try:
                             self.list_of_text.extend(response)
                         except:
                             self.list_of_text.append(response)
 
-                    elif key == "instagram":
-                        from Data_Source_Aggregators import Instagram_Aggrigator as ia
-
-                        aggrigator = ia.Instagram_Aggrigator()
-
-                        response = aggrigator.pull_from_instagram(user)
-
-                        try:
-                            self.list_of_text.extend(response)
-                        except:
-                            self.list_of_text.append(response)
-
-                    elif key == "tumblr":
-                        from Data_Source_Aggregators import Tumblr_Aggrigator as ta
-
-                        aggrigator = ta.Tumblr_Aggrigator()
-
-                        response = aggrigator.pull_from_tumblr(user)
-
-                        try:
-                            self.list_of_text.extend(response)
-                        except:
-                            self.list_of_text.append(response)
-
-                    elif "http" in key:
-                        from Data_Source_Aggregators import Generic_Aggrigator as ga
-
-                        aggrigator = ga.Generic_Aggrigator()
-
-                        response = aggrigator.scrape_website(key, user)
-
-                        try:
-                            self.list_of_text.extend(response)
-                        except:
-                            self.list_of_text.append(response)
-
-                    else:
+                    except:
                         raise Exception("Unknown Source " + key)
+
                 else:
                     print(user+"'s source " + key + " not set in config")
 

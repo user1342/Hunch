@@ -67,12 +67,15 @@ class Config:
     def get_default_aggregations (self, config = None):
         return self._read_paramiter("default_aggregations", config)
 
+    #This is used to retrieve credentials used to log into the display
     def get_default_credentials (self, config = None):
         return self._read_paramiter("default_credentials", config)
 
+    #This returns a list of the aggregators that are to be used
     def get_list_of_in_use_aggregators (self, config = None):
         return self._read_paramiter("aggregators", config)
 
+    #This returns a list of the detectors that are to be used.
     def get_list_of_in_use_detectors (self, config = None):
         return self._read_paramiter("detectors", config)
 
@@ -96,15 +99,19 @@ class Config:
     def get_score_low(self, config = None):
         return self._read_paramiter("score_low", config)
 
+    #This returns the value that should be set for the impact if one isnt set
     def get_default_impact(self, config = None):
         return self._read_paramiter("default_impact", config)
 
+    # A list of strings that are used in the blacklist detector
     def get_blacklisted_strings(self, config = None):
         return self._read_paramiter("blacklisted_strings", config)
 
+    #A limit (characters) on how bit each string from an aggrigator can be.
     def get_aggrigat_character_limit(self, config = None):
         return self._read_paramiter("character_limit", config)
 
+    #Returns the whole config.
     def get_whole_config(self, config_file_location):
         if config_file_location is not None and os.path.isfile(config_file_location) is True:
             with open(config_file_location, 'r') as config_file:

@@ -1,5 +1,5 @@
 import random
-import re
+from Liklihood_Detectors import Core_Detector_List
 
 import Core_ConfigInterpreter as cc
 
@@ -51,42 +51,14 @@ class Individual:
             self.name = self.name + list_of_words[random_number - 1] + "//"
 
 
-    def detect (self):
-        list_of_detectors = []
 
-        # Adds the Relationship Detector to be used when profiling
-        from Liklihood_Detectors import Relationship_Detection as rd
-        relationship_profile = rd.Relationship_Detection()
-        list_of_detectors.append(relationship_profile)
-
-        # Adds the goal detector to be used when profiling
-        from Liklihood_Detectors import Goal_Detection as gd
-        goal_profile = gd.Goal_Detection()
-        list_of_detectors.append(goal_profile)
-
-        # Adds the goal detector to be used when profiling
-        from Liklihood_Detectors import Location_Detection as ld
-        location_profile = ld.Location_Detection()
-        list_of_detectors.append(location_profile)
-
-        # Adds the url recognition
-        from Liklihood_Detectors import url_recognition as ur
-        url_recognition = ur.Url_Recognition()
-        list_of_detectors.append(url_recognition)
-
-        #Adds the Blacklist recognition
-        from Liklihood_Detectors import blacklist_recognition as br
-        blacklist_recognition = br.Blacklist_Recognition()
-        list_of_detectors.append(blacklist_recognition)
-
-        return list_of_detectors
 
     # Uses the detectors to calculate a risk score for the individual
     def profile(self):
         # The below was removed so that we don't crash during a run.
         #assert self._text_to_be_profiled, "List of text to be profiled is empty"
 
-        list_of_detectors = self.detect()
+        list_of_detectors = Core_Detector_List.list_of_detectors
 
         total_scores = []
         total = 0

@@ -17,13 +17,10 @@ class Twitter_Aggrigator:
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
 
-    # The constructor
-    def __init__(self):
-        self.list_of_tweets = []
-
     # Takes the last amount of tweets from a users twitter account
-    def pull_from_twitter(self, username, number_of_tweets_timeout= cc.Config().get_default_aggregations("core_config.json")):
-
+    def pull(self, username):
+        list_of_tweets = []
+        number_of_tweets_timeout = cc.Config().get_default_aggregations("core_config.json")
         item = self.api.get_user(username)
 
         '''
@@ -47,9 +44,9 @@ class Twitter_Aggrigator:
 
             #tweet = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', tweet)
 
-            self.list_of_tweets.append(tweet)
+            list_of_tweets.append(tweet[0:character_limit])
 
             if tweet_count >= number_of_tweets_timeout:
                 break
 
-        return self.list_of_tweets
+        return list_of_tweets

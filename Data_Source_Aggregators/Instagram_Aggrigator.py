@@ -7,12 +7,9 @@ A class used to gather information from generic websites
 '''
 class Instagram_Aggrigator:
 
-    # The constructor
-    def __init__(self):
-        self.list_of_posts = []
-
     #method used to gather information from a defined website
-    def pull_from_instagram(self,username):
+    def pull(self,username):
+        list_of_posts = []
         instagram_base_url = "https://www.instagram.com/"
 
         # Gets the text for the photos on their profile.
@@ -35,12 +32,12 @@ class Instagram_Aggrigator:
                 pass
             else:
                 post = post[0:character_limit]+"..."
-            self.list_of_posts.append(post)
+            list_of_posts.append(post)
 
         #Checks if the amount requested to return in the config is above the amount actually returned by instagram.
         return_amount = cc.Config().get_default_aggregations("core_config.json")
         if return_amount > 11:
             return_amount = 11
 
-        return self.list_of_posts[1:return_amount+1]
+        return list_of_posts[1:return_amount+1]
 

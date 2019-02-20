@@ -7,12 +7,9 @@ A class used to gather information from tumblr
 '''
 class Tumblr_Aggrigator:
 
-    # The constructor
-    def __init__(self):
-        self.list_of_posts = []
-
     #method used to gather information from tumblr
-    def pull_from_tumblr(self,username):
+    def pull(self,username):
+        list_of_posts = []
         tumblr_base_url = ".tumblr.com"
         # Gets the text for the photos on their profile.
         url = username + tumblr_base_url
@@ -37,10 +34,10 @@ class Tumblr_Aggrigator:
             if len(line) > 100:
                 if character_limit > len(line):
                     character_limit = len(line)
-                self.list_of_posts.append(line[0:character_limit]+"...")
+                list_of_posts.append(line[0:character_limit]+"...")
 
         #Sets the amount to return as the value set in the config
         return_amount = cc.Config().get_default_aggregations("core_config.json")
 
-        return self.list_of_posts[0:return_amount]
+        return list_of_posts[0:return_amount]
 
