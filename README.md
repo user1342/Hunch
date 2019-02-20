@@ -33,6 +33,7 @@ pip install dash==0.35.1
 pip install dash-html-components==0.13.4
 pip install dash-core-components==0.42.1
 pip install dash-table==3.1.11
+pip install dash-auth==1.2.0
 ```
 ```bash
 pip install pandas
