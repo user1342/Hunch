@@ -11,6 +11,7 @@ import Core_Individual
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
+import dash_auth
 import pandas as pd
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -365,6 +366,27 @@ class create_website:
     # This is the main bulk of the class. Defining the necessary setting to load the page.
     # This function loads the titles, dropdown and graph.
     def generate_page(self):
+
+        #Takes the default credentials from the config and sets them as authentication for the portal
+        credentials_dictionary = cc.Config().get_default_credentials("core_config.json")
+
+        # This check only adds the authentication if both a username and password are set in the config
+        if credentials_dictionary:
+
+            #Sets the username and password from the default credentials
+            username = credentials_dictionary["username"]
+            password = credentials_dictionary["password"]
+
+            #Creates a list of valid username and password
+            VALID_USERNAME_PASSWORD_PAIRS = [
+                [username, password]
+            ]
+
+            #Sets the authentication
+            auth = dash_auth.BasicAuth(
+                app,
+                VALID_USERNAME_PASSWORD_PAIRS
+            )
 
         self.generate_layout()
 

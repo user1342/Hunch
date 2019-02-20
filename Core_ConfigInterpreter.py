@@ -67,6 +67,9 @@ class Config:
     def get_default_aggregations (self, config = None):
         return self._read_paramiter("default_aggregations", config)
 
+    def get_default_credentials (self, config = None):
+        return self._read_paramiter("default_credentials", config)
+
     def get_list_of_in_use_aggregators (self, config = None):
         return self._read_paramiter("aggregators", config)
 
@@ -116,6 +119,7 @@ class Config:
     #Takes a paramiter that should be in the config dictionary
     def _read_paramiter (self, paramiter = None, config_file_location = None):
         assert paramiter, "No paramiter given to Config Interpreter"
+        paramiter = paramiter.lower()
 
         if config_file_location is None or os.path.isfile(config_file_location) is False:
             #print("No file given or file given incorrect, defaulting to default config.")
