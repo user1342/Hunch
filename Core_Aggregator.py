@@ -1,6 +1,6 @@
 import json
 import Core_ConfigInterpreter as cc
-from Data_Source_Aggregators import Core_Aggrigator_List
+from Data_Source_Aggregators import List_Of_Aggregators
 
 '''
 A class used to define which aggregation sources will be used to gather text from individuals
@@ -66,7 +66,7 @@ class WebsiteToCrawl:
                 #Checks if the key is in that list
                 if key in config_set_aggrigator:
                     #Checks the website key against the dictionary of aggregators
-                    ditionary_of_aggregators = Core_Aggrigator_List.dictionary_of_aggrigators
+                    ditionary_of_aggregators = List_Of_Aggregators.dictionary_of_aggrigators
 
                     try:
                         #Checks the key (e.g. instagram) is in the dictionary and if so sets the value as the aggrigator

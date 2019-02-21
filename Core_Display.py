@@ -122,7 +122,7 @@ class create_website:
             "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(
                 my_aggrigator.list_of_dictionary_sources))
 
-        my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name)
+        my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name, my_aggrigator.impact)
         print("Beginning profiling " + my_individual.name + "'s " + str(
             len(my_individual._text_to_be_profiled)) + " samples.")
 
@@ -130,14 +130,15 @@ class create_website:
         self.list_of_individuals_being_scanned.append([my_individual.name, datetime.now()])
         self.generate_layout()
 
-        self.list_of_individuals.append(my_individual.profile())
+        individual_profile = my_individual.profile()
+        self.list_of_individuals.append(individual_profile)
 
         for item in self.list_of_individuals_being_scanned:
             if item[0] == my_individual.name:
                 self.list_of_individuals_being_scanned.remove(item)
                 break
 
-        print("Finished adding to list : " + str(self.list_of_individuals))
+        print("Finished adding to list : " + str(individual_profile))
 
         # When the profile/ scan is finished the layout is re drawn with the new data
         self.generate_layout()

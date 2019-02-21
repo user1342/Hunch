@@ -1,5 +1,5 @@
 import random
-from Liklihood_Detectors import Core_Detector_List
+from Liklihood_Detectors import List_Of_Detectors
 
 import Core_ConfigInterpreter as cc
 
@@ -58,7 +58,7 @@ class Individual:
         # The below was removed so that we don't crash during a run.
         #assert self._text_to_be_profiled, "List of text to be profiled is empty"
 
-        list_of_detectors = Core_Detector_List.list_of_detectors
+        list_of_detectors = List_Of_Detectors.list_of_detectors
 
         total_scores = []
         total = 0
