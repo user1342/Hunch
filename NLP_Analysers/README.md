@@ -16,8 +16,7 @@ The 'construct_detect_command' should return a JSON response if it has detected 
      
 "detect-entities" returns a json string of which looks as follows:
 ```json
-{"Entities": [{"Score": 0.9824379682540894,
-              "Text": "@jenstatsky",
+{"Entities": [{"Text": "@jenstatsky",
               "Type": "PERSON"}]}
 ```
 While "detect-sentiment" returns:
