@@ -2,7 +2,7 @@
 A Predictive Policing and Threat Aggregation and pivoting toolset - powered by Natural Language Processing and Open Source Intelligence. 
 
 
-<img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png" width="400"> <img src="https://github.com/user1342/Hunch/blob/master/Demo.gif" width="400">
+<img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png"> 
 
 ## Installation
 
@@ -91,3 +91,5 @@ Please make sure to update tests as appropriate... When I make some.
 
 ## License
 [Apache License](https://choosealicense.com/licenses/apache-2.0/)
+
+<img src="https://github.com/user1342/Hunch/blob/master/Demo.gif">
