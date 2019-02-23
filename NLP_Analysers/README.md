@@ -4,9 +4,7 @@ The NLP Analysers are the backbone of this tool. These classes use natural langa
 When making a new NLP Analyser it must take in a **string of text as a paramiter** and must return a json response matching the below (for entity recognition):
 
 ```json
-{"Entities": [{"BeginOffset": 3,
-               "EndOffset": 14,
-               "Score": 0.9824379682540894,
+{"Entities": [{"Score": 0.9824379682540894,
                "Text": "@jenstatsky",
                "Type": "PERSON"}]}
 ```
