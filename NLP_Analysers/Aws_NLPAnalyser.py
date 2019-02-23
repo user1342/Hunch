@@ -8,6 +8,8 @@ to perform NLP on text.
 
 
 class AWSComprehend:
+    analyser_name = "comprehend"
+
     # A list of the current NLP detect commands.
     list_of_detect_commands = [
         "detect-sentiment",

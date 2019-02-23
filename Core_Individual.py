@@ -74,7 +74,7 @@ class Individual:
         for detector in list_of_detectors:
             #Only runs the detectors that are set in the config
             if detector.detector_name in list_of_detectors_in_config:
-                print(detector.detector_name.capitalize() + " detector run ")
+                if cc.Config().get_verbose("core_config.json") : print(detector.detector_name.capitalize() + " detector run ")
                 # Removes null items in list
                 self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
@@ -89,7 +89,7 @@ class Individual:
                         if "likelihood" in dictionary_of_scan_results.keys():
                             total_scores.append(dictionary_of_scan_results["likelihood"])
             else:
-                print(detector.detector_name.capitalize() + " detector not run ")
+                if cc.Config().get_verbose("core_config.json"): print(detector.detector_name.capitalize() + " detector not run ")
 
         for number in total_scores:
             total = total + number

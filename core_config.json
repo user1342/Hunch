@@ -4,14 +4,15 @@
     "aggregators": ["twitter","reddit","instagram","tumblr","http"],
     "detectors": ["blacklist","goal","location","relationship","url"],
 
-    "blacklisted_strings" : ["war", "North Korea", "brexit", "hero","mum","anon","anti-semitism","Jerron Hawkins"],
+    "blacklisted_strings" : ["war", "North Korea", "brexit"],
 
     "score_high": 2,
     "score_medium": 1,
     "score_low": 0,
     "default_impact": 1,
-    "default_aggregations": 3,
+    "default_aggregations": 5,
     "character_limit":250,
+    "verbose": true,
 
     "default_credentials":{"username":"user","password":"password"},
 

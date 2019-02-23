@@ -82,6 +82,6 @@ class WebsiteToCrawl:
                         raise Exception("Unknown Source " + key)
 
                 else:
-                    print(user+"'s source " + key + " not set in config")
+                    if cc.Config().get_verbose("core_config.json"): print(user+"'s source " + key + " not set in config")
 
         return self.list_of_text

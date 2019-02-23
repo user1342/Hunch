@@ -83,10 +83,6 @@ class Config:
     def get_default_analyser(self, config = None):
         ret_val = self._read_paramiter("default_analyser", config)
 
-        #Checks if the string comprehend was returned from the json file and if so substitutes it for the correct analyser
-        if ret_val == "comprehend":
-            ret_val = AWSComprehend.AWSComprehend()
-
         return ret_val
 
     #The below functions are used to return a score for low, medium, and high likelihoods.
@@ -111,6 +107,10 @@ class Config:
     def get_aggrigat_character_limit(self, config = None):
         return self._read_paramiter("character_limit", config)
 
+    #Returns true or false depending on if verbose output was set in the config
+    def get_verbose(self, config = None):
+        return self._read_paramiter("verbose", config)
+
     #Returns the whole config.
     def get_whole_config(self, config_file_location):
         if config_file_location is not None and os.path.isfile(config_file_location) is True:
@@ -129,7 +129,7 @@ class Config:
         paramiter = paramiter.lower()
 
         if config_file_location is None or os.path.isfile(config_file_location) is False:
-            #print("No file given or file given incorrect, defaulting to default config.")
+            if cc.Config().get_verbose("core_config.json"): print("No file given or file given incorrect, defaulting to default config.")
             ret_val = self._read_default_paramiter(paramiter)
         else:
             ret_val = self._read_from_file(paramiter,config_file_location)

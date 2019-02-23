@@ -81,7 +81,6 @@ class Relationship_Detection:
             for item in dictionary_of_items:
                 if item in list_of_entities:
                     ret_val, sentiment = self._get_sentiment()
-
                     items_to_return["Type"] = item
                     items_to_return["Keyword"] = dictionary_of_items[item]
                     items_to_return["Time"] = datetime.datetime.now()
