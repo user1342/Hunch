@@ -10,16 +10,19 @@ All aggregators need a 'pull' function in their class. This is the entry point f
 ```python
 def pull(self, username):
 ```
-The pull function also returns a list of data aggrigated from the source and the user. When doing this you should use the character limit and return amount specified in the users configuration file. 
+
+The pull function also returns a list of data aggrigated from the source and the user. When doing this you should use the character limit and return amount specified in the users configuration file. The character limit defines the max size for each string of text. The return amount defines the amount of strings returned. 
 ```python
 import Core_ConfigInterpreter as cc
-character_limit = cc.Config().get_aggrigat_character_limit("core_config.json") #This defines the max size for each string of text.
-return_amount = cc.Config().get_default_aggregations("core_config.json") #This defines the amount of strings returned. 
+character_limit = cc.Config().get_aggrigat_character_limit("core_config.json")
+return_amount = cc.Config().get_default_aggregations("core_config.json")
 ```
+
 The data returned is a list of strings returned from the source and user that looks as follows:
 ```python
 ['The absolute worst. Thank God we filmed it. @fuegobox #chocochallenge https://t.co/7wFHtYvuXh', 'Head on over to my instagram stories at @kristenanniebell if youd like to see one of the most painful and embarrass… https://t.co/7GJlZd7mjR', 'RT @SarahKSilverman: Our government is doing this to humans.  This is non partisan issue. We have to join together to stop this. We are pun…', 'This is torture for these kids. I am so ashamed. https://t.co/nHHvbiroW3', 'I second this emotion. PLEASE @sagaftra, get us something better. @ExpressScripts /acreedo is very hard to use. https://t.co/egAXVUbklM']
 ```
+
 ## 2 - The List Of Aggrigators
 All aggrigators to be used should be listed in the 'list_of_aggrigators.py' file. This file contains a dictionary with the key being the name of the aggrigator (e.g. twitter) and the aggrigators class. See an example below:
 
