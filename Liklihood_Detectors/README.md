@@ -20,6 +20,8 @@ def get_score(self, text):
 If you are planning on returning a likelihood then your detector will need to use the priorities set in the configuration file. This stops every detector from using their own priority system. To do this decide what would depict a high, medium, and low likelihood and use the code below to set the individuals likelihood. 
 
 ```python
+    import Core_ConfigInterpreter as cc
+
     scores = {"HIGH": cc.Config().get_score_high("core_config.json"),
               "MEDIUM": cc.Config().get_score_medium("core_config.json"),
               "LOW": cc.Config().get_score_low("core_config.json")
