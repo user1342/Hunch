@@ -1,5 +1,5 @@
 # Profiling The Likelihood from a given piece of text
-The purpose of a liklihood detector is to take a given piece of text and implement a methadology that will return a likelihood as well as additional information - for example a detector that looks at how often someone referes to close relationships will use NLP to recognise when a relationship is mentioned and base a likelihood of that. The below documents the three step process for creating a Hunch Likelihood Detector. 
+The purpose of a liklihood detector is to take a given piece of text and implement a methadology that will return a likelihood as well as additional information - for example a detector that looks at how often someone referes to close relationships will use NLP to recognise when a relationship is mentioned and base a likelihood off that. The below documents the three step process for creating a Hunch Likelihood Detector. 
 
 ## 1 - Follow The Template
 A detector will take the form of a python file in the "Likelihood_Detectors" folder. Inside of this file will be a class that contains five main parts, these are stated below.
