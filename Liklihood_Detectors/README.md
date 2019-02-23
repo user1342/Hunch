@@ -39,7 +39,7 @@ core_nlp = ca.Core_NLPAnalyser()
 profiler = core_nlp.create_analyser()
 json_response = self.profiler.construct_detect_command("detect-entities", self.text_to_profile)
 ```
-This core_nlp analyser is set up so that multiple analysers can be created. Currently there is only an AWS Comprehend analyser and so the functions depict that. Currently this analyser returns a json string of which looks as follows:
+The two options for the construct_detect_command are "detect-sentiment", and "detect-entities". This core_nlp analyser is set up so that multiple analysers can be created. Currently there is only an AWS Comprehend analyser and so the functions depict that. Currently this analyser returns a json string of which looks as follows:
 
  ```python
 {"Entities": [{"Score": 0.9824379682540894,
