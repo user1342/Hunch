@@ -51,13 +51,7 @@ The two options for the construct_detect_command are "detect-sentiment", and "de
 While "detect-sentiment" returns:
  ```json
 {  
-   'Sentiment':'NEGATIVE',
-   'SentimentScore':{  
-      'Positive':0.049914125353097916,
-      'Mixed':0.1693001240491867,
-      'Negative':0.5058740973472595,
-      'Neutral':0.27491164207458496
-   }
+   "Sentiment":"NEGATIVE"
 }
 ```
 
