@@ -28,7 +28,7 @@ While "detect-sentiment" returns:
 }
 ```
 
-# 2 - List Of Analysers
+## 2 - List Of Analysers
 Next you will need to both import your analyser and add it to the list_of_analysers in the 'Core_NLPAnalysers.py' file. 
 
 ```python
@@ -37,7 +37,7 @@ from NLP_Analysers import Aws_NLPAnalyser
 list_of_analysers = [Aws_NLPAnalyser.AWSComprehend()]
 ```
 
-# 3 - The Configuration
+## 3 - The Configuration
  The final step is where the user will need to add the default_analyser name into their configuration file, this is so that Hunch knows to run the specific analyser. An example:
  
  ```json
