@@ -43,8 +43,7 @@ The two options for the construct_detect_command are "detect-sentiment", and "de
 
 "detect-entities" returns a json string of which looks as follows:
  ```json
-{"Entities": [{"Score": 0.9824379682540894,
-               "Text": "@jenstatsky",
+{"Entities": [{"Text": "@jenstatsky",
                "Type": "PERSON"}]}
 ```
 
