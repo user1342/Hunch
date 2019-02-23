@@ -39,12 +39,26 @@ core_nlp = ca.Core_NLPAnalyser()
 profiler = core_nlp.create_analyser()
 json_response = self.profiler.construct_detect_command("detect-entities", self.text_to_profile)
 ```
-The two options for the construct_detect_command are "detect-sentiment", and "detect-entities". This core_nlp analyser is set up so that multiple analysers can be created. Currently there is only an AWS Comprehend analyser and so the functions depict that. Currently this analyser returns a json string of which looks as follows:
+The two options for the construct_detect_command are "detect-sentiment", and "detect-entities". This core_nlp analyser is set up so that multiple analysers can be created. Currently there is only an AWS Comprehend analyser and so the functions depict that. 
 
- ```python
+"detect-entities" returns a json string of which looks as follows:
+ ```json
 {"Entities": [{"Score": 0.9824379682540894,
                "Text": "@jenstatsky",
                "Type": "PERSON"}]}
+```
+
+While "detect-sentiment" returns:
+ ```json
+{  
+   'Sentiment':'NEGATIVE',
+   'SentimentScore':{  
+      'Positive':0.049914125353097916,
+      'Mixed':0.1693001240491867,
+      'Negative':0.5058740973472595,
+      'Neutral':0.27491164207458496
+   }
+}
 ```
 
 ### 1.5 - Returning a JSON Response
