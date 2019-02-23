@@ -1,13 +1,9 @@
 # Hunch
 A Predictive Policing and Threat Aggregation and pivoting toolset - powered by Natural Language Processing and Open Source Intelligence. 
 
-
-<img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png"> 
+<img src="https://github.com/user1342/Hunch/blob/master/Demo.gif">
 
 ## Installation
-
-
-
 
 To use the AWS Comprehend aggregation for Hunch you will need to have the [AWS CLI](https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html) installed.  As part of setting up the AWS CLI you will need to create an AWS [IAM](https://console.aws.amazon.com/iam) user with the "ComprehendFullAccess" group and set this as your user when it comes to the configure stage.
 
@@ -92,4 +88,4 @@ Please make sure to update tests as appropriate... When I make some.
 ## License
 [Apache License](https://choosealicense.com/licenses/apache-2.0/)
 
-<img src="https://github.com/user1342/Hunch/blob/master/Demo.gif">
+<img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png"> 
