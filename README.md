@@ -1,5 +1,5 @@
 # Hunch
-A Predictive Policing and Threat Aggregation and pivoting toolset - powered by Natural Language Processing and Open Source Intelligence. 
+A Predictive Policing and Threat Aggregation and pivoting toolset - powered by Natural Language Processing and Open Source Intelligence. An article on how [NLP can be used to predict cime.](https://www.infosecurity-magazine.com/next-gen-infosec/language-processing-motive/). For more from [James Stevenson](http://www.jamesstevenson.me/).
 
 <img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png"  width = 400> <img src="https://github.com/user1342/Hunch/blob/master/Demo.gif" width = 400>
 
