@@ -1,5 +1,5 @@
 # Hunch
-A Predictive Policing and Threat Aggregation toolset. This modular toolset, powered by Natural Language Processing and Open Source Intelligence, is desiged to provide the user with actionable data including: signals, pivots, and risk levels. In collecting this information all that is required from the user is a 'source'(e.g. Twitter) and 'username'(e.g. Jane Doe) from the user. 
+A Predictive Policing and Threat Aggregation toolset. This modular toolset, powered by Natural Language Processing and Open Source Intelligence, is desiged to provide the user with actionable data including: signals, pivots, and risk levels. In collecting this information all that is required from the user is a 'source'(e.g. Twitter) and 'username'(e.g. Jane Doe). Current source aggrigators include: Twitter, Instagram, Tumblr, and Reddit. 
 
 For more on how Natural Language Processing can be used to predict crime, check out this [article](https://www.infosecurity-magazine.com/next-gen-infosec/language-processing-motive/) and a [talk](https://www.youtube.com/watch?v=9F0vbbjw9jk&t=1s). For more from [James Stevenson](http://www.jamesstevenson.me/). 
 
