@@ -48,7 +48,7 @@ pip install requests
 ```
 
 ## Usage
-There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile an individual. A sample of this is below:
+There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile all individuals in the [JSON FILES folder](https://github.com/user1342/Hunch/tree/master/Json_Files) as well as launching the display interface on localhost. A simplified version of this can be found below:
 
 ```python
 
@@ -63,7 +63,7 @@ my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_ag
 Core_Display.create_website([my_individual.profile()]).generate_page()
 
 ```
-or you can use the [Lazy](https://github.com/user1342/Hunch/blob/master/Lazy.py) tool which cleans up the code needed to profile an individual.
+In addition to this you can use the [Lazy](https://github.com/user1342/Hunch/blob/master/Lazy.py) tool which cuts down on the code needed to profile individuals, however, loses some of the additional functionality.
 ```python
 
 import Lazy
