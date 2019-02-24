@@ -1,4 +1,5 @@
 import random
+import string
 from Liklihood_Detectors import List_Of_Detectors
 
 import Core_ConfigInterpreter as cc
@@ -39,19 +40,10 @@ class Individual:
         self._text_to_be_profiled.remove(text)
 
     # A method that generates a psudo random name for the individual
-    def generate_name(self, filename="Core_wordfile", words_in_name=3):
-        list_of_words = []
-
-        file = open(filename, "r")
-        for line in file:
-            list_of_words.append(line.strip("\n"))
-
-        for iterator in range(words_in_name):
-            random_number = random.randint(0, len(list_of_words))
-            self.name = self.name + list_of_words[random_number - 1] + "//"
-
-
-
+    def generate_name(self, length=9):
+        new_name = ''.join(random.choice(string.ascii_lowercase) for i in range(length))
+        if cc.Config().get_verbose("core_config.json"): print("New name set to: " + new_name)
+        self.name = new_name
 
     # Uses the detectors to calculate a risk score for the individual
     def profile(self):
