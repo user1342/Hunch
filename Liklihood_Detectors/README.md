@@ -57,7 +57,7 @@ While "detect-sentiment" returns:
 ```
 
 ### 1.5 - Returning a JSON Response
-All Detectors must return a JSON string. This JSON response has two main entities. The first of these being the likelihood, which should have been previously set, and secondly the 'extra' field. The extra field contains information that will be displayed to the user. This including the actual 'text' that was profiled, the 'keyword' in the text that flagged the liklihood increasing, the time and date, the 'type' or category of the detector, and the sentiment of the text. Neither the 'likelihood' or the 'extra' fields are mandatory.
+All Detectors must return a JSON string. This JSON response has two main entities. The first of these being the likelihood, which should have been previously set, and secondly the 'extra' field. The extra field contains information that will be displayed to the user. This including the actual 'text' that was profiled, the 'keyword' in the text that flagged the liklihood increasing, the time and date, the 'type' or category of the detector, and the 'sentiment' of the text. Neither the 'likelihood' or the 'extra' fields are mandatory.
 
 ```json
 {"extra": [{"Keyword": "Mars",
