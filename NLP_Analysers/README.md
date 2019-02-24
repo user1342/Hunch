@@ -4,14 +4,21 @@ The NLP Analysers are the backbone of this tool. These classes use natural langa
 ## 1 - The Template
 When creating an NLP Analyser there are several pieces that you will need to add to your code to conform with the other NLP Analysers. 
 
-### 1.1 - The Entry Point
+### 1.1 - A Name
+All NLP analysers require a name to be set at the top of their class. This is so that the analsyer in the config can be compared with each analsyer. This should be written as:
+
+```python
+ analyser_name = "comprehend"
+```
+
+### 1.2 - The Entry Point
 For the NLP_Analysers the function 'construct_detect_command' is the entry point for the analyser. This takes in two paramiters, the text to be profiled and what type of profiling is to be performed, currently the only two types are "detect-sentiment", and "detect-entities", your 'construct_detect_command' function should take this input and profile the text accordingly. 
 
 ```python
 def construct_detect_command(self, task, text):
 ```
 
-### 1.2 - Returning a JSON response
+### 1.3 - Returning a JSON response
 The 'construct_detect_command' should return a JSON response if it has detected any entities or with the sentiment of the text. The returned entities is based off the [AWS Comprehend Entities List](https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html).     
      
 "detect-entities" returns a json string of which looks as follows:
