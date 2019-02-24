@@ -35,6 +35,8 @@ If you are planning on returning a likelihood then your detector will need to us
 One of the strengths of Hunch is it's integration with Natural Language Processing (NLP) - for example a relationship detector would use NLP entity recogniion to identify when a relationship was mentioned, or a location detector would use NLP to identify when locations were mentioned. Not all detectors are required to use NLP, however, if they do you should use the Core_NLPAnalyser.py file. For example:
 
  ```python
+ import Core_NLPAnalyser as ca
+ 
 core_nlp = ca.Core_NLPAnalyser()
 profiler = core_nlp.create_analyser()
 json_response = self.profiler.construct_detect_command("detect-entities", self.text_to_profile)
