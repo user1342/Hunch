@@ -1,7 +1,7 @@
 import re
 import praw
 
-import Core_ConfigInterpreter as cc
+import CORE_ConfigInterpreter as cc
 
 '''
 A class used to gather information from the reddit API.

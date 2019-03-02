@@ -1,5 +1,5 @@
 import unittest
-import Core_Individual
+import CORE_Individual
 
 # A test class for the Core_Individual class
 class Test_Core_Individual(unittest.TestCase):
@@ -11,7 +11,7 @@ class Test_Core_Individual(unittest.TestCase):
         example_name_to_be_profiled = "test"
         example_impact_to_be_profiled = 1
 
-        new_individual = Core_Individual.Individual(example_text_to_be_profiled,example_name_to_be_profiled,example_impact_to_be_profiled)
+        new_individual = CORE_Individual.Individual(example_text_to_be_profiled, example_name_to_be_profiled, example_impact_to_be_profiled)
         individuals_dictionary_response = new_individual.profile()
 
         self.assertIn("likelihood", individuals_dictionary_response.keys())
@@ -27,7 +27,7 @@ class Test_Core_Individual(unittest.TestCase):
         example_name_to_be_profiled = "test"
         example_impact_to_be_profiled = 1
 
-        new_individual = Core_Individual.Individual(example_text_to_be_profiled, example_name_to_be_profiled,
+        new_individual = CORE_Individual.Individual(example_text_to_be_profiled, example_name_to_be_profiled,
                                                     example_impact_to_be_profiled)
         individuals_dictionary_response = new_individual.profile()
 

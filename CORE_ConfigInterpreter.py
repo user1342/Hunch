@@ -35,7 +35,7 @@ class Config:
     def get_reddit_user_agent (self, config = None):
         return self._read_paramiter("reddit_user_agent", config)
 
-    #This is used to retrieve the default amount of items of text that should be aggregate from an aggregator
+    #This is used to retrieve the default amount of items of text that should be aggregate from an collector
     def get_default_aggregations (self, config = None):
         return self._read_paramiter("default_aggregations", config)
 
@@ -43,9 +43,9 @@ class Config:
     def get_default_credentials (self, config = None):
         return self._read_paramiter("default_credentials", config)
 
-    #This returns a list of the aggregators that are to be used
-    def get_list_of_in_use_aggregators (self, config = None):
-        return self._read_paramiter("aggregators", config)
+    #This returns a list of the collectors that are to be used
+    def get_list_of_in_use_collectors (self, config = None):
+        return self._read_paramiter("collectors", config)
 
     #This returns a list of the detectors that are to be used.
     def get_list_of_in_use_detectors (self, config = None):

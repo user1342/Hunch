@@ -92,6 +92,6 @@ list_of_detectors = [rd.Relationship_Detection(),
  {
   "config": {
     "default_analyser": "comprehend",
-    "aggregators": ["twitter","reddit","instagram","tumblr","http"],
+    "collectors": ["twitter","reddit","instagram","tumblr","http"],
     "detectors": ["blacklist","goal","location","relationship","url"],
  ```

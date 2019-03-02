@@ -1,7 +1,7 @@
 import json
-import Core_ConfigInterpreter as cc
-import Core_Logger
-from Data_Source_Aggregators import List_Of_Aggregators
+import CORE_ConfigInterpreter as cc
+import CORE_Logger
+from Data_Source_Collectors import List_Of_Collectors
 
 '''
 A class used to define which aggregation sources will be used to gather text from individuals
@@ -63,15 +63,15 @@ class WebsiteToCrawl:
                 user = source_dictionary[key]
 
                 # Sets a list of aggrigators set in the config
-                config_set_aggrigator = cc.Config().get_list_of_in_use_aggregators("core_config.json")
+                config_set_aggrigator = cc.Config().get_list_of_in_use_collectors("core_config.json")
                 #Checks if the key is in that list
                 if key in config_set_aggrigator:
-                    #Checks the website key against the dictionary of aggregators
-                    ditionary_of_aggregators = List_Of_Aggregators.dictionary_of_aggrigators
+                    #Checks the website key against the dictionary of collectors
+                    ditionary_of_collectors = List_Of_Collectors.dictionary_of_aggrigators
 
                     try:
                         #Checks the key (e.g. instagram) is in the dictionary and if so sets the value as the aggrigator
-                        aggrigator = ditionary_of_aggregators[key]
+                        aggrigator = ditionary_of_collectors[key]
                         response = aggrigator.pull(user)
 
                         try:
@@ -83,6 +83,6 @@ class WebsiteToCrawl:
                         raise Exception("Unknown Source " + key)
 
                 else:
-                    Core_Logger.log(user+"'s source " + key + " not set in config")
+                    CORE_Logger.log(user + "'s source " + key + " not set in config")
 
         return self.list_of_text

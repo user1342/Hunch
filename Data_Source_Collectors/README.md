@@ -1,12 +1,12 @@
 # Sampling data from a user and source
-The purpose of data source aggregators is to sample data from a user account from a specific source or set of sources - for example sampling Jane Does data from twitter, reddit, and Instagram. 
+The purpose of data source collectors is to sample data from a user account from a specific source or set of sources - for example sampling Jane Does data from twitter, reddit, and Instagram.
 
 
 ## 1 - The Template
 Each aggrigator needs specific elements of code so that it can function with the same functionality as any other.. 
 
 ### 1.1 The 'pull' function
-All aggregators need a 'pull' function in their class. This is the entry point for the class and is what will be called to aggregate data from sources. This function takes the paramiter of a username. A source does not need to be specified as each aggrigator should be unique to a source (e.g. a twitter aggrigator, an instagram aggrigator, etc). 
+All collectors need a 'pull' function in their class. This is the entry point for the class and is what will be called to aggregate data from sources. This function takes the paramiter of a username. A source does not need to be specified as each aggrigator should be unique to a source (e.g. a twitter aggrigator, an instagram aggrigator, etc).
 ```python
 def pull(self, username):
 ```
@@ -27,19 +27,19 @@ The data returned is a list of strings returned from the source and user that lo
 All aggrigators to be used should be listed in the 'list_of_aggrigators.py' file. This file contains a dictionary with the key being the name of the aggrigator (e.g. twitter) and the aggrigators class. See an example below:
 
 ```python
-from Data_Source_Aggregators import Instagram_Aggrigator as ia
+from Data_Source_Collectors import Instagram_Aggrigator as ia
 
-#This shows the aggregators that exist and can be used
+#This shows the collectors that exist and can be used
 dictionary_of_aggrigators = {"instagram":ia.Instagram_Aggrigator()}
 ```
 
 ## 3 - The Hunch Configuration
-The final step is where the user will need to add the aggregators name into their configuration file, this is so that Hunch knows to run your aggrigator (This name should be the same as what was specified in the dictonary above). An example:
+The final step is where the user will need to add the collectors name into their configuration file, this is so that Hunch knows to run your aggrigator (This name should be the same as what was specified in the dictonary above). An example:
  
 ```json
 {
     "config": {
     "default_analyser": "comprehend",
-    "aggregators": ["twitter","reddit","instagram","tumblr","http"],
+    "collectors": ["twitter","reddit","instagram","tumblr","http"],
     "detectors": ["blacklist","goal","location","relationship","url"],
 ```

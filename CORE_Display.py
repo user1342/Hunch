@@ -4,9 +4,9 @@ import os
 import re
 from datetime import datetime
 
-import Core_ConfigInterpreter as cc
-import Core_Aggregator
-import Core_Individual
+import CORE_ConfigInterpreter as cc
+import CORE_Collector
+import CORE_Individual
 
 import dash
 import dash_core_components as dcc
@@ -14,7 +14,7 @@ import dash_html_components as html
 import dash_auth
 import pandas as pd
 
-import Core_Logger
+import CORE_Logger
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -116,16 +116,16 @@ class create_website:
         json.dump(json_to_profile,new_json_file)
         new_json_file.close()
 
-        my_aggrigator = Core_Aggregator.WebsiteToCrawl()
+        my_aggrigator = CORE_Collector.WebsiteToCrawl()
 
         my_aggrigator.read_from_json_file(full_path)
 
-        Core_Logger.log(
-            "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(
+        CORE_Logger.log(
+            "Created Aggrigator for  " + my_aggrigator.name + ": " + str(
                 my_aggrigator.list_of_dictionary_sources))
 
-        my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name, my_aggrigator.impact)
-        Core_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
+        my_individual = CORE_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name, my_aggrigator.impact)
+        CORE_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
             len(my_individual._text_to_be_profiled)) + " samples.")
 
         # Adds individuals name to the list that is used to show the current scans in progress, then re draws the layout
@@ -140,7 +140,8 @@ class create_website:
                 self.list_of_individuals_being_scanned.remove(item)
                 break
 
-        Core_Logger.log("Finished adding to list : " + str(individual_profile))
+        CORE_Logger.log("Risk " + str(individual_profile["risk"]) + "| Impact " + str(individual_profile["impact"]) + "| Likelihood " + str(
+            individual_profile["likelihood"]))
 
         # When the profile/ scan is finished the layout is re drawn with the new data
         self.generate_layout()

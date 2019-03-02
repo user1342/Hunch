@@ -1,4 +1,4 @@
-import Core_ConfigInterpreter as cc
+import CORE_ConfigInterpreter as cc
 from NLP_Analysers import Aws_NLPAnalyser
 
 

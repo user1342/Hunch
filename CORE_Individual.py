@@ -2,8 +2,8 @@ import random
 import string
 from Liklihood_Detectors import List_Of_Detectors
 
-import Core_ConfigInterpreter as cc
-import Core_Logger
+import CORE_ConfigInterpreter as cc
+import CORE_Logger
 
 '''
 A class that is used to build a knowledge base on a likelihood.
@@ -43,7 +43,7 @@ class Individual:
     # A method that generates a psudo random name for the individual
     def generate_name(self, length=9):
         new_name = ''.join(random.choice(string.ascii_lowercase) for i in range(length))
-        Core_Logger.log("New name set to: " + new_name)
+        CORE_Logger.log("New name set to: " + new_name)
         self.name = new_name
 
     # Uses the detectors to calculate a risk score for the individual
@@ -67,7 +67,7 @@ class Individual:
         for detector in list_of_detectors:
             #Only runs the detectors that are set in the config
             if detector.detector_name in list_of_detectors_in_config:
-                Core_Logger.log(detector.detector_name.capitalize() + " detector run ")
+                CORE_Logger.log(detector.detector_name.capitalize() + " detector run ")
                 # Removes null items in list
                 self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
@@ -82,7 +82,7 @@ class Individual:
                         if "likelihood" in dictionary_of_scan_results.keys():
                             total_scores.append(dictionary_of_scan_results["likelihood"])
             else:
-                Core_Logger.log(detector.detector_name.capitalize() + " detector not run ")
+                CORE_Logger.log(detector.detector_name.capitalize() + " detector not run ")
 
         for number in total_scores:
             total = total + number

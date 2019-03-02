@@ -52,11 +52,11 @@ There is an example Python script called [Example_Profile_Script.py](https://git
 
 ```python
 
-import Core_Aggregator
+import Core_Collector
 import Core_Display
 import Core_Individual
 
-my_aggrigator = Core_Aggregator.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"Donald J. Trump")
+my_aggrigator = Core_Collector.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"Donald J. Trump")
 
 my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name)
 

@@ -1,6 +1,6 @@
 import tweepy
 
-import Core_ConfigInterpreter as cc
+import CORE_ConfigInterpreter as cc
 
 '''
 A class used to gather tweets from a specified user

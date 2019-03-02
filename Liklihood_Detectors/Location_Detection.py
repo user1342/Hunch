@@ -2,12 +2,12 @@
 import datetime
 import time
 
-import Core_ConfigInterpreter as cc
+import CORE_ConfigInterpreter as cc
 
 from geopy.geocoders import Nominatim
 import urllib.request, json
 
-import Core_NLPAnalyser as ca
+import CORE_NLPAnalyser as ca
 
 '''
 A Class used to calculate a liklihood based off known locations. 

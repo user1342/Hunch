@@ -1,8 +1,8 @@
 # A detector class must have a 'get_score' function that returns a number..
 import datetime
 
-import Core_NLPAnalyser as ca
-import Core_ConfigInterpreter as cc
+import CORE_NLPAnalyser as ca
+import CORE_ConfigInterpreter as cc
 
 '''
 A Class used to calculate a liklihood based off known goals and aspirations . 

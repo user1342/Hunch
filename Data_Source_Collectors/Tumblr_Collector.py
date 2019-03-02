@@ -1,6 +1,6 @@
 import re
 import subprocess as sp
-import Core_ConfigInterpreter as cc
+import CORE_ConfigInterpreter as cc
 
 '''
 A class used to gather information from tumblr
