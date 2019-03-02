@@ -1,5 +1,6 @@
 import json
 import Core_ConfigInterpreter as cc
+import Core_Logger
 from Data_Source_Aggregators import List_Of_Aggregators
 
 '''
@@ -82,6 +83,6 @@ class WebsiteToCrawl:
                         raise Exception("Unknown Source " + key)
 
                 else:
-                    if cc.Config().get_verbose("core_config.json"): print(user+"'s source " + key + " not set in config")
+                    Core_Logger.log(user+"'s source " + key + " not set in config")
 
         return self.list_of_text

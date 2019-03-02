@@ -4,7 +4,7 @@
     "aggregators": ["twitter","reddit","instagram","tumblr","http"],
     "detectors": ["blacklist","goal","location","relationship","url"],
 
-    "blacklisted_strings" : ["war", "North Korea", "brexit"],
+    "blacklisted_strings" : ["war", "North Korea", "brexit","Drug trafficking"],
 
     "score_high": 2,
     "score_medium": 1,
@@ -15,6 +15,7 @@
     "verbose": true,
 
     "default_credentials":{"username":"user","password":"password"},
+    "default_log_file":"log_file.txt",
 
     "reddit_client_id": "Add API Key Here",
     "reddit_client_secret" : "Add API Key Here",

@@ -14,6 +14,8 @@ import dash_html_components as html
 import dash_auth
 import pandas as pd
 
+import Core_Logger
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.title = 'Hunch'
@@ -118,12 +120,12 @@ class create_website:
 
         my_aggrigator.read_from_json_file(full_path)
 
-        if cc.Config().get_verbose("core_config.json"): print(
+        Core_Logger.log(
             "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(
                 my_aggrigator.list_of_dictionary_sources))
 
         my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name, my_aggrigator.impact)
-        if cc.Config().get_verbose("core_config.json"): print("Beginning profiling " + my_individual.name + "'s " + str(
+        Core_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
             len(my_individual._text_to_be_profiled)) + " samples.")
 
         # Adds individuals name to the list that is used to show the current scans in progress, then re draws the layout
@@ -138,7 +140,7 @@ class create_website:
                 self.list_of_individuals_being_scanned.remove(item)
                 break
 
-        if cc.Config().get_verbose("core_config.json"):print("Finished adding to list : " + str(individual_profile))
+        Core_Logger.log("Finished adding to list : " + str(individual_profile))
 
         # When the profile/ scan is finished the layout is re drawn with the new data
         self.generate_layout()
