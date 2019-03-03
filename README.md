@@ -36,6 +36,11 @@ The URL Recognition script requires the [Requests](https://pypi.org/project/requ
 pip install -r requirements.txt
 ```
 
+The Collectors that do not use an API will most commonly use Curl, if you are on a Linux system you will need to have curl installed. 
+
+```bash
+sudo apt-get install curl
+```
 ## Usage
 There is an example Python script called [Example_Profile_Script.py](https://github.com/user1342/Hunch/blob/master/Example_Profile_Script.py) that contains the necessary code to profile all individuals in the [JSON FILES folder](https://github.com/user1342/Hunch/tree/master/Json_Files) as well as launching the display interface on localhost. A simplified version of this can be found below:
 
