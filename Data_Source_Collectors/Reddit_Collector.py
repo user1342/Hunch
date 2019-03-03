@@ -22,6 +22,7 @@ class Reddit_Collector:
             #comment = re.sub('(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?', '', comment.body)
             comment = re.sub('\\n\\n.+', '',comment.body)
 
-            list_of_comments.append(comment)
+            character_limit = cc.Config().get_aggrigat_character_limit("core_config.json")
+            list_of_comments.append(comment[0:character_limit])
 
         return list_of_comments[1:cc.Config().get_default_aggregations("core_config.json")+1]

@@ -4,7 +4,6 @@ import os
 import CORE_Collector
 import CORE_Display
 import CORE_Individual
-import CORE_ConfigInterpreter as cc
 import CORE_Logger
 
 '''
@@ -61,7 +60,9 @@ class lazy_profile:
             results["likelihood"]))
 
         os.remove(full_path)
+        CORE_Logger.log("Deleted temp JSON file at: " + full_path)
 
+        self.list_of_profiled_individuals.append(results)
         return results
 
 

@@ -46,14 +46,18 @@ class Generic_Collector:
                 #Checks the line for if the username has been mentioned
                 occurances_of_user = re.findall(username, line)
 
+                character_limit = cc.Config().get_aggrigat_character_limit("core_config.json")
+
                 #If the username has been mentioned the line is added to the list
                 if occurances_of_user:
-                        list_of_occurances.append(line)
+                        list_of_occurances.append(line[0:character_limit])
 
             #Closes the loop if it's over the set threshold
             if iterator >= nested_pages_timeout:
                 break
 
-        # Chunks the responses down to 10 samples, mainly for testing purposes.
-        return list_of_occurances[0:10]
+        # Checks if the amount requested to return in the config is above the amount actually returned by instagram.
+        return_amount = cc.Config().get_default_aggregations("core_config.json")
+
+        return list_of_occurances[0:return_amount]
 

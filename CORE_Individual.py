@@ -1,6 +1,6 @@
 import random
 import string
-from Liklihood_Detectors import List_Of_Detectors
+from Methodologies import List_Of_Methodologies
 
 import CORE_ConfigInterpreter as cc
 import CORE_Logger
@@ -46,28 +46,28 @@ class Individual:
         CORE_Logger.log("New name set to: " + new_name)
         self.name = new_name
 
-    # Uses the detectors to calculate a risk score for the individual
+    # Uses the methodologies to calculate a risk score for the individual
     def profile(self):
         # The below was removed so that we don't crash during a run.
         #assert self._text_to_be_profiled, "List of text to be profiled is empty"
 
-        list_of_detectors = List_Of_Detectors.list_of_detectors
+        list_of_methodologies = List_Of_Methodologies.list_of_methodologies
 
         total_scores = []
         total = 0
 
         list_of_extra_info = []
-        # Loops through all of the detectors
+        # Loops through all of the Methodologies
 
         # I have no idea why this tmp is needed (maybe a pointer problem) but everything breaks without it.
         tmp_text = self._text_to_be_profiled
 
-        #Sets a list to be equal to the detectors set in the config.
-        list_of_detectors_in_config = cc.Config().get_list_of_in_use_detectors("core_config.json")
-        for detector in list_of_detectors:
-            #Only runs the detectors that are set in the config
-            if detector.detector_name in list_of_detectors_in_config:
-                CORE_Logger.log(detector.detector_name.capitalize() + " detector run ")
+        #Sets a list to be equal to the Methodologies set in the config.
+        list_of_Methodologies_in_config = cc.Config().get_list_of_in_use_Methodologies("core_config.json")
+        for methodology in list_of_methodologies:
+            #Only runs the Methodologies that are set in the config
+            if methodology.methodology_name in list_of_Methodologies_in_config:
+                CORE_Logger.log(methodology.methodology_name.capitalize() + " methodology run ")
                 # Removes null items in list
                 self._text_to_be_profiled = filter(None, self._text_to_be_profiled)
 
@@ -75,14 +75,14 @@ class Individual:
                 # Loops through the list of text to be profiled, profiling each, and then calculating an average
                 for text in self._text_to_be_profiled:
                     if text:
-                        dictionary_of_scan_results = detector.get_score(text)
+                        dictionary_of_scan_results = methodology.get_score(text)
                         list_of_extra_info.append(dictionary_of_scan_results)
 
                         # Checks if the likelihood field exists and if so uses it towards the total.
                         if "likelihood" in dictionary_of_scan_results.keys():
                             total_scores.append(dictionary_of_scan_results["likelihood"])
             else:
-                CORE_Logger.log(detector.detector_name.capitalize() + " detector not run ")
+                CORE_Logger.log(methodology.methodology_name.capitalize() + " methodology not run ")
 
         for number in total_scores:
             total = total + number

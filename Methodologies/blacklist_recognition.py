@@ -10,7 +10,7 @@ import CORE_NLPAnalyser as ca
 # This class does not return a likelihood and instead returns an extra of when blacklisted words are used.
 class Blacklist_Recognition:
 
-    detector_name = "blacklist"
+    methodology_name = "blacklist"
 
     # sets the profiler object to be the default analyser set in the Core_NLPAnalyser file
     core_nlp = ca.Core_NLPAnalyser()

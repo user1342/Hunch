@@ -1,8 +1,8 @@
 {
   "config": {
     "default_analyser": "comprehend",
-    "aggregators": ["twitter","reddit","instagram","tumblr","http"],
-    "detectors": ["blacklist","goal","location","relationship","url"],
+    "collectors": ["twitter","reddit","instagram","tumblr","http"],
+    "methodologies": ["blacklist","goal","location","relationship","url"],
 
     "blacklisted_strings" : ["war", "North Korea", "brexit","Drug trafficking"],
 

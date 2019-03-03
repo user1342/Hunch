@@ -49,4 +49,5 @@ class Twitter_Collector:
             if tweet_count >= number_of_tweets_timeout:
                 break
 
-        return list_of_tweets
+        return_amount = cc.Config().get_default_aggregations("core_config.json")
+        return list_of_tweets[0:return_amount]

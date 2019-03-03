@@ -41,5 +41,5 @@ The final step is where the user will need to add the collectors name into their
     "config": {
     "default_analyser": "comprehend",
     "collectors": ["twitter","reddit","instagram","tumblr","http"],
-    "detectors": ["blacklist","goal","location","relationship","url"],
+    "Methodologies": ["blacklist","goal","location","relationship","url"],
 ```

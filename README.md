@@ -85,7 +85,7 @@ lazy_profle.display_webpage()
 
 
 ## Contributing
-Pull requests are welcome, including creating new detectors, collectors, and analysers. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome, including creating new Methodologies, collectors, and analysers. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate... When I make some.
 

@@ -1,4 +1,4 @@
-# A detector class must have a 'get_score' function that returns a number..
+# A methodology class must have a 'get_score' function that returns a number..
 import datetime
 
 import CORE_NLPAnalyser as ca
@@ -26,7 +26,7 @@ class Goal_Detection:
     core_nlp = ca.Core_NLPAnalyser()
     profiler = core_nlp.create_analyser()
 
-    detector_name = "goal"
+    methodology_name = "goal"
 
     # A dictionary that is used for the level of liklihood
     scores = {"HIGH": cc.Config().get_score_high("core_config.json"),

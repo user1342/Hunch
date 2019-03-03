@@ -1,6 +1,7 @@
 import os
 import json
 
+import CORE_Logger
 '''
 A class used to check default settings for Hunch as well as settings from a defined config file.
 '''
@@ -47,9 +48,9 @@ class Config:
     def get_list_of_in_use_collectors (self, config = None):
         return self._read_paramiter("collectors", config)
 
-    #This returns a list of the detectors that are to be used.
-    def get_list_of_in_use_detectors (self, config = None):
-        return self._read_paramiter("detectors", config)
+    #This returns a list of the Methodologies that are to be used.
+    def get_list_of_in_use_Methodologies (self, config = None):
+        return self._read_paramiter("Methodologies", config)
 
     # This function is used to retrive the default analyser
     def get_default_analyser(self, config = None):

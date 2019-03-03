@@ -1,5 +1,5 @@
 # Entity Recognition and Sentiment Analysis using NLP
-The NLP Analysers are the backbone of this tool. These classes use natural langauge processing to perform entity recognition and sentiment analysis on given items of text. The [Core_NLPAnalyser.py](https://github.com/user1342/Hunch/blob/master/Core_NLPAnalyser.py) stands as a gateway for the likelihood detector classes to use the natural langauge processing functionality. This means that the same NLP Analyser is used across individuals and websites for each run. In turn this analyser is set in the users configuration. Currently there is only one NLP analyser and this is the AWS Comprehend analyser.  
+The NLP Analysers are the backbone of this tool. These classes use natural langauge processing to perform entity recognition and sentiment analysis on given items of text. The [Core_NLPAnalyser.py](https://github.com/user1342/Hunch/blob/master/Core_NLPAnalyser.py) stands as a gateway for the likelihood methodology classes to use the natural langauge processing functionality. This means that the same NLP Analyser is used across individuals and websites for each run. In turn this analyser is set in the users configuration. Currently there is only one NLP analyser and this is the AWS Comprehend analyser.
 
 ## 1 - The Template
 When creating an NLP Analyser there are several pieces that you will need to add to your code to conform with the other NLP Analysers. 
@@ -50,7 +50,7 @@ list_of_analysers = [Aws_NLPAnalyser.AWSComprehend()]
  {
   "config": {
     "default_analyser": "comprehend",
-    "aggregators": ["twitter","reddit","instagram","tumblr","http"],
-    "detectors": ["blacklist","goal","location","relationship","url"],
+    "collectors": ["twitter","reddit","instagram","tumblr","http"],
+    "Methodologies": ["blacklist","goal","location","relationship","url"],
  ```
         

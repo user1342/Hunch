@@ -5,8 +5,6 @@ import re
 from datetime import datetime
 
 import CORE_ConfigInterpreter as cc
-import CORE_Collector
-import CORE_Individual
 
 import dash
 import dash_core_components as dcc
@@ -14,7 +12,6 @@ import dash_html_components as html
 import dash_auth
 import pandas as pd
 
-import CORE_Logger
 import Lazy
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -46,7 +43,7 @@ class create_website:
         # Sets what the HTML page will look like.
         app.layout = app.layout = html.Div([
 
-        # Banner display
+            # Banner display
             html.Div(style={'backgroundColor': "#ffffff", 'color': "#000000"},
                      children=html.H1(children='Hunch!'),
                      ),
@@ -72,9 +69,13 @@ class create_website:
                             html.Div([
                                 dcc.Markdown("\nAdd the specifications for an individual to be profiled.\n"),
                                 self.return_inprogress_individuals_table(),
-                                dcc.Textarea(id='name_input-box', placeholder= cc.Config().get_whole_config("core_config.json"), draggable = "false", readOnly = True, style={'width': '50%', 'height':"500px"}),
+                                dcc.Textarea(id='name_input-box',
+                                             placeholder=cc.Config().get_whole_config("core_config.json"),
+                                             draggable="false", readOnly=True,
+                                             style={'width': '50%', 'height': "500px"}),
                                 dcc.Textarea(id='handle_and_source_input_box',
-                                          placeholder='JSON source and handle information...', draggable = "False",  style={'width': '50%', 'height':"500px"}),
+                                             placeholder='JSON source and handle information...', draggable="False",
+                                             style={'width': '50%', 'height': "500px"}),
                                 html.Button('Submit', id='button'),
                                 html.Div(id='output-container-button',
                                          children='Enter a value and press submit'),
@@ -116,7 +117,7 @@ class create_website:
         self.generate_layout()
 
         lazy_profle = Lazy.lazy_profile()
-        individual_profile = lazy_profle.profile_json_string(json_file_folder,json_to_profile)
+        individual_profile = lazy_profle.profile_json_string(json_file_folder, json_to_profile)
 
         self.list_of_individuals.append(individual_profile)
 
@@ -168,18 +169,16 @@ class create_website:
                 ]) for i in range(min(len(dataframe), len(dataframe)))]
             )
 
-
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
     def return_prioritised_table(self):
 
-        # If an individual doesn't have a risk score then they ever have no data attached (e.g. no valid detectors were chosen) to them or they only have extra data (like a url detector).
+        # If an individual doesn't have a risk score then they ever have no data attached (e.g. no valid Methodologies were chosen) to them or they only have extra data (like a url methodology).
         # We still want them on the table, however at the end so assign them to -1.
         iterator = 0
         for individual in self.list_of_individuals:
             if individual["risk"] == None:
                 self.list_of_individuals[iterator]["risk"] = -1
             iterator = iterator + 1
-
 
         # Sorts the list of individuals in order of lower risk first then flips it.
         self.list_of_individuals.sort(key=operator.itemgetter('risk'))
@@ -194,7 +193,7 @@ class create_website:
         # The below loops through the individuals and assigns their values to each colum
         iterator = 0
         for individual in self.list_of_individuals:
-            #If the risk is set to -1 then it was done so for our sort and we can change it back to None
+            # If the risk is set to -1 then it was done so for our sort and we can change it back to None
             if individual["risk"] == -1:
                 self.list_of_individuals[iterator]["risk"] = None
 
@@ -350,22 +349,21 @@ class create_website:
     # This function loads the titles, dropdown and graph.
     def generate_page(self):
 
-        #Takes the default credentials from the config and sets them as authentication for the portal
+        # Takes the default credentials from the config and sets them as authentication for the portal
         credentials_dictionary = cc.Config().get_default_credentials("core_config.json")
 
         # This check only adds the authentication if both a username and password are set in the config
         if credentials_dictionary:
-
-            #Sets the username and password from the default credentials
+            # Sets the username and password from the default credentials
             username = credentials_dictionary["username"]
             password = credentials_dictionary["password"]
 
-            #Creates a list of valid username and password
+            # Creates a list of valid username and password
             VALID_USERNAME_PASSWORD_PAIRS = [
                 [username, password]
             ]
 
-            #Sets the authentication
+            # Sets the authentication
             auth = dash_auth.BasicAuth(
                 app,
                 VALID_USERNAME_PASSWORD_PAIRS

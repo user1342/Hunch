@@ -12,7 +12,7 @@ class Url_Recognition:
     core_nlp = ca.Core_NLPAnalyser()
     profiler = core_nlp.create_analyser()
 
-    detector_name = "url"
+    methodology_name = "url"
 
     scores = {"HIGH": cc.Config().get_score_high("core_config.json"),
               "MEDIUM": cc.Config().get_score_medium("core_config.json"),
