@@ -1,0 +1,11 @@
+{
+  "individual": {
+    "name": "Theresa May",
+    "impact": 5,
+    "sources": [
+      {
+        "twitter": "theresa_may"
+      }
+    ]
+  }
+}
