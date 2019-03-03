@@ -12,14 +12,14 @@ if __name__ == '__main__':
     list_of_profiled_individuals = []
 
     for filename in os.listdir(json_file_directory):
-        my_aggrigator = CORE_Collector.WebsiteToCrawl()
+        my_collector = CORE_Collector.WebsiteToCrawl()
         full_path = os.path.join(json_file_directory, filename)
-        my_aggrigator.read_from_json_file(full_path)
-        CORE_Logger.log("Created Aggrigator for  " + my_aggrigator.name + ": " + str(my_aggrigator.list_of_dictionary_sources))
+        my_collector.read_from_json_file(full_path)
+        CORE_Logger.log("Created Collector for  " + my_collector.name + ": " + str(my_collector.list_of_dictionary_sources))
 
-        my_individual = CORE_Individual.Individual(my_aggrigator.aggregate_data())
-        my_individual.impact = my_aggrigator.impact
-        my_individual.name = my_aggrigator.name  # my_individual.generate_name()
+        my_individual = CORE_Individual.Individual(my_collector.aggregate_data())
+        my_individual.impact = my_collector.impact
+        my_individual.name = my_collector.name  # my_individual.generate_name()
         CORE_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
             len(my_individual._text_to_be_profiled)) + " samples.")
 

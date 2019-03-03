@@ -6,7 +6,7 @@ import CORE_ConfigInterpreter as cc
 '''
 A class used to gather information from the reddit API.
 '''
-class Reddit_Aggrigator:
+class Reddit_Collector:
     reddit_api = praw.Reddit(client_id=cc.Config().get_reddit_client_id("core_config.json"),
                              client_secret=cc.Config().get_reddit_client_secret("core_config.json"),
                              username=cc.Config().get_reddit_username("core_config.json"),

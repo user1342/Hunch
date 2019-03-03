@@ -15,6 +15,7 @@ import dash_auth
 import pandas as pd
 
 import CORE_Logger
+import Lazy
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -110,43 +111,21 @@ class create_website:
 
         json_to_profile = json.loads(json_to_profile)
         individual_name = json_to_profile["individual"]["name"]
-        full_path = os.path.join(json_file_folder, individual_name+".json")
-
-        new_json_file = open(full_path, "w")
-        json.dump(json_to_profile,new_json_file)
-        new_json_file.close()
-
-        my_aggrigator = CORE_Collector.WebsiteToCrawl()
-
-        my_aggrigator.read_from_json_file(full_path)
-
-        CORE_Logger.log(
-            "Created Aggrigator for  " + my_aggrigator.name + ": " + str(
-                my_aggrigator.list_of_dictionary_sources))
-
-        my_individual = CORE_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name, my_aggrigator.impact)
-        CORE_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
-            len(my_individual._text_to_be_profiled)) + " samples.")
-
         # Adds individuals name to the list that is used to show the current scans in progress, then re draws the layout
-        self.list_of_individuals_being_scanned.append([my_individual.name, datetime.now()])
+        self.list_of_individuals_being_scanned.append([individual_name, datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
         self.generate_layout()
 
-        individual_profile = my_individual.profile()
+        lazy_profle = Lazy.lazy_profile()
+        individual_profile = lazy_profle.profile_json_string(json_file_folder,json_to_profile)
+
         self.list_of_individuals.append(individual_profile)
 
         for item in self.list_of_individuals_being_scanned:
-            if item[0] == my_individual.name:
+            if item[0] == individual_name:
                 self.list_of_individuals_being_scanned.remove(item)
                 break
 
-        CORE_Logger.log("Risk " + str(individual_profile["risk"]) + "| Impact " + str(individual_profile["impact"]) + "| Likelihood " + str(
-            individual_profile["likelihood"]))
-
-        # When the profile/ scan is finished the layout is re drawn with the new data
         self.generate_layout()
-        os.remove(full_path)
-
 
     # A function used to return a table of all of the profiled individuals prioritised on the highest risk
     def return_inprogress_individuals_table(self):

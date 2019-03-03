@@ -7,8 +7,8 @@ from Data_Source_Collectors import Tumblr_Collector as ta
 # - a 'pull' function that takes a username as a parameter. This returns a list of strings from that user.
 
 #This shows the collectors that exist and can be used
-dictionary_of_aggrigators = {"instagram":ia.Instagram_Aggrigator(),
-                             "twitter":tw.Twitter_Aggrigator(),
-                             "reddit":ra.Reddit_Aggrigator(),
-                             "tumblr":ta.Tumblr_Aggrigator()
+dictionary_of_collectors = {"instagram":ia.Instagram_Collector(),
+                             "twitter":tw.Twitter_Collector(),
+                             "reddit":ra.Reddit_Collector(),
+                             "tumblr":ta.Tumblr_Collector()
                              }

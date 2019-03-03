@@ -5,7 +5,7 @@ import CORE_ConfigInterpreter as cc
 '''
 A class used to gather information from generic websites
 '''
-class Instagram_Aggrigator:
+class Instagram_Collector:
 
     #method used to gather information from a defined website
     def pull(self,username):

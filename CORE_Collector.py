@@ -62,17 +62,17 @@ class WebsiteToCrawl:
                 # Sets a user variable to be equal to the entry for the key, of which will be the source website.
                 user = source_dictionary[key]
 
-                # Sets a list of aggrigators set in the config
-                config_set_aggrigator = cc.Config().get_list_of_in_use_collectors("core_config.json")
+                # Sets a list of collectors set in the config
+                config_set_collector = cc.Config().get_list_of_in_use_collectors("core_config.json")
                 #Checks if the key is in that list
-                if key in config_set_aggrigator:
+                if key in config_set_collector:
                     #Checks the website key against the dictionary of collectors
-                    ditionary_of_collectors = List_Of_Collectors.dictionary_of_aggrigators
+                    ditionary_of_collectors = List_Of_Collectors.dictionary_of_collectors
 
                     try:
-                        #Checks the key (e.g. instagram) is in the dictionary and if so sets the value as the aggrigator
-                        aggrigator = ditionary_of_collectors[key]
-                        response = aggrigator.pull(user)
+                        #Checks the key (e.g. instagram) is in the dictionary and if so sets the value as the collector
+                        collector = ditionary_of_collectors[key]
+                        response = collector.pull(user)
 
                         try:
                             self.list_of_text.extend(response)

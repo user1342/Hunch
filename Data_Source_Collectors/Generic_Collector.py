@@ -5,7 +5,7 @@ import CORE_ConfigInterpreter as cc
 '''
 A class used to gather information from generic websites
 '''
-class Generic_Aggrigator:
+class Generic_Collector:
 
     #method used to gather information from a defined website
     def pull(self,website, username, nested_pages_timeout = cc.Config().ger_default_aggregations("core_config.json")):

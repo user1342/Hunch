@@ -5,8 +5,7 @@ import CORE_ConfigInterpreter as cc
 def log(text):
     default_log_file = cc.Config().get_log_path("core_config.json")
 
-    current_dt = datetime.datetime.now()
-    current_dt = current_dt.strftime("%Y-%m-%d %H:%M:%S")
+    current_dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     message = current_dt + " | " + str(text)
 

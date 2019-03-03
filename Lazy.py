@@ -1,3 +1,6 @@
+import json
+import os
+
 import CORE_Collector
 import CORE_Display
 import CORE_Individual
@@ -16,14 +19,14 @@ class lazy_profile:
 
     # This function takes in a list of dictionaries to aggregate, a name, and an impact,
     def profile(self, list_of_dictionarys_to_aggregate, name, impact):
-        my_aggrigator = CORE_Collector.WebsiteToCrawl(list_of_dictionarys_to_aggregate, name, impact)
+        my_collector = CORE_Collector.WebsiteToCrawl(list_of_dictionarys_to_aggregate, name, impact)
 
         CORE_Logger.log(
-            "\n\nCreated Aggrigator for  " + my_aggrigator.name + ": " + str(my_aggrigator.list_of_dictionary_sources))
+            "\n\nCreated Collector for  " + my_collector.name + ": " + str(my_collector.list_of_dictionary_sources))
 
-        my_individual = CORE_Individual.Individual(my_aggrigator.aggregate_data())
-        my_individual.impact = my_aggrigator.impact
-        my_individual.name = my_aggrigator.name  # my_individual.generate_name()
+        my_individual = CORE_Individual.Individual(my_collector.aggregate_data())
+        my_individual.impact = my_collector.impact
+        my_individual.name = my_collector.name  # my_individual.generate_name()
         CORE_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
             len(my_individual._text_to_be_profiled)) + " samples.")
 
@@ -32,6 +35,35 @@ class lazy_profile:
             results["likelihood"]))
 
         self.list_of_profiled_individuals.append(results)
+
+    # A function that will create a temp file to profile a given piece of json
+    def profile_json_string(self,json_file_folder,json_to_profile):
+
+        individual_name = json_to_profile["individual"]["name"]
+        full_path = os.path.join(json_file_folder, individual_name+".json")
+
+        CORE_Logger.log("Making temp JSON file at: "+full_path)
+
+        new_json_file = open(full_path, "w")
+        json.dump(json_to_profile,new_json_file)
+        new_json_file.close()
+
+        my_collector = CORE_Collector.WebsiteToCrawl()
+        my_collector.read_from_json_file(full_path)
+
+        my_individual = CORE_Individual.Individual(my_collector.aggregate_data(), my_collector.name, my_collector.impact)
+
+        CORE_Logger.log("Beginning profiling " + my_individual.name + "'s " + str(
+            len(my_individual._text_to_be_profiled)) + " samples.")
+
+        results = my_individual.profile()
+        CORE_Logger.log("Risk " + str(results["risk"]) + "| Impact " + str(results["impact"]) + "| Likelihood " + str(
+            results["likelihood"]))
+
+        os.remove(full_path)
+
+        return results
+
 
     # This function takes all of the lists of individuals to profile that have been created using the profile function and displays them in the web views
     def display_webpage(self):

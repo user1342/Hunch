@@ -2,8 +2,8 @@ import datetime
 import re
 import requests
 
-import Core_ConfigInterpreter as cc
-import Core_NLPAnalyser as ca
+import CORE_ConfigInterpreter as cc
+import CORE_NLPAnalyser as ca
 
 
 # This class is uses entity recognition to detect when a blacklisted word is used in a given piece of text.
@@ -57,7 +57,7 @@ class Blacklist_Recognition:
             if blacklisted_item.lower().strip()+" " in str(self.text_to_profile).lower().strip():
                 items_to_return["Type"] = "BLACKLISTED"
                 items_to_return["Keyword"] = str(blacklisted_item).capitalize()
-                items_to_return["Time"] = datetime.datetime.now()
+                items_to_return["Time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 items_to_return["Text"] = self.text_to_profile
                 # This sets the sentiment of the text (e.g. positive), even though an impact isn't created.
                 #The [1] is because the first value [0] is retval not the sentiment

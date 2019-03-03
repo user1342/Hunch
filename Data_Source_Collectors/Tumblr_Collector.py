@@ -5,7 +5,7 @@ import CORE_ConfigInterpreter as cc
 '''
 A class used to gather information from tumblr
 '''
-class Tumblr_Aggrigator:
+class Tumblr_Collector:
 
     #method used to gather information from tumblr
     def pull(self,username):

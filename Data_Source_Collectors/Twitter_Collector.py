@@ -7,7 +7,7 @@ A class used to gather tweets from a specified user
 '''
 
 
-class Twitter_Aggrigator:
+class Twitter_Collector:
     consumer_key = cc.Config().get_twitter_consumer_key("core_config.json")
     consumer_secret = cc.Config().get_twitter_consumer_secret("core_config.json")
     access_token = cc.Config().get_twitter_access_token("core_config.json")

@@ -75,7 +75,7 @@ class Config:
     def get_blacklisted_strings(self, config = None):
         return self._read_paramiter("blacklisted_strings", config)
 
-    #A limit (characters) on how bit each string from an aggrigator can be.
+    #A limit (characters) on how bit each string from an collector can be.
     def get_aggrigat_character_limit(self, config = None):
         return self._read_paramiter("character_limit", config)
 

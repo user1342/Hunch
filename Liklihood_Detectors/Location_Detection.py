@@ -116,7 +116,7 @@ class Location_Detection:
 
                                         items_to_return["Type"] = item
                                         items_to_return["Keyword"] = dictionary_of_items[item]
-                                        items_to_return["Time"] = datetime.datetime.now()
+                                        items_to_return["Time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                                         items_to_return["Text"] = self.text_to_profile
                                         items_to_return["sentiment"] = sentiment
                                         list_of_keywords.append(items_to_return)
@@ -130,7 +130,7 @@ class Location_Detection:
 
                         items_to_return["Type"] = item
                         items_to_return["Keyword"] = dictionary_of_items[item]
-                        items_to_return["Time"] = datetime.datetime.now()
+                        items_to_return["Time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         items_to_return["Text"] = self.text_to_profile
                         items_to_return["sentiment"] = sentiment
                         list_of_keywords.append(items_to_return)

@@ -2,8 +2,8 @@ import datetime
 import re
 import requests
 
-import Core_ConfigInterpreter as cc
-import Core_NLPAnalyser as ca
+import CORE_ConfigInterpreter as cc
+import CORE_NLPAnalyser as ca
 
 # This class is uses entity recognition to detect when a url is used in a given piece of text.
 # This class does not return a likelihood and instead returns an extra of when urls are used.
@@ -62,7 +62,7 @@ class Url_Recognition:
             if str(url).startswith("https://twitter.com") == False:
                 items_to_return["Type"] = "URL"
                 items_to_return["Keyword"] = url
-                items_to_return["Time"] = datetime.datetime.now()
+                items_to_return["Time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 items_to_return["Text"] = self.text_to_profile
                 items_to_return["sentiment"] = self._get_sentiment()[1] #This sets the sentiment of the text (e.g. positive), even though an impact isn't created.
                 list_of_keywords.append(items_to_return)

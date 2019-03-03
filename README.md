@@ -22,7 +22,7 @@ The Reddit aggregation requires the Reddit [PRAW](https://praw.readthedocs.io/en
 ```bash
 pip install praw
 ```
-The Twitter aggrigator requires the [Tweepy](http://www.tweepy.org/) module and requires [Twitter App API keys](https://developer.twitter.com/en/apps). The API keys will need to be added to the [Core_Config.Json](https://github.com/user1342/Hunch/blob/master/core_config.json).
+The Twitter collector requires the [Tweepy](http://www.tweepy.org/) module and requires [Twitter App API keys](https://developer.twitter.com/en/apps). The API keys will need to be added to the [Core_Config.Json](https://github.com/user1342/Hunch/blob/master/core_config.json).
 
 ```bash
 pip install tweepy
@@ -56,9 +56,9 @@ import Core_Collector
 import Core_Display
 import Core_Individual
 
-my_aggrigator = Core_Collector.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"Donald J. Trump")
+my_collector = Core_Collector.WebsiteToCrawl([{"twitter":"realdonaldtrump"}],"Donald J. Trump")
 
-my_individual = Core_Individual.Individual(my_aggrigator.aggregate_data(), my_aggrigator.name)
+my_individual = Core_Individual.Individual(my_collector.aggregate_data(), my_collector.name)
 
 Core_Display.create_website([my_individual.profile()]).generate_page()
 
@@ -85,7 +85,7 @@ lazy_profle.display_webpage()
 
 
 ## Contributing
-Pull requests are welcome, including creating new detectors, aggrigators, and analysers. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome, including creating new detectors, collectors, and analysers. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate... When I make some.
 
