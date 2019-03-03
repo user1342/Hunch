@@ -27,7 +27,7 @@ The Twitter aggrigator requires the [Tweepy](http://www.tweepy.org/) module and 
 ```bash
 pip install tweepy
 ```
-The core display requires the [Dash](https://dash.plot.ly/) python plugin to be installed. The display also uses [Pandas](https://pandas.pydata.org/pandas-docs/stable/install.html) to display tables. 
+The core display requires the [Dash](https://dash.plot.ly/) python plugin to be installed. The display also uses [Pandas](https://pandas.pydata.org/pandas-docs/stable/install.html) to display tables - you may also need [Microsoft Windows SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=8279) to install Pandas. 
 ```bash
 pip install dash==0.35.1
 pip install dash-html-components==0.13.4
