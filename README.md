@@ -19,32 +19,16 @@ aws configure
 ```
 The Reddit aggregation requires the Reddit [PRAW](https://praw.readthedocs.io/en/latest/getting_started/installation.html) api to be installed. You will also need a [Reddit developed application](https://www.reddit.com/prefs/apps/) and use the keys created as part of that process. The API keys will need to be added to the [Core_Config.Json](https://github.com/user1342/Hunch/blob/master/core_config.json).
 
-```bash
-pip install praw
-```
 The Twitter collector requires the [Tweepy](http://www.tweepy.org/) module and requires [Twitter App API keys](https://developer.twitter.com/en/apps). The API keys will need to be added to the [Core_Config.Json](https://github.com/user1342/Hunch/blob/master/core_config.json).
 
-```bash
-pip install tweepy
-```
 The core display requires the [Dash](https://dash.plot.ly/) python plugin to be installed. The display also uses [Pandas](https://pandas.pydata.org/pandas-docs/stable/install.html) to display tables - you may also need [Microsoft Windows SDK](https://www.microsoft.com/en-us/download/confirmation.aspx?id=8279) to install Pandas. 
-```bash
-pip install dash==0.35.1
-pip install dash-html-components==0.13.4
-pip install dash-core-components==0.42.1
-pip install dash-table==3.1.11
-pip install dash-auth==1.2.0
-```
-```bash
-pip install pandas<0.21
-```
+
 Location detection requires the [GeoPy](https://pypi.org/project/geopy/) plugin that can be installed with the command below. The Location Detection also uses the [UK Police Crime API](https://data.police.uk/docs/). This API does not currently require an API key. 
-```bash
-pip install geopy
-```
+
 The URL Recognition script requires the [Requests](https://pypi.org/project/requests/2.7.0/) plugin to un shorten url shortlinks. 
+
 ```bash
-pip install requests
+pip install -r requirements.txt
 ```
 
 ## Usage
