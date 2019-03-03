@@ -36,7 +36,7 @@ pip install dash-table==3.1.11
 pip install dash-auth==1.2.0
 ```
 ```bash
-pip install pandas
+pip install pandas<0.21
 ```
 Location detection requires the [GeoPy](https://pypi.org/project/geopy/) plugin that can be installed with the command below. The Location Detection also uses the [UK Police Crime API](https://data.police.uk/docs/). This API does not currently require an API key. 
 ```bash
