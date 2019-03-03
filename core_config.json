@@ -4,7 +4,7 @@
     "collectors": ["twitter","reddit","instagram","tumblr","http"],
     "methodologies": ["blacklist","goal","location","relationship","url"],
 
-    "blacklisted_strings" : ["war", "North Korea", "brexit","Drug trafficking"],
+    "blacklisted_strings" : ["war", "North Korea", "brexit","Drugs*"],
 
     "score_high": 2,
     "score_medium": 1,

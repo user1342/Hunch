@@ -51,10 +51,17 @@ class Blacklist_Recognition:
         # Takes the blacklisted strings from the config file and adds them to a list
         list_of_blacklist_items = cc.Config().get_blacklisted_strings(("core_config.json"))
 
+        retval = self.scores["LOW"]
+
         # Loops through that list of blacklisted strings and cgecks if any are in the given text to be profied.
         # We add a space so that it is a fresh word
         for blacklisted_item in list_of_blacklist_items:
-            if blacklisted_item.lower().strip()+" " in str(self.text_to_profile).lower().strip():
+
+            blacklisted_item = blacklisted_item.lower().strip()
+            text_to_check = (self.text_to_profile).lower().strip()
+            blacklist_present = re.search(blacklisted_item,text_to_check)
+
+            if  blacklist_present:
                 items_to_return["Type"] = "BLACKLISTED"
                 items_to_return["Keyword"] = str(blacklisted_item).capitalize()
                 items_to_return["Time"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -63,9 +70,11 @@ class Blacklist_Recognition:
                 #The [1] is because the first value [0] is retval not the sentiment
                 items_to_return["sentiment"] = self._get_sentiment()[1]
                 list_of_keywords.append(items_to_return)
+                retval = self.scores["HIGH"]
 
         # Creates a dictionary to return containing the likelihood and additional ifnormation like tags
         return_dictionary = {}
+        return_dictionary["likelihood"] = retval
         return_dictionary["extra"] = list_of_keywords
 
         return return_dictionary
