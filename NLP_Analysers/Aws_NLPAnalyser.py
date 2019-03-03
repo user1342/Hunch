@@ -41,8 +41,11 @@ class AWSComprehend:
         # Check if used task is in list of known aws comprehend detect commands
         assert task in self.list_of_detect_commands, task + " not in list of known detect commands: " + str(
             self.list_of_detect_commands)
-        text = text.replace('"',"'")
-        text = '"'+text+'"'
+
+        if sys.platform == "linux":
+            text = text.replace('"',"'")
+            text = '"'+text+'"'
+
         command_list = ['aws', 'comprehend', task, '--language-code', language, '--text', text]
 
         return self._run_aws_comprehend(command_list)
