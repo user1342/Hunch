@@ -1,6 +1,11 @@
 # Hunch
 A Predictive Policing and Threat Aggregation toolset. This modular toolset, powered by Natural Language Processing and Open Source Intelligence, is desiged to provide the user with actionable data including: signals, pivots, and risk levels. In collecting this information all that is required from the user is a 'source'(e.g. Twitter) and 'username'(e.g. Jane Doe). Current source collectors include: Twitter, Instagram, Tumblr, and Reddit. 
 
+* **Collectors** - Collect text (e.g. comments, tweets, posts, etc) from a source (e.g. twitter, or instagram) and a user (e.g. Jane Doe).
+* **Analysers** - Apply Natural Language Processing to the collected text (for example entity recognition and sentiment analsyssis), which is then used by the methodologies.
+* **Methodologies** - Apply frameworks to the collected text (for example has a location been mentioned and is a location known for a specific type of crime)
+
+
 For more on how Natural Language Processing can be used to predict crime, check out this [article](https://www.infosecurity-magazine.com/next-gen-infosec/language-processing-motive/) and a [talk](https://www.youtube.com/watch?v=9F0vbbjw9jk&t=1s). 
 
 If you have a specific use case for Hunch and would like help in it's implementation then please reach out to [James Stevenson](http://www.jamesstevenson.me/). 
@@ -69,7 +74,7 @@ lazy_profle.display_webpage()
 
 
 ## Contributing
-Pull requests are welcome, including creating new Methodologies, collectors, and analysers. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome, including creating new detectors, collectors, and analysers. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate... When I make some.
 
