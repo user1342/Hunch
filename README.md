@@ -8,7 +8,7 @@ A Predictive Policing and Threat Aggregation toolset. This modular toolset, powe
 
 For more on how Natural Language Processing can be used to predict crime, check out this [article](https://www.infosecurity-magazine.com/next-gen-infosec/language-processing-motive/) and a [talk](https://www.youtube.com/watch?v=9F0vbbjw9jk&t=1s). 
 
-If you have a specific use case for Hunch and would like help in it's implementation then please reach out to [James Stevenson](http://www.jamesstevenson.me/). 
+If you have a specific use case for Hunch and would like help in it's implementation then please reach out to [James Stevenson](https://twitter.com/_JamesStevenson). 
 
 <img src="https://github.com/user1342/Hunch/blob/master/Hunch_FlowDiagram.png"  width = 400> <img src="https://github.com/user1342/Hunch/blob/master/Demo.gif" width = 400>
 
