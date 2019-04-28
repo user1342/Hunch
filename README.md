@@ -86,4 +86,4 @@ Pull requests are welcome, including creating new detectors, collectors, and ana
 Please make sure to update tests as appropriate... When I make some.
 
 ## License
-[Apache License](https://choosealicense.com/licenses/apache-2.0/)
+[GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
