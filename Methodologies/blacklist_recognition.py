@@ -1,6 +1,5 @@
 import datetime
 import re
-import requests
 
 import CORE_ConfigInterpreter as cc
 import CORE_NLPAnalyser as ca

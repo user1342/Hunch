@@ -88,6 +88,10 @@ class Config:
     def get_log_path(self, config = None):
         return self._read_paramiter("default_log_file", config)
 
+    #Returns the timeout in seconds that should be waited before stopping an attempt
+    def get_internet_timeout_seconds(self, config = None):
+        return self._read_paramiter("internet_timeout_seconds", config)
+
     #Returns the whole config.
     def get_whole_config(self, config_file_location):
         if config_file_location is not None and os.path.isfile(config_file_location) is True:

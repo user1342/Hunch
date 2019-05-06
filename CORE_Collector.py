@@ -1,5 +1,6 @@
 import json
 import CORE_ConfigInterpreter as cc
+import CORE_Essentials
 import CORE_Logger
 from Data_Source_Collectors import List_Of_Collectors
 
@@ -53,6 +54,8 @@ class WebsiteToCrawl:
     # This function checks what websites have been requested to profile users and what
     # user accounts are to be profiled on the websites.
     def aggregate_data(self):
+        CORE_Essentials.check_connected(cc.Config().get_internet_timeout_seconds("core_config.json"))
+
         assert self.list_of_dictionary_sources is not None, " No sources listed"
 
         # Loops through the sources using the defined handle for each defined website

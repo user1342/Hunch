@@ -22,7 +22,7 @@ app.title = 'Hunch'
 A Class used to create a web front end for viewing Hunch results. 
 '''
 
-
+#TODO: This code could be cleaned and re used more than it is.
 class create_website:
 
     # The constructor, setting class variables
