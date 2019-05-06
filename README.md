@@ -1,8 +1,8 @@
 # Hunch
-A Predictive Policing and Threat Aggregation toolset. This modular toolset, powered by Natural Language Processing and Open Source Intelligence, is desiged to provide the user with actionable data including: signals, pivots, and risk levels. In collecting this information all that is required from the user is a 'source'(e.g. Twitter) and 'username'(e.g. Jane Doe). Current source collectors include: Twitter, Instagram, Tumblr, and Reddit. 
+A Predictive Policing and Threat Aggregation toolset. This modular toolset, powered by Natural Language Processing and Open Source Intelligence, is designed to provide the user with actionable data including: signals, pivots, and risk levels. In collecting this information all that is required from the user is a 'source'(e.g. Twitter) and 'username'(e.g. Jane Doe). Current source collectors include: Twitter, Instagram, Tumblr, and Reddit. 
 
 * **Collectors** - Collect text (e.g. comments, tweets, posts, etc) from a source (e.g. twitter, or instagram) and a user (e.g. Jane Doe).
-* **Analysers** - Apply Natural Language Processing to the collected text (for example entity recognition and sentiment analsyssis), which is then used by the methodologies.
+* **Analysers** - Apply Natural Language Processing to the collected text (for example entity recognition and sentiment analysis), which is then used by the methodologies.
 * **Methodologies** - Apply frameworks to the collected text (for example has a location been mentioned and is a location known for a specific type of crime)
 
 
@@ -14,7 +14,7 @@ If you have a specific use case for Hunch and would like help in it's implementa
 
 ## Installation
 
-Hunch has been tested on both Windows 10 and Ubuntu. **An instalation video can be found on** [**Youtube**](https://www.youtube.com/watch?v=piNc4bWw6Rc).
+Hunch has been tested on both Windows 10 and Ubuntu. **An installation video can be found on** [**Youtube**](https://www.youtube.com/watch?v=piNc4bWw6Rc).
 
 To use the AWS Comprehend aggregation for Hunch you will need to have the [AWS CLI](https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html) installed.  As part of setting up the AWS CLI you will need to create an AWS [IAM](https://console.aws.amazon.com/iam) user with the "ComprehendFullAccess" group and set this as your user when it comes to the configure stage.
 
@@ -32,7 +32,7 @@ The core display requires the [Dash](https://dash.plot.ly/) python plugin to be 
 
 Location detection requires the [GeoPy](https://pypi.org/project/geopy/) plugin that can be installed with the command below. The Location Detection also uses the [UK Police Crime API](https://data.police.uk/docs/). This API does not currently require an API key. 
 
-The URL Recognition script requires the [Requests](https://pypi.org/project/requests/2.7.0/) plugin to un shorten url shortlinks. 
+The URL Recognition script requires the [Requests](https://pypi.org/project/requests/2.7.0/) plugin to unshorten url short links. 
 
 ```bash
 pip install -r requirements.txt
@@ -87,3 +87,5 @@ Please make sure to update tests as appropriate... When I make some.
 
 ## License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
+
+
