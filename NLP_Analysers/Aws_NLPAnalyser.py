@@ -22,8 +22,9 @@ class AWSComprehend:
     # A function that takes a 'command' list, executes it and converts the output to json
     def _run_aws_comprehend(self, command):	
         assert "aws" in command, "AWS Comprehend command not run."
-
-        if sys.platform == "linux":
+        
+        #Checks if the OS is linux or MAC
+        if sys.platform == "linux" or sys.platform == "darwin":
             raw_output = sp.Popen(command, stdout=sp.PIPE)
         else:
             raw_output = sp.Popen(command, stdout=sp.PIPE, shell=True)
