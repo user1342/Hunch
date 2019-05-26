@@ -14,7 +14,7 @@ If you have a specific use case for Hunch and would like help in it's implementa
 
 ## Installation
 
-Hunch uses Python 3.x and supports both Windows 10 and Ubuntu 18.x - However, other versions and operating systems may work they simply have not been tested. **An installation video can be found on** [**Youtube**](https://www.youtube.com/watch?v=piNc4bWw6Rc).
+Hunch uses Python 3.x and supports both Windows 10 and Ubuntu 18.x - However, other versions and operating systems may work they simply have not been tested. **An installation video can be found on** [**Youtube**](https://www.youtube.com/watch?v=lEC9RYIH7PQ).
 
 To use the AWS Comprehend aggregation for Hunch you will need to have the [AWS CLI](https://docs.aws.amazon.com/polly/latest/dg/setup-aws-cli.html) installed.  As part of setting up the AWS CLI you will need to create an AWS [IAM](https://console.aws.amazon.com/iam) user with the "ComprehendFullAccess" group and set this as your user when it comes to the configure stage.
 
